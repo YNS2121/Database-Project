@@ -1,8 +1,8 @@
 <html lang="tr">
 
 <head>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mainbody.css">
     <link rel="stylesheet" href="css/sidebar.css">
@@ -40,6 +40,41 @@
             -moz-appearance: none;
             appearance: none;
         }
+
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+
+        .icon {
+            cursor: pointer;
+            margin-right: 50px;
+            line-height: 60px
+        }
+
+        .icon span {
+            background: #f00;
+            padding: 7px;
+            border-radius: 50%;
+            color: #fff;
+            vertical-align: top;
+            margin-left: -25px
+        }
+
+        .icon img {
+            display: inline-block;
+            width: 26px;
+            margin-top: 4px
+        }
+
+        .icon:hover {
+            opacity: .7
+        }
+
+        .logo {
+            flex: 1;
+            margin-left: 50px;
+            color: #eee;
+            font-size: 20px;
+            font-family: monospace
+        }
     </style>
 </head>
 
@@ -52,7 +87,7 @@
                 alt="no image">
             <div class="search_box">
                 <i class="bi bi-search"></i>
-                <input type="text" class="search_input" value="Ara">
+                <input type="text" class="search_input" placeholder="Ara">
             </div>
         </div>
         <div class="header_right">
@@ -63,12 +98,75 @@
                 <div class="nav_text">Anasayfa</div>
             </div>
 
-            <div class="nav_link network">
-                <div class="nav_icon">
-                    <i class="bi bi-people-fill" style="font-size: 1.3rem  !important;"></i>
+            <div class="header_right_2">
+                <div class="nav_link d-flex">
+                    <div class="nav_icon">
+
+                        <div class="nav_text dropdown drop">
+                            <i class="fa-solid fa-comments"
+                                style="font-size: 1.4rem  !important; display: flex; justify-content: center;"></i>
+                            <div class="nav_text">Mülakat Teklifleri</div>
+
+                            <div class="dropdown-content" style="left: -90px !important;">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                                                style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                            <div class="dropdown_profile_info" style="padding-left:10px;">
+                                                <div class="act_title">
+                                                    Umut SAYDAM
+                                                </div>
+                                                <div class="acoount_name">
+                                                    Android Developer
+                                                </div>
+                                            </div>
+                                       
+                                        <div class="profile_view_button">
+                                            Profili Görüntüle
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                                            style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                        <div class="dropdown_profile_info" style="padding-left:10px;">
+                                            <div class="act_title">
+                                                Umut SAYDAM
+                                            </div>
+                                            <div class="acoount_name">
+                                                Android Developer
+                                            </div>
+                                        </div>
+                                   
+                                    <div class="profile_view_button">
+                                        Profili Görüntüle
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                                        style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                    <div class="dropdown_profile_info" style="padding-left:10px;">
+                                        <div class="act_title">
+                                            Umut SAYDAM
+                                        </div>
+                                        <div class="acoount_name">
+                                            Android Developer
+                                        </div>
+                                    </div>
+                               
+                                <div class="profile_view_button">
+                                    Profili Görüntüle
+                                </div>
+                            </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="nav_text">Mülakat İstekleri</div>
+                <div class="small_screen">
+                    <i class="bi bi-three-dots"></i>
+                </div>
             </div>
+
             <!--
             <div class="nav_link jobs">
                 <div class="nav_icon"><i class="bi bi-bag-fill" style="font-size: 1.3rem  !important;"></i></div>
@@ -82,14 +180,58 @@
                 </div>
                 <div class="nav_text">Messaging</div>
             </div>
--->
+
             <div class="nav_link">
                 <div class="nav_icon">
                     <div class="info">3</div>
                     <i class="bi bi-bell-fill" style="font-size: 1.3rem  !important;"></i>
                 </div>
                 <div class="nav_text">Bildirimler</div>
+            </div>-->
+
+            <div class="header_right_2">
+                <div class="nav_link d-flex">
+                    <div class="nav_icon">
+
+                        <div class="nav_text dropdown drop">
+                            <i class="fa-solid fa-bell"
+                                style="font-size: 1.4rem  !important; display: flex; justify-content: center;"></i>
+                            <div class="nav_text">Bildirimler</div>
+
+                            <div class="dropdown-content" style="left: -90px !important;">
+                                <div class="dropdown_profile">
+                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                                        style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                    <div class="dropdown_profile_info" style="padding-left:10px;">
+                                        <div class="act_title">
+                                            Umut SAYDAM
+                                        </div>
+                                        <div class="acoount_name">
+                                            Android Developer
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile_view_button">
+                                    Profili Görüntüle
+                                </div>
+
+                                <div class="bdr_bottom"></div>
+                                <div class="title" style="color:black;">Hesap</div>
+                                <div class="list">Ayarlar</div>
+                                <div class="list">Yardım</div>
+                                <div class="list bdr_bottom">Dil</div>
+                                <div class="list">Çıkış Yap</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="small_screen">
+                    <i class="bi bi-three-dots"></i>
+                </div>
             </div>
+
+
+
 
             <div class="header_right_2" style="border-left: 1px solid grey;">
                 <div class="nav_link d-flex">
@@ -202,7 +344,7 @@
                     <div class="input_text">
                         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
                             alt="no image" class=profile>
-                        <input type="text" value="Kendinizi tanıtın." class="post_input">
+                        <input type="text" placeholder="Kendinizi tanıtın." class="post_input">
                     </div>
                     <div class="input_blocks">
                         <div class="input_option">
@@ -225,12 +367,11 @@
                      -->
                     </div>
                 </div>
-
             </div>
             <div class="post_box">
                 <div class="input">
                     <div class="input_blocks">
-                        <form class="" style="display: flex; justify-content: center; align-items:center;">
+                        <form style="display: flex; justify-content: space-around; align-items:center; width: 100%;">
                             <div>
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>Meslek</option>
@@ -242,12 +383,13 @@
                             <div>
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>Alan</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value="1">Android Developer</option>
+                                    <option value="2">IOS Developer</option>
+                                    <option value="3">Project Management</option>
                                 </select>
                             </div>
-                            <input class="btn btn-primary " type="submit" value="Filtreyi Uygula">
+                            <button type="button" class="btn btn-primary btn-sm" style="padding: 7px;">Filtreyi
+                                uygula</button>
                         </form>
                     </div>
                 </div>
@@ -437,6 +579,7 @@
     </div>
     <script src="/__/firebase/8.4.3/firebase-app.js"></script>
     <script src="/__/firebase/init.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
