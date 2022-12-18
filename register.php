@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--  Title etiketleri arasına yazdığınızda sekme adını belirlemiş olursunuz. -->
-    <title>HIRE | Log in</title>
+    <title>HIRE | Sign up</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/register.css" rel="stylesheet">
@@ -39,7 +39,7 @@
             </div>
             <div class="form-inner">
                 <form action="#" class="login">
-                <div class="field">
+                    <div class="field">
                         <input type="text" placeholder="Email Address" required>
                     </div>
                     <div class="field">
