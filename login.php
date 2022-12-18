@@ -29,7 +29,6 @@
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -39,12 +38,15 @@
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-            <button type="submit" class="btn btn-primary"><a href="index.php" class="btn btn-primary stretched-link"> Log in</a></button>
+            <div class="d-grid gap-2 mt-4">
+                <a href="index.php" class="btn btn-primary">Log in</a>
+                <a href="signup.php" class="btn btn-primary"">Sign Up</a>
+            </div>
         </form>
     </div>
 
     <!-- Javascript ekledik-->
-    <script src="js/bootstrap.min.js" async defer></script>
+    <script src=" js/bootstrap.min.js" async defer></script>
 </body>
 
 </html>
