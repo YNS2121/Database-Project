@@ -40,7 +40,7 @@
             </div>
             <div class="d-grid gap-2 mt-4">
                 <a href="index.php" class="btn btn-primary">Log in</a>
-                <a href="signup.php" class="btn btn-primary"">Sign Up</a>
+                <a href="register.php" class="btn btn-primary"">Sign Up</a>
             </div>
         </form>
     </div>

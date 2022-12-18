@@ -249,7 +249,7 @@
                                     </div>
                                 </div>
                                 <div class="profile_view_button">
-                                    Profili Görüntüle
+                                <a href="kullanici_profili.html">Profili Görüntüle</a>
                                 </div>
 
                                 <div class="bdr_bottom"></div>
