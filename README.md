@@ -1,2 +1,2 @@
 # Database-Project
-We are developed a web site for use database.
+We are developed a website for use database.
