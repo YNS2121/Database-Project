@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper" style="margin: 25px;">
         <div class="title-text">
             <div class="title login">Employee Form</div>
             <div class="title signup">Employer Form</div>
@@ -40,6 +40,15 @@
             <div class="form-inner">
                 <form action="#" class="login">
                     <div class="field">
+                        <input type="text" placeholder="Name" required>
+                    </div>
+                    <div class="field">
+                        <input type="text" placeholder="Surname" required>
+                    </div>
+                    <div class="field">
+                        <input type="text" placeholder="Company" required>
+                    </div>
+                    <div class="field">
                         <input type="text" placeholder="Email Address" required>
                     </div>
                     <div class="field">
@@ -47,6 +56,12 @@
                     </div>
                     <div class="field">
                         <input type="password" placeholder="Confirm password" required>
+                    </div>
+                    <div class="field">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Tell me about yourself" rows="3"></textarea>
+                    </div>
+                    <div class="field">
+
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
@@ -55,6 +70,9 @@
                 </form>
                 <form action="#" class="signup">
                     <div class="field">
+                        <input type="text" placeholder="Company Name" required>
+                    </div>
+                    <div class="field">
                         <input type="text" placeholder="Email Address" required>
                     </div>
                     <div class="field">
@@ -62,6 +80,16 @@
                     </div>
                     <div class="field">
                         <input type="password" placeholder="Confirm password" required>
+                    </div>
+                    <div class="field">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Vision" rows="3"></textarea>
+                    </div>
+                    <div style="margin-top: 10%;"></div>
+                    <div class="field">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Mission" rows="3"></textarea>
+                    </div>
+                    <div class="field">
+
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
