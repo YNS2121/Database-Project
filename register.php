@@ -40,25 +40,25 @@
             <div class="form-inner">
                 <form action="#" class="login">
                     <div class="field">
-                        <input type="text" placeholder="Name" required>
+                        <input type="text" placeholder="Name" name="name" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Surname" required>
+                        <input type="text" placeholder="Surname" name="surname" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Company" required>
+                        <input type="text" placeholder="Company" name="company" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Email Address" required>
+                        <input type="text" placeholder="Email Address" name="emailAddress" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Password" required>
+                        <input type="password" placeholder="Password" name="password" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Confirm password" required>
+                        <input type="password" placeholder="Confirm password" name="confirmPassword" required>
                     </div>
                     <div class="field">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Tell me about yourself" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Tell me about yourself" name="tellYourself" rows="3"></textarea>
                     </div>
                     <div class="field">
 
@@ -70,30 +70,30 @@
                 </form>
                 <form action="#" class="signup">
                     <div class="field">
-                        <input type="text" placeholder="Company Name" required>
+                        <input type="text" placeholder="Company Name" name="companyName" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Email Address" required>
+                        <input type="text" placeholder="Email Address" name="emailAddress" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Password" required>
+                        <input type="password" placeholder="Password" name="password" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Confirm password" required>
+                        <input type="password" placeholder="Confirm password" name="confirmPassword" required>
                     </div>
                     <div class="field">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Vision" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Vision" name="vision" rows="3"></textarea>
                     </div>
                     <div style="margin-top: 10%;"></div>
                     <div class="field">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Mission" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Mission" name="mission" rows="3"></textarea>
                     </div>
                     <div class="field">
 
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
-                        <input type="submit" value="Signup">
+                        <input type="submit" name="submitEmployer" value="Signup">
                     </div>
                 </form>
             </div>
@@ -123,3 +123,30 @@
 </body>
 
 </html>
+<?php
+//include('db/conDB.php');
+if ($con) {
+    if (isset($_POST["submit"])) {
+        $name = $_POST["name"];
+        $surname = $_POST["surname"];
+        $company = $_POST["company"];
+        $emailAddress = $_POST["emailAddress"];
+        $password = $_POST["password"];
+        $confirmPassword = $_POST["confirmPassword"];
+        $tellYourself = $_POST["tellYourself"];
+        echo "basarili";
+
+    }
+    if (isset($_POST["submitEmployer"])) {
+        $companyName = $_POST["companyName"];
+        $emailAddress = $_POST["emailAddress"];
+        $password = $_POST["password"];
+        $confirmPassword = $_POST["confirmPassword"];
+        $vision = $_POST["vision"];
+        $mission = $_POST["mission"];
+        echo "basarili";
+    }
+} else {
+    echo "Veri tabani baglanti hatasi";
+}
+?>

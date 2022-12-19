@@ -52,7 +52,7 @@
 </html>
 <?php
 include('db/conDB.php');
-if ($conn) {
+if ($con) {
     if (isset($_POST["submit"])) {
         $emailAddress = $_POST["emailAddress"];
         $password = $_POST["password"];
