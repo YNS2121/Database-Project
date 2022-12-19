@@ -52,11 +52,19 @@
 </html>
 <?php
 include('db/conDB.php');
-if ($conn) {
+if ($con) {
     if (isset($_POST["submit"])) {
         $emailAddress = $_POST["emailAddress"];
         $password = $_POST["password"];
-        
+        $sql = "select * from kullanicilar where kullanici_email = '$emailAddress' and kullanici_sifre = '$password'";
+        $result = mysqli_query($con, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            header("Location: index.php");
+            die();
+        } else {
+            echo "Boyle bir hesap yok";
+        }
     }
 } else {
     echo "Veri tabani baglanti hatasi";
