@@ -48,39 +48,39 @@
 <body>
     <div class="wrapper" style="margin: 25px;">
         <div class="title-text">
-            <div class="title login">Employee Form</div>
-            <div class="title signup">Employer Form</div>
+            <div class="title login">Çalışan Formu</div>
+            <div class="title signup">İş Veren Formu</div>
         </div>
         <div class="form-container">
             <div class="slide-controls">
                 <input type="radio" name="slide" id="login" checked>
                 <input type="radio" name="slide" id="signup">
-                <label for="login" class="slide login">Employee</label>
-                <label for="signup" class="slide signup">Employer</label>
+                <label for="login" class="slide login">Çalışan</label>
+                <label for="signup" class="slide signup">İş Veren</label>
                 <div class="slider-tab"></div>
             </div>
             <div class="form-inner">
                 <form action="" method="POST" class="login">
                     <div class="field">
-                        <input type="text" placeholder="Name" name="name" required>
+                        <input type="text" placeholder="Ad" name="name" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Surname" name="surname" required>
+                        <input type="text" placeholder="Soyad" name="surname" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Company" name="company" required>
+                        <input type="text" placeholder="Şirket" name="company" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Email Address" name="emailAddress" required>
+                        <input type="text" placeholder="Email" name="emailAddress" required>
                     </div>
                     <div class="field">
                         <input type="tel" placeholder="Telefon" name="phone" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Password" name="password" required>
+                        <input type="password" placeholder="Şifre" name="password" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Confirm password" name="confirmPassword" required>
+                        <input type="password" placeholder="Şifreyi Doğrula" name="confirmPassword" required>
                     </div>
                     <div class="field">
                         <select class="form-select" aria-label="Default select example">
@@ -91,7 +91,7 @@
                         </select>
                     </div>
                     <div class="field">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Tell me about yourself" name="tellYourself" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Kendiden  Bahset" name="tellYourself" rows="3"></textarea>
                     </div>
                     <div class="field" style="margin-top: 38px; display: flex; align-items: center;">
                         <input class="form-check-input" style="height: 20px !important; width: 20px !important;" type="checkbox" name="offersOpen" value="" id="flexCheckDefault">
@@ -101,38 +101,38 @@
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
-                        <input type="submit" name="submitEmployee" value="Signup">
+                        <input type="submit" name="submitEmployee" value="Kayıt Ol">
                     </div>
                 </form>
                 <form action="" method="POST" class="signup">
                     <div class="field">
-                        <input type="text" placeholder="Company Name" name="companyName" required>
+                        <input type="text" placeholder="Şirket İsmi" name="companyName" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Email Address" name="emailAddress" required>
+                        <input type="text" placeholder="Email" name="emailAddress" required>
                     </div>
                     <div class="field">
                         <input type="tel" placeholder="Telefon" name="phone" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Password" name="password" required>
+                        <input type="password" placeholder="Şifre" name="password" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Confirm password" name="confirmPassword" required>
+                        <input type="password" placeholder="Şifreyi doğrula" name="confirmPassword" required>
                     </div>
                     <div class="field">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Vision" name="vision" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Vizyon" name="vision" rows="3"></textarea>
                     </div>
                     <div style="margin-top: 10%;"></div>
                     <div class="field">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Mission" name="mission" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Misyon" name="mission" rows="3"></textarea>
                     </div>
                     <div class="field">
 
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
-                        <input type="submit" name="submitEmployer" value="Signup">
+                        <input type="submit" name="submitEmployer" value="Kayıt Ol">
                     </div>
                 </form>
             </div>
