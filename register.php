@@ -20,6 +20,28 @@
             background: rgb(255, 255, 255);
             background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(9, 9, 121, 1) 0%, rgba(0, 212, 255, 1) 100%);
         }
+
+        .form-select {
+            display: block;
+            width: 100%;
+            min-height: 50px;
+            padding: .375rem 2.25rem .375rem .75rem;
+            -moz-padding-start: calc(0.75rem - 3px);
+            font-size: 1.5rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            background-color: #fff;
+            background-repeat: no-repeat;
+            background-position: right .75rem center;
+            background-size: 16px 12px;
+            border: 1px solid #ced4da;
+            border-radius: .375rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
     </style>
 </head>
 
@@ -38,7 +60,7 @@
                 <div class="slider-tab"></div>
             </div>
             <div class="form-inner">
-                <form action="#" class="login">
+                <form action="" method="POST" class="login">
                     <div class="field">
                         <input type="text" placeholder="Name" name="name" required>
                     </div>
@@ -52,28 +74,45 @@
                         <input type="text" placeholder="Email Address" name="emailAddress" required>
                     </div>
                     <div class="field">
+                        <input type="tel" placeholder="Telefon" name="phone" required>
+                    </div>
+                    <div class="field">
                         <input type="password" placeholder="Password" name="password" required>
                     </div>
                     <div class="field">
                         <input type="password" placeholder="Confirm password" name="confirmPassword" required>
                     </div>
                     <div class="field">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Tell me about yourself" name="tellYourself" rows="3"></textarea>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Alanınızı seçiniz...</option>
+                            <option value="1">Android Developer</option>
+                            <option value="2">IOS Developer</option>
+                            <option value="3">Project Management</option>
+                        </select>
                     </div>
                     <div class="field">
-
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Tell me about yourself" name="tellYourself" rows="3"></textarea>
+                    </div>
+                    <div class="field" style="margin-top: 38px; display: flex; align-items: center;">
+                        <input class="form-check-input" style="height: 20px !important; width: 20px !important;" type="checkbox" name="offersOpen" value="" id="flexCheckDefault">
+                        <label class="form-check-label" style="margin-top: 12px; margin-left: 10px;" for="flexCheckDefault">
+                            İş tekliflerine açığım
+                        </label>
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
-                        <input type="submit" value="Signup">
+                        <input type="submit" name="submitEmployee" value="Signup">
                     </div>
                 </form>
-                <form action="#" class="signup">
+                <form action="" method="POST" class="signup">
                     <div class="field">
                         <input type="text" placeholder="Company Name" name="companyName" required>
                     </div>
                     <div class="field">
                         <input type="text" placeholder="Email Address" name="emailAddress" required>
+                    </div>
+                    <div class="field">
+                        <input type="tel" placeholder="Telefon" name="phone" required>
                     </div>
                     <div class="field">
                         <input type="password" placeholder="Password" name="password" required>
@@ -124,22 +163,23 @@
 
 </html>
 <?php
-//include('db/conDB.php');
+include('db/conDB.php');
 if ($con) {
-    if (isset($_POST["submit"])) {
+    if (isset($_POST["submitEmployee"])) {
         $name = $_POST["name"];
         $surname = $_POST["surname"];
         $company = $_POST["company"];
         $emailAddress = $_POST["emailAddress"];
+        $phone = $_POST["phone"];
         $password = $_POST["password"];
         $confirmPassword = $_POST["confirmPassword"];
         $tellYourself = $_POST["tellYourself"];
-        echo "basarili";
-
+        $offersOpen = $_POST["offersOpen"];
     }
     if (isset($_POST["submitEmployer"])) {
         $companyName = $_POST["companyName"];
         $emailAddress = $_POST["emailAddress"];
+        $phone = $_POST["phone"];
         $password = $_POST["password"];
         $confirmPassword = $_POST["confirmPassword"];
         $vision = $_POST["vision"];
