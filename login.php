@@ -57,14 +57,6 @@ if ($con) {
         $emailAddress = $_POST["emailAddress"];
         $password = $_POST["password"];
         
-        $sql = "select * from kullanicilar where kullanici_mail = '$emailAdress' and kullanici_sifre = '$password'";
-        $result = mysqli_query($con, $sql);
-
-        if(mysqli_num_rows($result) > 0){
-            header('Location: index.php');
-        } else{
-            echo "Veri tabani baglanti hatasi";
-        }
     }
 } else {
     echo "Veri tabani baglanti hatasi";

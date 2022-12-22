@@ -38,12 +38,15 @@
                 <div class="slider-tab"></div>
             </div>
             <div class="form-inner">
-                <form action="" method="POST" class="login">
+                <form action="#" class="login">
                     <div class="field">
                         <input type="text" placeholder="Name" name="name" required>
                     </div>
                     <div class="field">
                         <input type="text" placeholder="Surname" name="surname" required>
+                    </div>
+                    <div class="field">
+                        <input type="text" placeholder="Company" name="company" required>
                     </div>
                     <div class="field">
                         <input type="text" placeholder="Email Address" name="emailAddress" required>
@@ -57,15 +60,12 @@
                     <div class="field">
                         <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Tell me about yourself" name="tellYourself" rows="3"></textarea>
                     </div>
-                    <div class="field" style="margin-top: 38px; display: flex; align-items: center;">
-                        <input class="form-check-input" style="height: 20px !important; width: 20px !important;" type="checkbox" name="offersOpen" value="" id="flexCheckDefault">
-                        <label class="form-check-label" style="margin-top: 12px; margin-left: 10px;" for="flexCheckDefault">
-                            İş tekliflerine açığım
-                        </label>
+                    <div class="field">
+
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
-                        <input type="submit" name="submit" value="Signup">
+                        <input type="submit" value="Signup">
                     </div>
                 </form>
                 <form action="#" class="signup">
@@ -124,30 +124,27 @@
 
 </html>
 <?php
-include('db/conDB.php');
+//include('db/conDB.php');
 if ($con) {
     if (isset($_POST["submit"])) {
         $name = $_POST["name"];
         $surname = $_POST["surname"];
+        $company = $_POST["company"];
         $emailAddress = $_POST["emailAddress"];
         $password = $_POST["password"];
         $confirmPassword = $_POST["confirmPassword"];
         $tellYourself = $_POST["tellYourself"];
-        $offersOpen = $_POST["offersOpen"];
+        echo "basarili";
 
-        if ($password == $confirmPassword) {
-            $sql = "insert into kullanicilar (kullanici_ad, kullanici_soyad, kullanici_email, kullanici_sifre, kullanici_tanitim, kullanici_teklif_acik) values ('$name', '$surname','$emailAddress','$password','$tellYourself', '$offersOpen')";
-            $result = mysqli_query($con, $sql);
-            if (mysqli_query($con,$sql)) {
-                echo "basarili";
-
-                $sql = "insert into iletisim ()";
-            }else{
-                echo "kayıt olurken hata oldu";
-            }
-        } else {
-            echo "Parolalar eşleşmiyor.";
-        }
+    }
+    if (isset($_POST["submitEmployer"])) {
+        $companyName = $_POST["companyName"];
+        $emailAddress = $_POST["emailAddress"];
+        $password = $_POST["password"];
+        $confirmPassword = $_POST["confirmPassword"];
+        $vision = $_POST["vision"];
+        $mission = $_POST["mission"];
+        echo "basarili";
     }
 } else {
     echo "Veri tabani baglanti hatasi";
