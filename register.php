@@ -87,12 +87,9 @@
                             <option value="3">Project Management</option>
                         </select>
                     </div>
-<<<<<<< HEAD
                     <div class="field">
                         <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Tell me about yourself" name="tellYourself" rows="3"></textarea>
                     </div>
-=======
->>>>>>> fc5f93f1d1cecabcb0ec3794e2b5fe63edbbe083
                     <div class="field" style="margin-top: 38px; display: flex; align-items: center;">
                         <input class="form-check-input" style="height: 20px !important; width: 20px !important;" type="checkbox" name="offersOpen" value="" id="flexCheckDefault">
                         <label class="form-check-label" style="margin-top: 12px; margin-left: 10px;" for="flexCheckDefault">
@@ -101,11 +98,7 @@
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
-<<<<<<< HEAD
-                        <input type="submit" name="submitEmployee" value="Signup">
-=======
                         <input type="submit" name="submit" value="Signup">
->>>>>>> fc5f93f1d1cecabcb0ec3794e2b5fe63edbbe083
                     </div>
                 </form>
                 <form action="" method="POST" class="signup">
@@ -178,7 +171,20 @@ if ($con) {
         $confirmPassword = $_POST["confirmPassword"];
         $tellYourself = $_POST["tellYourself"];
         $offersOpen = $_POST["offersOpen"];
-<<<<<<< HEAD
+
+        if ($password == $confirmPassword) {
+            $sql = "insert into kullanicilar (kullanici_ad, kullanici_soyad, kullanici_email, kullanici_sifre, kullanici_tanitim, kullanici_teklif_acik) values ('$name', '$surname','$emailAddress','$password','$tellYourself', '$offersOpen')";
+            $result = mysqli_query($con, $sql);
+            if (mysqli_query($con, $sql)) {
+                echo "basarili";
+
+                $sql = "insert into iletisim ()";
+            } else {
+                echo "kayıt olurken hata oldu";
+            }
+        } else {
+            echo "Parolalar eşleşmiyor.";
+        }
     }
     if (isset($_POST["submitEmployer"])) {
         $companyName = $_POST["companyName"];
@@ -188,23 +194,30 @@ if ($con) {
         $confirmPassword = $_POST["confirmPassword"];
         $vision = $_POST["vision"];
         $mission = $_POST["mission"];
-        echo "basarili";
-=======
 
         if ($password == $confirmPassword) {
-            $sql = "insert into kullanicilar (kullanici_ad, kullanici_soyad, kullanici_email, kullanici_sifre, kullanici_tanitim, kullanici_teklif_acik) values ('$name', '$surname','$emailAddress','$password','$tellYourself', '$offersOpen')";
+            $sql = "insert into kullanicilar (kullanici_ad, kullanici_soyad, kullanici_email, kullanici_sifre, kullanici_tanitim, kullanici_teklif_acik) values ('$companyName', '$surname','$emailAddress','$password','$tellYourself', '$offersOpen')";
             $result = mysqli_query($con, $sql);
-            if (mysqli_query($con,$sql)) {
+            if (mysqli_query($con, $sql)) {
                 echo "basarili";
-
-                $sql = "insert into iletisim ()";
-            }else{
+                $sql = "select kullanici_id from kullanicilar where kullanici_email = '$emailAddress";
+                if (mysqli_query($con, $sql)) {
+                    $result = mysqli_query($con, $sql);
+                    $row = $result->fetch_assoc();
+                    $userID = $row["kullanici_id"];
+                    $sql = "insert into iletisim (kullanicilar_kullanici_id, iletisim_tel_no, iletisim_mail) values ('$userID', '$phone', '$emailAddress')";
+                    if (mysqli_query($con, $sql)) {
+                        echo "islem basarili";
+                    }else{
+                        echo "iletisim veri tabanında hata var";
+                    }
+                }
+            } else {
                 echo "kayıt olurken hata oldu";
             }
         } else {
             echo "Parolalar eşleşmiyor.";
         }
->>>>>>> fc5f93f1d1cecabcb0ec3794e2b5fe63edbbe083
     }
 } else {
     echo "Veri tabani baglanti hatasi";
