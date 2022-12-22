@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 19 Ara 2022, 17:35:34
--- Sunucu sürümü: 10.4.24-MariaDB
--- PHP Sürümü: 8.1.6
+-- Üretim Zamanı: 22 Ara 2022, 14:38:56
+-- Sunucu sürümü: 10.4.19-MariaDB
+-- PHP Sürümü: 8.0.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -117,6 +117,22 @@ CREATE TABLE `meslekler` (
   `meslek_adi` varchar(50) COLLATE utf8_turkish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
+--
+-- Tablo döküm verisi `meslekler`
+--
+
+INSERT INTO `meslekler` (`meslek_id`, `meslek_adi`) VALUES
+(1, 'Bilgisayar Mühendisliği'),
+(2, 'Endüstri Mühendisliği'),
+(3, 'Jeoloji Mühendisliği'),
+(4, 'Çevre Mühendisliği'),
+(5, 'Elektrik-Elektronik Mühendisliği'),
+(6, 'Makine Mühendisliği'),
+(7, 'Yazılım Mühendisliği'),
+(8, 'Adli Bilişim Mühendisliği'),
+(9, 'İnşaat Mühendisliği'),
+(10, 'Biyomühendislik');
+
 -- --------------------------------------------------------
 
 --
@@ -128,6 +144,22 @@ CREATE TABLE `meslek_alanlar` (
   `meslekler_meslek_id` int(11) NOT NULL,
   `alan_adi` varchar(50) COLLATE utf8_turkish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `meslek_alanlar`
+--
+
+INSERT INTO `meslek_alanlar` (`alan_id`, `meslekler_meslek_id`, `alan_adi`) VALUES
+(1, 1, 'Donanım Mühendisliği'),
+(2, 2, 'Bütçe ve Finansal Planlama'),
+(3, 3, 'Maden Tetkik ve Arama'),
+(4, 4, 'Çevre ve Şehircilik'),
+(5, 5, 'Haberleşme ve Medya'),
+(6, 6, 'İmalat sanayi'),
+(7, 7, 'Test Mühendisliği'),
+(8, 8, 'İnternet ve E-ticaret Güvenliği'),
+(9, 9, 'Karayolu ve Demiryolu Üstyapı Tasarımı'),
+(10, 10, 'Genetik Mühendisliği');
 
 -- --------------------------------------------------------
 
@@ -293,13 +325,13 @@ ALTER TABLE `kullanicilar`
 -- Tablo için AUTO_INCREMENT değeri `meslekler`
 --
 ALTER TABLE `meslekler`
-  MODIFY `meslek_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `meslek_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `meslek_alanlar`
 --
 ALTER TABLE `meslek_alanlar`
-  MODIFY `alan_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `alan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `sirketler`

@@ -90,14 +90,12 @@
                     <div class="field">
                         <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Kendiden  Bahset" name="tellYourself" rows="3"></textarea>
                     </div>
-                    <div class="field" style="margin-top: 38px; display: flex; align-items: center;">
-                        <input class="form-check-input" style="height: 20px !important; width: 20px !important;" type="checkbox" name="offersOpen" value="" id="flexCheckDefault">
-                        <label class="form-check-label" style="margin-top: 12px; margin-left: 10px;" for="flexCheckDefault">
-                            İş tekliflerine açığım
-                        </label>
+                    <div class="field">
+
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
+                        <input type="submit" value="Signup">
                         <input type="submit" name="submitEmployee" value="Kayıt Ol">
                     </div>
                 </form>
@@ -160,11 +158,12 @@
 
 </html>
 <?php
-include('db/conDB.php');
+//include('db/conDB.php');
 if ($con) {
     if (isset($_POST["submitEmployee"])) {
         $name = $_POST["name"];
         $surname = $_POST["surname"];
+        $company = $_POST["company"];
         $emailAddress = $_POST["emailAddress"];
         $phone = $_POST["phone"];
         $password = $_POST["password"];
