@@ -101,12 +101,17 @@
                     <div class="field btn">
                         <div class="btn-layer"></div>
                         <input type="submit" name="submitEmployee" value="Kayıt Ol">
-                        <input type="submit" name="submitEmployer" value="Kayıt Ol">
                     </div>
                 </form>
                 <form action="" method="POST" class="signup">
                     <div class="field">
-                        <input type="text" placeholder="Şirket İsmi" name="companyName" required>
+                        <input type="text" placeholder="Şirket sahibinin adı" name="ownerName" required>
+                    </div>
+                    <div class="field">
+                        <input type="text" placeholder="Şirket sahibinin soyadı" name="ownerSurname" required>
+                    </div>
+                    <div class="field">
+                        <input type="text" placeholder="Şirket adı" name="companyName" required>
                     </div>
                     <div class="field">
                         <input type="email" placeholder="Email" name="emailAddress" required>
@@ -121,10 +126,12 @@
                         <input type="password" placeholder="Şifreyi doğrula" name="confirmPassword" required>
                     </div>
                     <div class="field">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Şirket sahibi tanıtım" name="ownerIntroduction" rows="3"></textarea>
+                    </div>
+                    <div class="field" style="margin-top: 10%;">
                         <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Vizyon" name="vision" rows="3"></textarea>
                     </div>
-                    <div style="margin-top: 10%;"></div>
-                    <div class="field">
+                    <div class="field" style="margin-top: 10%;">
                         <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Misyon" name="mission" rows="3"></textarea>
                     </div>
                     <div class="field">
@@ -193,7 +200,7 @@ if ($con) {
                         <script type="text/javascript">
                             location.href = 'http://localhost/Hire/login.php';
                         </script>
-<?php
+                        <?php
 
                     } else {
                         echo "iletisim veri tabanında hata var";
@@ -207,27 +214,40 @@ if ($con) {
         }
     }
     if (isset($_POST["submitEmployer"])) {
+        $ownerName = $_POST["ownerName"];
+        $ownerSurname = $_POST["ownerSurname"];
         $companyName = $_POST["companyName"];
         $emailAddress = $_POST["emailAddress"];
         $phone = $_POST["phone"];
         $password = $_POST["password"];
         $confirmPassword = $_POST["confirmPassword"];
+        $ownerIntroduction = $_POST["ownerIntroduction"];
         $vision = $_POST["vision"];
         $mission = $_POST["mission"];
 
+        echo $ownerName;
         if ($password == $confirmPassword) {
-            $sql = "insert into kullanicilar (kullanici_ad, kullanici_soyad, kullanici_email, kullanici_sifre, kullanici_tanitim, kullanici_teklif_acik) values ('$companyName', '$surname','$emailAddress','$password','$tellYourself', '$offersOpen')";
+            $sql = "insert into kullanicilar (kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email, kullanici_sifre) values ('$ownerName', '$ownerSurname','$ownerIntroduction','$emailAddress','$password')";
             $result = mysqli_query($con, $sql);
-            if (mysqli_query($con, $sql)) {
-                echo "basarili";
-                $sql = "select kullanici_id from kullanicilar where kullanici_email = '$emailAddress";
-                if (mysqli_query($con, $sql)) {
-                    $result = mysqli_query($con, $sql);
+            if ($result) {
+                $sql = "select kullanici_id from kullanicilar where kullanici_email = '$emailAddress'";
+                $result = mysqli_query($con, $sql);
+                if ($result) {
                     $row = $result->fetch_assoc();
                     $userID = $row["kullanici_id"];
                     $sql = "insert into iletisim (kullanicilar_kullanici_id, iletisim_tel_no, iletisim_mail) values ('$userID', '$phone', '$emailAddress')";
                     if (mysqli_query($con, $sql)) {
-                        echo "islem basarili";
+
+                        $sql = "insert into sirketler (kullanicilar_kullanici_id, sirket_adi, sirket_vizyon, sirket_misyon) values ('$userID', '$companyName', '$vision', '$mission')";
+                        if (mysqli_query($con, $sql)) {
+                        ?>
+                            <script type="text/javascript">
+                                location.href = 'http://localhost/Hire/login.php';
+                            </script>
+<?php
+                        } else {
+                            echo "Sirketler tablo hatali";
+                        }
                     } else {
                         echo "iletisim veri tabanında hata var";
                     }
