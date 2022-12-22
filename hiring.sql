@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 22 Ara 2022, 14:38:56
+-- Üretim Zamanı: 22 Ara 2022, 13:49:36
 -- Sunucu sürümü: 10.4.19-MariaDB
 -- PHP Sürümü: 8.0.7
 
