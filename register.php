@@ -68,7 +68,7 @@
                         <input type="text" placeholder="Soyad" name="surname" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Email" name="emailAddress" required>
+                        <input type="email" placeholder="Email" name="emailAddress" required>
                     </div>
                     <div class="field">
                         <input type="tel" placeholder="Telefon" name="phone" required>
@@ -80,23 +80,28 @@
                         <input type="password" placeholder="Şifreyi Doğrula" name="confirmPassword" required>
                     </div>
                     <div class="field">
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="section">
                             <option selected>Alanınızı seçiniz...</option>
-                            <option value="1">Android Developer</option>
-                            <option value="2">IOS Developer</option>
-                            <option value="3">Project Management</option>
+                            <option value="Android Developer">Android Developer</option>
+                            <option value="IOS Developer">IOS Developer</option>
+                            <option value="Project Management">Project Management</option>
                         </select>
                     </div>
                     <div class="field">
                         <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Kendiden  Bahset" name="tellYourself" rows="3"></textarea>
                     </div>
                     <div class="field">
-
+                        <div class="field" style="margin-top: 38px; display: flex; align-items: center;">
+                            <input class="form-check-input" style="height: 20px !important; width: 20px !important;" type="checkbox" name="offersOpen" value="1" id="flexCheckDefault">
+                            <label class="form-check-label" style="margin-top: 12px; margin-left: 10px;" for="flexCheckDefault">
+                                İş tekliflerine açığım
+                            </label>
+                        </div>
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
-                        <input type="submit" value="Signup">
                         <input type="submit" name="submitEmployee" value="Kayıt Ol">
+                        <input type="submit" name="submitEmployer" value="Kayıt Ol">
                     </div>
                 </form>
                 <form action="" method="POST" class="signup">
@@ -104,7 +109,7 @@
                         <input type="text" placeholder="Şirket İsmi" name="companyName" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Email" name="emailAddress" required>
+                        <input type="email" placeholder="Email" name="emailAddress" required>
                     </div>
                     <div class="field">
                         <input type="tel" placeholder="Telefon" name="phone" required>
@@ -163,21 +168,37 @@ if ($con) {
     if (isset($_POST["submitEmployee"])) {
         $name = $_POST["name"];
         $surname = $_POST["surname"];
-        $company = $_POST["company"];
         $emailAddress = $_POST["emailAddress"];
         $phone = $_POST["phone"];
         $password = $_POST["password"];
         $confirmPassword = $_POST["confirmPassword"];
+        $section = $_POST["section"];
         $tellYourself = $_POST["tellYourself"];
         $offersOpen = $_POST["offersOpen"];
 
         if ($password == $confirmPassword) {
-            $sql = "insert into kullanicilar (kullanici_ad, kullanici_soyad, kullanici_email, kullanici_sifre, kullanici_tanitim, kullanici_teklif_acik) values ('$name', '$surname','$emailAddress','$password','$tellYourself', '$offersOpen')";
+            $sql = "insert into kullanicilar (kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_teklif_acik, kullanici_email, kullanici_sifre) values ('$name', '$surname','$tellYourself', '$offersOpen','$emailAddress','$password')";
             $result = mysqli_query($con, $sql);
-            if (mysqli_query($con, $sql)) {
-                echo "basarili";
+            if ($result) {
+                $sql = "select kullanici_id from kullanicilar where kullanici_email = '$emailAddress'";
+                $result = mysqli_query($con, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    $row = $result->fetch_assoc();
+                    $userID = $row["kullanici_id"];
+                    $sql = "insert into iletisim (kullanicilar_kullanici_id, iletisim_tel_no, iletisim_mail) values ('$userID', '$phone', '$emailAddress')";
+                    if (mysqli_query($con, $sql)) {
+                        echo "islem basarili";
 
-                $sql = "insert into iletisim ()";
+?>
+                        <script type="text/javascript">
+                            location.href = 'http://localhost/Hire/login.php';
+                        </script>
+<?php
+
+                    } else {
+                        echo "iletisim veri tabanında hata var";
+                    }
+                }
             } else {
                 echo "kayıt olurken hata oldu";
             }
@@ -207,7 +228,7 @@ if ($con) {
                     $sql = "insert into iletisim (kullanicilar_kullanici_id, iletisim_tel_no, iletisim_mail) values ('$userID', '$phone', '$emailAddress')";
                     if (mysqli_query($con, $sql)) {
                         echo "islem basarili";
-                    }else{
+                    } else {
                         echo "iletisim veri tabanında hata var";
                     }
                 }
