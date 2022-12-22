@@ -68,14 +68,7 @@
                         <input type="text" placeholder="Soyad" name="surname" required>
                     </div>
                     <div class="field">
-<<<<<<< HEAD
-                        <input type="text" placeholder="Email Address" name="emailAddress" required>
-=======
-                        <input type="text" placeholder="Şirket" name="company" required>
-                    </div>
-                    <div class="field">
                         <input type="text" placeholder="Email" name="emailAddress" required>
->>>>>>> 8f2cf469aff0f3cf8086847e7e4caa33aeea9f09
                     </div>
                     <div class="field">
                         <input type="tel" placeholder="Telefon" name="phone" required>
@@ -105,11 +98,7 @@
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
-<<<<<<< HEAD
-                        <input type="submit" name="submit" value="Signup">
-=======
                         <input type="submit" name="submitEmployee" value="Kayıt Ol">
->>>>>>> 8f2cf469aff0f3cf8086847e7e4caa33aeea9f09
                     </div>
                 </form>
                 <form action="" method="POST" class="signup">
