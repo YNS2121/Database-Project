@@ -158,7 +158,7 @@
 
 </html>
 <?php
-//include('db/conDB.php');
+include('db/conDB.php');
 if ($con) {
     if (isset($_POST["submitEmployee"])) {
         $name = $_POST["name"];
