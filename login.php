@@ -56,7 +56,6 @@ if ($con) {
     if (isset($_POST["submit"])) {
         $emailAddress = $_POST["emailAddress"];
         $password = $_POST["password"];
-        
     }
 } else {
     echo "Veri tabani baglanti hatasi";
