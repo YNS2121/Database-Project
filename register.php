@@ -194,14 +194,11 @@ if ($con) {
                     $userID = $row["kullanici_id"];
                     $sql = "insert into iletisim (kullanicilar_kullanici_id, iletisim_tel_no, iletisim_mail) values ('$userID', '$phone', '$emailAddress')";
                     if (mysqli_query($con, $sql)) {
-                        echo "islem basarili";
-
-?>
+                        echo "islem basarili"; ?>
                         <script type="text/javascript">
                             location.href = 'http://localhost/Hire/login.php';
                         </script>
                         <?php
-
                     } else {
                         echo "iletisim veri tabanında hata var";
                     }
@@ -225,7 +222,6 @@ if ($con) {
         $vision = $_POST["vision"];
         $mission = $_POST["mission"];
 
-        echo $ownerName;
         if ($password == $confirmPassword) {
             $sql = "insert into kullanicilar (kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email, kullanici_sifre) values ('$ownerName', '$ownerSurname','$ownerIntroduction','$emailAddress','$password')";
             $result = mysqli_query($con, $sql);
@@ -239,8 +235,7 @@ if ($con) {
                     if (mysqli_query($con, $sql)) {
 
                         $sql = "insert into sirketler (kullanicilar_kullanici_id, sirket_adi, sirket_vizyon, sirket_misyon) values ('$userID', '$companyName', '$vision', '$mission')";
-                        if (mysqli_query($con, $sql)) {
-                        ?>
+                        if (mysqli_query($con, $sql)) { ?>
                             <script type="text/javascript">
                                 location.href = 'http://localhost/Hire/login.php';
                             </script>
