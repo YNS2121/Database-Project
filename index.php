@@ -19,6 +19,12 @@
                 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
+        body{
+            background-color: #69a6e2 ;           
+            background-image: linear-gradient(to bottom right, #A6A6A6, #D9D9D9, #FFFFFF);
+
+        }
+
         .form-select {
             display: block;
             width: 100%;
@@ -48,7 +54,7 @@
     <!-- Nav bar header -->
     <div class="header">
         <div class="header_left">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYKaJcHbm2_iuxuhJ7_ikmvSHY43CdK1KExg&usqp=CAU"
+            <img src="hirelogo.png"
                 alt="no image">
             <div class="search_box">
                 <i class="bi bi-search"></i>
@@ -307,60 +313,17 @@
                     <div class="sidebar_second_text"><i class="fa-solid fa-circle-dot"
                             style="margin-right:10px;font-size: 10px;"></i>Nasa</div>
                 </div>
-                <div class="sidebar_title" style="color:blue">Groups</div>
-
-
-                <div class="recent">
-                    <div class="sidebar_second_text"><i class="bi bi-people-fill"
-                            style="margin-right:10px;font-size: medium;"></i> Tensorflow</div>
-                    <div class="sidebar_second_text"><i class="bi bi-people-fill"
-                            style="margin-right:10px;font-size: medium;"></i> Tensorflow</div>
-
-
-                </div>
-
-                <div class="sidebar_title" style="color:blue">Followed Hashtags</div>
-
+                
 
                 <div class="recent">
-                    <div class="sidebar_second_text"># Tensorflow</div>
-                    <div class="sidebar_second_text"># Tensorflow</div>
+                         
 
 
                 </div>
             </div>
 
         </div>
-        <div class="posts">
-            <div class="post_box">
-                <div class="input">
-                    <div class="input_text">
-                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                            alt="no image" class=profile>
-                        <input type="text" placeholder="Kendinizi tanıtın." class="post_input">
-                    </div>
-                    <div class="input_blocks">
-                        <div class="input_option">
-                            <div class="option"><i class="bi bi-image" style="color:lightblue"></i> </div>
-                            <div class="option_text">Fotoğraf</div>
-                        </div>
-                        <div class="input_option">
-                            <div class="option"><i class="bi bi-play-btn-fill" style="color:lightgreen"></i> </div>
-                            <div class="option_text">Video</div>
-                        </div>
-                        <!--    <div class="input_option">
-                            <div class="option"><i class="bi bi-calendar-event" style="color:orange"></i> </div>
-                            <div class="option_text">Event</div>
-                        </div>
-                   
-                        <div class="input_option">
-                            <div class="option"><i class="bi bi-card-text" style="color:crimson"></i> </div>
-                            <div class="option_text">Write article</div>
-                        </div>
-                     -->
-                    </div>
-                </div>
-            </div>
+        <div class="posts"> 
             <div class="post_box">
                 <div class="input">
                     <div class="input_blocks">
@@ -395,9 +358,7 @@
                         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
                             alt="no image" class="post_profile" style="height:60px">
                         <div class="post_item_owner" style="margin-left:8px;">
-                            <a href="#" class="act_title">Techniczoid </a>
-                            <p class="account_name">10 Million - Followers</p>
-                            <p class="account_name">Youtube Channel</p>
+                            <a href="#" class="act_title">Ali Efe Bozdaş </a>
                         </div>
                     </div>
                     <i class="bi bi-three-dots" style="padding:5px;"></i>
@@ -418,19 +379,16 @@
                     <img src="1.svg" alt="">
                     <img src="2.svg" alt="">
                     <img src="3.svg" alt="">
-                    <span class="account_name">20 . Comments</span>
+                    
 
                 </div>
 
                 <div class="post_item_footer">
                     <div class="footer_item">
-                        <i class="bi bi-hand-thumbs-up"></i>
-                        <div>Beğen</div>
+                        
+                        
                     </div>
-                    <div class="footer_item">
-                        <i class="bi bi-chat-text"></i>
-                        <div>Yorum</div>
-                    </div>
+                    
                     <!--
                     <div class="footer_item">
                         <i class="bi bi-arrow-90deg-right"></i>
@@ -545,8 +503,8 @@
                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
                         alt="no image" class="account_picture">
                     <div class="account_info">
-                        <h4 class="act_title">Meryem Yılmaz</h4>
-                        <p class="account_name">AI Expert</p>
+                        <h4 class="act_title">Esra Durmaz</h4>
+                        <p class="account_name">Pentester</p>
 
                         <div class="follow">
                             + Mülakat Teklifi Et
@@ -558,7 +516,7 @@
                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
                         alt="no image" class="account_picture">
                     <div class="account_info">
-                        <h4 class="act_title">Kemal Kahraman</h4>
+                        <h4 class="act_title">Zeynep Ergün</h4>
                         <p class="account_name">Front-End Dev.</p>
 
                         <div class="follow">
