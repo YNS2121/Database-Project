@@ -255,7 +255,7 @@
                                     </div>
                                 </div>
                                 <div class="profile_view_button">
-                                <a href="kullanici_profili.html">Profili Görüntüle</a>
+                                <a href="user-profile.php">Profili Görüntüle</a>
                                 </div>
 
                                 <div class="bdr_bottom"></div>
