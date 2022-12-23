@@ -97,7 +97,7 @@ if ($result) {
               </div>
               <div class="panel-body">
                 <?php
-                $sqlCvList = "SELECT * from cv JOIN diller ON cv.diller_dil_id = diller.dil_id;";
+                $sqlCvList =  "SELECT * from cv JOIN diller ON cv.diller_dil_id = diller.dil_id HAVING cv.kullanicilar_kullanici_id = '$userID';";
                 $resultCvList = mysqli_query($con,  $sqlCvList);
                 $sqlVideoList = "SELECT * from videolar where kullanicilar_kullanici_id = '$userID'";
                 $resultVideoList = mysqli_query($con,  $sqlVideoList);
