@@ -3,14 +3,17 @@
 $userID = $_GET["userID"];
 $sql = "Select * from kullanicilar where kullanici_id = '$userID'";
 $meslekSQL = "SELECT kullanicilar_kullanici_id,meslekler_meslek_id, alan_id, alan_adi from kullanici_meslek_detay JOIN meslek_alanlar ON kullanici_meslek_detay.alanlar_alan_id = meslek_alanlar.alan_id HAVING kullanici_meslek_detay.kullanicilar_kullanici_id = '$userID'";
-$sqlIletisim = "SELECT * FROM iletisim where kullanicilar_kullanici_id = '$userID';";
+$sqlIletisim = "SELECT * FROM iletisim where kullanicilar_kullanici_id = '$userID'";
+$sqlImg = "SELECT fotograf_adresi FROM fotograflar where kullanicilar_kullanici_id = '$userID'";
 $result = mysqli_query($con, $sql);
 $resultMeslekSQL = mysqli_query($con, $meslekSQL);
 $resultIletisimSQL = mysqli_query($con, $sqlIletisim);
+$resultImg = mysqli_query($con, $sqlImg);
 if ($result) {
   $row = $result->fetch_assoc();
   $rowMeslek = $resultMeslekSQL->fetch_assoc();
   $rowIletisim = $resultIletisimSQL->fetch_assoc();
+  $rowImg = $resultImg->fetch_assoc();
 } else {
   echo "Hata";
 }
@@ -38,7 +41,7 @@ if ($result) {
           <div class="row">
             <div class="col-sm-12">
               <div class="image-container bg2">
-                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="avatar" alt="avatar" />
+                <img src="uploads/<?php echo $rowImg["fotograf_adresi"]; ?>" class="avatar" alt="avatar" />
               </div>
             </div>
             <div class="col-sm-12">
@@ -49,8 +52,7 @@ if ($result) {
                 <div></div>
                 <div class="mg-top-10">
                   <a href="#" class="btn btn-blue">İş Teklifi Yap</a>
-
-                  <a href="edit_profil.php" class="btn btn-blue" onclick="goclicky(this); return false;" target="_blank">Profili Düzenle</a>
+                  <a href="edit_profil.php?userID=<?php echo $userID; ?>" class="btn btn-blue" onclick="goclicky(this); return false;" target="_blank">Profili Düzenle</a>
                 </div>
               </div>
             </div>
@@ -94,65 +96,29 @@ if ($result) {
                 </div>
               </div>
               <div class="panel-body">
+                <?php
+                $sqlCvList = "SELECT * from cv JOIN diller ON cv.diller_dil_id = diller.dil_id;";
+                $resultCvList = mysqli_query($con,  $sqlCvList);
+                $sqlVideoList = "SELECT * from videolar where kullanicilar_kullanici_id = '$userID'";
+                $resultVideoList = mysqli_query($con,  $sqlVideoList);
+                ?>
                 <div class="body-section">
-                  <p>Kullanici CV bilgileri.</p>
+                  <p><b>Kullanici CV bilgileri.</b></p>
                   <ul>
-                    <li>CV(Türkçe)</li>
-                    <li>CV(İngilizce))</li>
-                    <li>CV(İspanyolca)</li>
+                    <?php
+                    foreach ($resultCvList as $item) { ?>
+                      <li><a href="uploadsCv/<?php echo $item['cv_adresi']; ?>"><?php echo $item['cv_adresi'] . ' ' . '(' . $item['dil_adi'] . ')'; ?></a></li>
+                    <?php }
+                    ?>
                   </ul>
-                  <p>Kullanici mülakat videoları.</p>
+                  <p><b>Kullanici mülakat videoları.</b></p>
                   <ul>
-                    <li>Yunus Emre Berdibek Mülakat.mp3</li>
+                    <?php
+                    foreach ($resultVideoList as $video) { ?>
+                      <li><a href="uploadsVideo/<?php echo $video['video_adresi']; ?>"><?php echo $video['video_adresi']; ?></a></li>
+                    <?php }
+                    ?>
                   </ul>
-                </div>
-                <div class="body-section">
-                  <a href="#" class="btn btn-info btn-sm">Düzenle </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel panel-white border-top-pink">
-              <div class="panel-heading">
-                <h3 class="panel-title">Yetenekler</h3>
-                <div class="controls pull-right">
-                  <span class="pull-right clickable">
-                    <i class="fa fa-chevron-up"></i>
-                  </span>
-                </div>
-              </div>
-              <div class="panel-body">
-                <div class="body-section">
-                  <h5 class="mg-top-0">Mühendislik - 90%</h5>
-                  <div class="progress progress-xs">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
-                  </div>
-                </div>
-                <div class="body-section">
-                  <h5>Pazarlama - 40%</h5>
-                  <div class="progress progress-xs">
-                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
-                  </div>
-                </div>
-                <div class="body-section">
-                  <h5>İletişim - 20%</h5>
-                  <div class="progress progress-xs">
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
-                  </div>
-                </div>
-                <div class="body-section">
-                  <h5>Strateji- 60%</h5>
-                  <div class="progress progress-xs">
-                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                      <span class="sr-only">60% Complete (warning)</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="body-section">
-                  <h5>Müşteri Hizmetleri - 80%</h5>
-                  <div class="progress progress-xs">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"></div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -184,58 +150,6 @@ if ($result) {
                 <div class="body-section">
                   <h5 class="section-heading">Email</h5>
                   <p class="section-content"><?php echo $rowIletisim["iletisim_mail"]; ?></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel panel-white border-top-orange">
-              <div class="panel-heading">
-                <h3 class="panel-title">Lisanslar ve Sertifikalar</h3>
-                <div class="controls pull-right">
-                  <span class="pull-right clickable">
-                    <i class="fa fa-chevron-up"></i>
-                  </span>
-                </div>
-              </div>
-              <div class="panel-body">
-                <div class="body-section">
-                  <h5 class="section-heading">Friends</h5>
-                  <p class="section-content">242</p>
-                </div>
-                <div class="body-section">
-                  <h5 class="section-heading">Posts</h5>
-                  <p class="section-content">2240</p>
-                </div>
-                <div class="body-section">
-                  <h5 class="section-heading">Pictures</h5>
-                  <p class="section-content">18</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel panel-white border-top-blue">
-              <div class="panel-heading">
-                <h3 class="panel-title">Deneyim</h3>
-                <div class="controls pull-right">
-                  <span class="pull-right clickable">
-                    <i class="fa fa-chevron-up"></i>
-                  </span>
-                </div>
-              </div>
-              <div class="panel-body">
-                <div class="body-section">
-                  <h5 class="section-heading">Staj</h5>
-                  <p class="section-content">
-                    Stajyer Tekno Bağlantı Elemanları · Stajyer Tem 2022 - Ağu
-                    2022 · 2 ayTem 2022 - Ağu 2022 · 2 ay Malatya, Türkiye
-                  </p>
-                </div>
-                <div class="body-section">
-                  <h5 class="section-heading">Stajyer</h5>
-                  <p class="section-content">
-                    Stajyer DOKUMAS · Stajyer Haz 2021 - Tem 2021 · 2 ayHaz
-                    2021 - Tem 2021 · 2 ay Malatya, Türkiye
-                  </p>
                 </div>
               </div>
             </div>
