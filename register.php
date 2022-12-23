@@ -1,3 +1,4 @@
+<?php include('db/conDB.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -20,80 +21,132 @@
             background: rgb(255, 255, 255);
             background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(9, 9, 121, 1) 0%, rgba(0, 212, 255, 1) 100%);
         }
+
+        .form-select {
+            display: block;
+            width: 100%;
+            min-height: 50px;
+            padding: .375rem 2.25rem .375rem .75rem;
+            -moz-padding-start: calc(0.75rem - 3px);
+            font-size: 1.5rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            background-color: #fff;
+            background-repeat: no-repeat;
+            background-position: right .75rem center;
+            background-size: 16px 12px;
+            border: 1px solid #ced4da;
+            border-radius: .375rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
     </style>
 </head>
 
 <body>
     <div class="wrapper" style="margin: 25px;">
         <div class="title-text">
-            <div class="title login">Employee Form</div>
-            <div class="title signup">Employer Form</div>
+            <div class="title login">Çalışan Formu</div>
+            <div class="title signup">İş Veren Formu</div>
         </div>
         <div class="form-container">
             <div class="slide-controls">
                 <input type="radio" name="slide" id="login" checked>
                 <input type="radio" name="slide" id="signup">
-                <label for="login" class="slide login">Employee</label>
-                <label for="signup" class="slide signup">Employer</label>
+                <label for="login" class="slide login">Çalışan</label>
+                <label for="signup" class="slide signup">İş Veren</label>
                 <div class="slider-tab"></div>
             </div>
             <div class="form-inner">
-                <form action="#" class="login">
+                <form action="" method="POST" class="login">
                     <div class="field">
-                        <input type="text" placeholder="Name" name="name" required>
+                        <input type="text" placeholder="Ad" name="name" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Surname" name="surname" required>
+                        <input type="text" placeholder="Soyad" name="surname" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Company" name="company" required>
+                        <input type="email" placeholder="Email" name="emailAddress" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Email Address" name="emailAddress" required>
+                        <input type="tel" placeholder="Telefon" name="phone" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Password" name="password" required>
+                        <input type="password" placeholder="Şifre" name="password" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Confirm password" name="confirmPassword" required>
+                        <input type="password" placeholder="Şifreyi Doğrula" name="confirmPassword" required>
                     </div>
                     <div class="field">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Tell me about yourself" name="tellYourself" rows="3"></textarea>
+                        <?php
+                        $sql = "select alan_id, alan_adi from meslek_alanlar";
+                        $result = mysqli_query($con, $sql);
+                        ?>
+                        <select class="form-select" aria-label="Default select example" name="section">
+                            <option selected>Alanınızı seçiniz...</option>
+                            <?php
+                            foreach ($result as $i) {
+                            ?> <option value=<?php echo $i["alan_id"]; ?>><?php echo $i["alan_adi"]; ?></option>
+                            <?php }
+                            ?>
+                        </select>
                     </div>
                     <div class="field">
-
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Kendiden  Bahset" name="tellYourself" rows="3"></textarea>
+                    </div>
+                    <div class="field">
+                        <div class="field" style="margin-top: 38px; display: flex; align-items: center;">
+                            <input class="form-check-input" style="height: 20px !important; width: 20px !important;" type="checkbox" name="offersOpen" value="1" id="flexCheckDefault">
+                            <label class="form-check-label" style="margin-top: 12px; margin-left: 10px;" for="flexCheckDefault">
+                                İş tekliflerine açığım
+                            </label>
+                        </div>
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
-                        <input type="submit" value="Signup">
+                        <input type="submit" name="submitEmployee" value="Kayıt Ol">
                     </div>
                 </form>
-                <form action="#" class="signup">
+                <form action="" method="POST" class="signup">
                     <div class="field">
-                        <input type="text" placeholder="Company Name" name="companyName" required>
+                        <input type="text" placeholder="Şirket sahibinin adı" name="ownerName" required>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Email Address" name="emailAddress" required>
+                        <input type="text" placeholder="Şirket sahibinin soyadı" name="ownerSurname" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Password" name="password" required>
+                        <input type="text" placeholder="Şirket adı" name="companyName" required>
                     </div>
                     <div class="field">
-                        <input type="password" placeholder="Confirm password" name="confirmPassword" required>
+                        <input type="email" placeholder="Email" name="emailAddress" required>
                     </div>
                     <div class="field">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Vision" name="vision" rows="3"></textarea>
+                        <input type="tel" placeholder="Telefon" name="phone" required>
                     </div>
-                    <div style="margin-top: 10%;"></div>
                     <div class="field">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Mission" name="mission" rows="3"></textarea>
+                        <input type="password" placeholder="Şifre" name="password" required>
+                    </div>
+                    <div class="field">
+                        <input type="password" placeholder="Şifreyi doğrula" name="confirmPassword" required>
+                    </div>
+                    <div class="field">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Şirket sahibi tanıtım" name="ownerIntroduction" rows="3"></textarea>
+                    </div>
+                    <div class="field" style="margin-top: 10%;">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Vizyon" name="vision" rows="3"></textarea>
+                    </div>
+                    <div class="field" style="margin-top: 10%;">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Misyon" name="mission" rows="3"></textarea>
                     </div>
                     <div class="field">
 
                     </div>
                     <div class="field btn">
                         <div class="btn-layer"></div>
-                        <input type="submit" name="submitEmployer" value="Signup">
+                        <input type="submit" name="submitEmployer" value="Kayıt Ol">
                     </div>
                 </form>
             </div>
@@ -124,27 +177,93 @@
 
 </html>
 <?php
-//include('db/conDB.php');
 if ($con) {
-    if (isset($_POST["submit"])) {
+    if (isset($_POST["submitEmployee"])) {
         $name = $_POST["name"];
         $surname = $_POST["surname"];
-        $company = $_POST["company"];
         $emailAddress = $_POST["emailAddress"];
+        $phone = $_POST["phone"];
         $password = $_POST["password"];
         $confirmPassword = $_POST["confirmPassword"];
+        $section = $_POST["section"];
         $tellYourself = $_POST["tellYourself"];
-        echo "basarili";
+        $offersOpen = $_POST["offersOpen"];
 
+        if ($password == $confirmPassword) {
+            $sql = "insert into kullanicilar (kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_teklif_acik, kullanici_email, kullanici_sifre) values ('$name', '$surname','$tellYourself', '$offersOpen','$emailAddress','$password')";
+            $result = mysqli_query($con, $sql);
+            if ($result) {
+                $sql = "select kullanici_id from kullanicilar where kullanici_email = '$emailAddress'";
+                $result = mysqli_query($con, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    $row = $result->fetch_assoc();
+                    $userID = $row["kullanici_id"];
+                    $sql = "insert into iletisim (kullanicilar_kullanici_id, iletisim_tel_no, iletisim_mail) values ('$userID', '$phone', '$emailAddress')";
+                    if (mysqli_query($con, $sql)) {
+                        $sql = "insert into kullanici_meslek_detay (kullanicilar_kullanici_id, alanlar_alan_id) values ('$userID', '$section')";
+                        if (mysqli_query($con, $sql)) {
+?>
+                            <script type="text/javascript">
+                                location.href = 'http://localhost/Hire/login.php';
+                            </script>
+                        <?php
+                        }else{
+                            echo "meslek_detay hata";
+                        }
+                    } else {
+                        echo "iletisim veri tabanında hata var";
+                    }
+                }
+            } else {
+                echo "kayıt olurken hata oldu";
+            }
+        } else {
+            echo "Parolalar eşleşmiyor.";
+        }
     }
     if (isset($_POST["submitEmployer"])) {
+        $ownerName = $_POST["ownerName"];
+        $ownerSurname = $_POST["ownerSurname"];
         $companyName = $_POST["companyName"];
         $emailAddress = $_POST["emailAddress"];
+        $phone = $_POST["phone"];
         $password = $_POST["password"];
         $confirmPassword = $_POST["confirmPassword"];
+        $ownerIntroduction = $_POST["ownerIntroduction"];
         $vision = $_POST["vision"];
         $mission = $_POST["mission"];
-        echo "basarili";
+
+        if ($password == $confirmPassword) {
+            $sql = "insert into kullanicilar (kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email, kullanici_sifre) values ('$ownerName', '$ownerSurname','$ownerIntroduction','$emailAddress','$password')";
+            $result = mysqli_query($con, $sql);
+            if ($result) {
+                $sql = "select kullanici_id from kullanicilar where kullanici_email = '$emailAddress'";
+                $result = mysqli_query($con, $sql);
+                if ($result) {
+                    $row = $result->fetch_assoc();
+                    $userID = $row["kullanici_id"];
+                    $sql = "insert into iletisim (kullanicilar_kullanici_id, iletisim_tel_no, iletisim_mail) values ('$userID', '$phone', '$emailAddress')";
+                    if (mysqli_query($con, $sql)) {
+
+                        $sql = "insert into sirketler (kullanicilar_kullanici_id, sirket_adi, sirket_vizyon, sirket_misyon) values ('$userID', '$companyName', '$vision', '$mission')";
+                        if (mysqli_query($con, $sql)) { ?>
+                            <script type="text/javascript">
+                                location.href = 'http://localhost/Hire/login.php';
+                            </script>
+<?php
+                        } else {
+                            echo "Sirketler tablo hatali";
+                        }
+                    } else {
+                        echo "iletisim veri tabanında hata var";
+                    }
+                }
+            } else {
+                echo "kayıt olurken hata oldu";
+            }
+        } else {
+            echo "Parolalar eşleşmiyor.";
+        }
     }
 } else {
     echo "Veri tabani baglanti hatasi";
