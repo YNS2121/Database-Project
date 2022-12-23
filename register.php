@@ -207,7 +207,7 @@ if ($con) {
                                 location.href = 'http://localhost/Hire/login.php';
                             </script>
                         <?php
-                        }else{
+                        } else {
                             echo "meslek_detay hata";
                         }
                     } else {
@@ -246,6 +246,7 @@ if ($con) {
                     if (mysqli_query($con, $sql)) {
 
                         $sql = "insert into sirketler (kullanicilar_kullanici_id, sirket_adi, sirket_vizyon, sirket_misyon) values ('$userID', '$companyName', '$vision', '$mission')";
+                        $sqlFoto = "insert into fotograflar (kullanicilar_kullanici_id, fotograf_adresi) value ('$userID', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4g-Qf3MOCxDiyXBYM_qK8UVg0zN5-7r_Fvw&usqp=CAU')";
                         if (mysqli_query($con, $sql)) { ?>
                             <script type="text/javascript">
                                 location.href = 'http://localhost/Hire/login.php';
