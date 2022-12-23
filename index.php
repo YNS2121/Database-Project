@@ -1,4 +1,4 @@
-<?php include('db/conDB.php'); 
+<?php include('db/conDB.php');
 
 $userID = $_GET["userID"];
 
@@ -344,136 +344,45 @@ $userID = $_GET["userID"];
                 </div>
 
             </div>
+            <?php
+            $sqlUserList = "SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email, fotograf_id, fotograf_adresi, video_id, video_adresi, video_zamani FROM fotograflar INNER JOIN (SELECT * from videolar INNER JOIN (SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email FROM meslekler INNER JOIN (SELECT * FROM meslek_alanlar INNER JOIN (SELECT * FROM kullanicilar INNER JOIN kullanici_meslek_detay ON kullanicilar.kullanici_id = kullanici_meslek_detay.kullanicilar_kullanici_id) as a ON a.alanlar_alan_id = meslek_alanlar.alan_id) as b ON b.meslekler_meslek_id = meslekler.meslek_id) as v ON v.kullanici_id = videolar.kullanicilar_kullanici_id) as f ON f.kullanici_id = fotograflar.kullanicilar_kullanici_id;";
+            $resultUserList = mysqli_query($con, $sqlUserList);
+            if ($resultUserList) {
+                $rowUserList = $resultUserList;
+            }
 
-            <div class="post_item">
-                <div class="post_item_header">
-                    <div class="post_item_info">
-                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="post_profile" style="height:60px">
-                        <div class="post_item_owner" style="margin-left:8px;">
-                            <a href="#" class="act_title">Ali Efe Bozdaş </a>
+            foreach ($rowUserList as $user) { ?>
+                <div class="post_item">
+                    <div class="post_item_header">
+                        <div class="post_item_info">
+                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="post_profile" style="height:60px">
+                            <div class="post_item_owner" style="margin-left:8px;">
+                                <a href="#" class="act_title"><?php echo $user["kullanici_ad"] . " " . $user["kullanici_soyad"] . " "; ?></a>
+                            </div>
+                            <br>
+                            <div class="account_name" style="margin-left: 15px;">
+                                <?php echo $user["meslek_adi"] . " | " . $user["alan_adi"]; ?>
+                            </div>
                         </div>
-                    </div>
-                    <i class="bi bi-three-dots" style="padding:5px;"></i>
-                </div>
-
-                <div class="post_item_body_info">
-                    <p style="font-size: 0.95rem;">Published new video on CSS Property Box model. this video will run
-                        through few more properties that make up the
-                        box-model , Margin, Border, Padding, Content-Height & Width
-                    </p>
-                </div>
-
-                <video width="100%" controls class="post_iten_body_video" style="outline:none;">
-                    <source src="box_model.mp4" type="video/mp4">
-                </video>
-
-                <div class="post_item_comment_info">
-                    <img src="1.svg" alt="">
-                    <img src="2.svg" alt="">
-                    <img src="3.svg" alt="">
-
-
-                </div>
-
-                <div class="post_item_footer">
-                    <div class="footer_item">
-
-
+                        <i class="bi bi-three-dots" style="padding:5px;"></i>
                     </div>
 
-                    <!--
-                    <div class="footer_item">
-                        <i class="bi bi-arrow-90deg-right"></i>
-                        <div>Share</div>
-
+                    <div class="post_item_body_info">
+                        <p style="font-size: 0.95rem;"><?php echo $user["kullanici_tanitim"]; ?></p>
                     </div>
-                    <div class="footer_item">
-
-                        <i class="bi bi-cursor-fill"></i>
-                        <div>Send</div>
-
+                    <video width="100%" controls class="post_iten_body_video" style="outline:none;">
+                        <source src="uploadsVideo/<?php echo $user["video_adresi"]; ?>" type="video/mp4">
+                    </video>
+                    <div class="post_item_footer">
+                        <div class="footer_item"></div>
                     </div>
--->
-
                 </div>
-            </div>
+            <?php }
+            ?>
+
 
         </div>
         <div class="activity">
-            <!--
-            <div class="news">
-
-                <div class="news_head">
-                    <div class="news_title">Linkedln News</div>
-                    <i class="bi bi-info-square-fill" style="font-size:15px;"></i>
-                </div>
-                <br>
-
-                <div class="new_list">
-                    <div class="act_title" style="display: flex;flex-direction: row;align-items: flex-start;">
-                        <i class="bi bi-record-fill"
-                            style="font-size:14px;margin-right:10px;display:block;margin-top:5px;"></i>
-                        Indian crosses 3,58,974 daily cases
-                    </div>
-                    <div style="margin-left:25px;" class="account_name">10h ago - 5,043 readers</div>
-                </div>
-
-
-                <div class="new_list">
-                    <div class="act_title" style="display: flex;flex-direction: row;align-items: flex-start;">
-                        <i class="bi bi-record-fill"
-                            style="font-size:14px;margin-right:10px;display:block;margin-top:5px;"></i>
-                        Zomato files for $1.18 IPO
-                    </div>
-                    <div style="margin-left:25px;" class="account_name">13h ago - 52,043 readers</div>
-                </div>
-                <div class="new_list">
-                    <div class="act_title" style="display: flex;flex-direction: row;align-items: flex-start;">
-                        <i class="bi bi-record-fill"
-                            style="font-size:14px;margin-right:10px;display:block;margin-top:5px;"></i>
-                        Jobs pay ,in IT soar
-                    </div>
-                    <div style="margin-left:25px;" class="account_name">1d ago - 7865 readers</div>
-                </div>
-
-                <div class="new_list">
-                    <div class="act_title" style="display: flex;flex-direction: row;align-items: flex-start;">
-                        <i class="bi bi-record-fill"
-                            style="font-size:14px;margin-right:10px;display:block;margin-top:5px;"></i>
-                        Google saving $1B a year from WFH
-                    </div>
-                    <div style="margin-left:25px;" class="account_name">2d ago - 7865 readers</div>
-                </div>
-            </div>
-
-         
-            <div class="news">
-
-                <div class="news_head">
-                    <div class="news_title">Today's most viewed courses</div>
-                    <i class="bi bi-info-square-fill" style="font-size:15px;"></i>
-                </div>
-                <br>
-
-                <div class="new_list">
-                    <div class="act_title" style="display: flex;flex-direction: row;align-items: flex-start;">
-                        <i class="bi bi-record-fill"
-                            style="font-size:14px;margin-right:10px;display:block;margin-top:5px;"></i>
-                        Indian crosses 3,58,974 daily cases
-                    </div>
-                    <div style="margin-left:25px;" class="account_name">Top news 9874 - reviews</div>
-                </div>
-
-                <div class="new_list">
-                    <div class="act_title" style="display: flex;flex-direction: row;align-items: flex-start;">
-                        <i class="bi bi-record-fill"
-                            style="font-size:14px;margin-right:10px;display:block;margin-top:5px;"></i>
-                        Indian crosses 3,58,974 daily cases
-                    </div>
-                    <div style="margin-left:25px;" class="account_name">Top news 9874 - reviews</div>
-                </div>
-            </div>
-            -->
             <div class="news">
                 <div class="news_head">
                     <div class="news_title act_title">Potansiyel İş Arayanlar</div>
@@ -526,9 +435,8 @@ $userID = $_GET["userID"];
 <?php
 if ($con) {
     if (isset($_POST["submit"])) {
-        
     }
-}else {
-    ?> <h2> <?php  echo "bagalnti hatasi"; ?> </h2> <?php
-}
-?>
+} else {
+?> <h2> <?php echo "bagalnti hatasi"; ?> </h2> <?php
+                                            }
+                                                ?>
