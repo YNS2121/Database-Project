@@ -1,4 +1,8 @@
-<?php include('db/conDB.php'); ?>
+<?php include('db/conDB.php'); 
+
+$userID = $_GET["userID"];
+
+?>
 <html lang="tr">
 
 <head>
@@ -241,7 +245,7 @@
                                     </div>
                                 </div>
                                 <div class="profile_view_button">
-                                    <a href="user-profile.php">Profili Görüntüle</a>
+                                    <a href="user-profile.php?userID=<?php echo $userID; ?>">Profili Görüntüle</a>
                                 </div>
 
                                 <div class="bdr_bottom"></div>
