@@ -56,7 +56,15 @@ if ($con) {
     if (isset($_POST["submit"])) {
         $emailAddress = $_POST["emailAddress"];
         $password = $_POST["password"];
-        
+
+        $sql = "Select kullanici_id from kullanicilar where kullanici_email = '$emailAddress' and kullanici_sifre = '$password'";
+        if (mysqli_num_rows(mysqli_query($con, $sql)) > 0) { ?>
+            <script type="text/javascript">
+                location.href = 'http://localhost/Hire/index.php';
+            </script>
+<?php } else {
+            echo "Böyle bir kullanıcı yok";
+        }
     }
 } else {
     echo "Veri tabani baglanti hatasi";
