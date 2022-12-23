@@ -41,7 +41,13 @@ if ($result) {
           <div class="row">
             <div class="col-sm-12">
               <div class="image-container bg2">
-                <img src="uploads/<?php echo $rowImg["fotograf_adresi"]; ?>" class="avatar" alt="avatar" />
+                <?php
+                if (is_null($rowImg)) { ?>
+                  <img src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png" class="avatar" alt="avatar" />
+                <?php } else { ?>
+                  <img src="uploads/<?php echo $rowImg["fotograf_adresi"]; ?>" class="avatar" alt="avatar" />
+                <?php  }
+                ?>
               </div>
             </div>
             <div class="col-sm-12">
