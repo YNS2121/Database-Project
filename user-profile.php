@@ -1,538 +1,1074 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
     <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>user profile bio graph and total sales - Bootdey.com</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-</head>
-<body>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container bootstrap snippets bootdey">
-<div class="row">
-  <div class="profile-nav col-md-3">
-      <div class="panel">
-          <div class="user-heading round">
-              <a href="#">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
-              </a>
-              <h1>Yunus Berdibek</h1>
-              <p>ye.berdibek@gmail.com</p>
+    <title>Kullanıcı Profili</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link
+      href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <div class="panel panel-white profile-widget">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="image-container bg2">
+                  <img
+                    src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                    class="avatar"
+                    alt="avatar"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="details">
+                  <h4>Yunus Emre Berdibek <i class="fa fa-sheild"></i></h4>
+                  <div>IOS Developer</div>
+                  <div>Fırat Üniversitesi</div>
+                  <div>Bootdey Land</div>
+                  <div class="mg-top-10">
+                    <a href="#" class="btn btn-blue">İş Teklifi Yap</a>
+
+                    <a
+                      href="edit_profil.php"
+                      class="btn btn-blue"
+                      onclick="goclicky(this); return false;"
+                      target="_blank"
+                      >Profili Düzenle</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <ul class="nav nav-pills nav-stacked">
-              <li class="active"><a href="#"> <i class="fa fa-user"></i> Profil</a></li>
-              <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
-              <li><a href="kullanici_profili_duzenle.html"> <i class="fa fa-edit"></i> Profili düzenle</a></li>
-          </ul>
-      </div>
-  </div>
-  <div class="profile-info col-md-9">
-      <div class="panel">
-          <form>
-              <textarea placeholder="Kullanici cv ve mülakat videosu ekleme kısmı." rows="2" class="form-control input-lg p-text-area"></textarea>
-          </form>
-          <footer class="panel-footer">
-              <button class="btn btn-warning pull-right">Paylaş</button>
-              <ul class="nav nav-pills">
-                  <li>
-                      <a href="#"><i class="fa fa-map-marker"></i></a>
-                  </li>
-                  <li>
-                      <a href="#"><i class="fa fa-camera"></i></a>
-                  </li>
-                  <li>
-                      <a href="#"><i class=" fa fa-film"></i></a>
-                  </li>
-                  <li>
-                      <a href="#"><i class="fa fa-microphone"></i></a>
-                  </li>
-              </ul>
-          </footer>
-      </div>
-      <div class="panel">
-          <div class="bio-graph-heading">
-              Aliquam ac magna metus. Nam sed arcu non tellus fringilla fringilla ut vel ispum. Aliquam ac magna metus.
-          </div>
-          <div class="panel-body bio-graph-info">
-              <h1>Biyografi</h1>
-              <div class="row">
-                  <div class="bio-row">
-                      <p><span>Ad </span>: Yunus Emre</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Soyadı </span>: Berdibek</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Ülke </span>: Türkiye</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Doğum tarihi</span>: 8 Haziran 2002</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Meslek </span>: IOS Developer</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Email </span>: ye.berdibe@gmail.com</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Mobil telefon </span>: (12) 03 4567890</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Telefon 2 </span>: 88 (02) 123456</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div>
           <div class="row">
-              <div class="col-md-6">
-                  <div class="panel">
-                      <div class="panel-body">
-                          <div class="bio-chart">
-                              <div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="35" data-fgcolor="#e06b7d" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(224, 107, 125); padding: 0px; -webkit-appearance: none; background: none;"></div>
-                          </div>
-                          <div class="bio-desk">
-                              <h4 class="red">Envato Website</h4>
-                              <p>Started : 15 July</p>
-                              <p>Deadline : 15 August</p>
-                          </div>
-                      </div>
+            <div class="col-sm-6">
+              <div class="panel panel-white border-top-purple">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Özgeçmiş</h3>
+                  <div class="controls pull-right">
+                    <span class="pull-right clickable">
+                      <i class="fa fa-chevron-up"></i>
+                    </span>
                   </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="panel">
-                      <div class="panel-body">
-                          <div class="bio-chart">
-                              <div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="63" data-fgcolor="#4CC5CD" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(76, 197, 205); padding: 0px; -webkit-appearance: none; background: none;"></div>
-                          </div>
-                          <div class="bio-desk">
-                              <h4 class="terques">ThemeForest CMS </h4>
-                              <p>Started : 15 July</p>
-                              <p>Deadline : 15 August</p>
-                          </div>
-                      </div>
+                </div>
+                <div class="panel-body">
+                  <div class="body-section">
+                    <h5 class="section-heading">Hakkında</h5>
+                    <p class="section-content">A brief description of you</p>
                   </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="panel">
-                      <div class="panel-body">
-                          <div class="bio-chart">
-                              <div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="75" data-fgcolor="#96be4b" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(150, 190, 75); padding: 0px; -webkit-appearance: none; background: none;"></div>
-                          </div>
-                          <div class="bio-desk">
-                              <h4 class="green">VectorLab Portfolio</h4>
-                              <p>Started : 15 July</p>
-                              <p>Deadline : 15 August</p>
-                          </div>
-                      </div>
+                  <div class="body-section">
+                    <h5 class="section-heading">Özet</h5>
+                    <p class="section-content">
+                      Put a little about yourself here so people know they've
+                      found the correct Kevin.
+                    </p>
                   </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="panel">
-                      <div class="panel-body">
-                          <div class="bio-chart">
-                              <div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="50" data-fgcolor="#cba4db" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(203, 164, 219); padding: 0px; -webkit-appearance: none; background: none;"></div>
-                          </div>
-                          <div class="bio-desk">
-                              <h4 class="purple">Adobe Muse Template</h4>
-                              <p>Started : 15 July</p>
-                              <p>Deadline : 15 August</p>
-                          </div>
-                      </div>
+                  <div class="body-section">
+                    <h5 class="section-heading">İlgi alanları</h5>
+                    <p class="section-content">Yazılım, Yüzme</p>
                   </div>
+                  <div class="body-section">
+                    <a href="#" class="btn btn-purple btn-sm">Düzenle</a>
+                  </div>
+                </div>
               </div>
+
+              <div class="panel panel-white border-top-light-blue">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Mülakat Videoları ve CV</h3>
+                  <div class="controls pull-right">
+                    <span class="pull-right clickable">
+                      <i class="fa fa-chevron-up"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="body-section">
+                    <p>Kullanici CV bilgileri.</p>
+                    <ul>
+                      <li>CV(Türkçe)</li>
+                      <li>CV(İngilizce))</li>
+                      <li>CV(İspanyolca)</li>
+                    </ul>
+                    <p>Kullanici mülakat videoları.</p>
+                    <ul>
+                      <li>Yunus Emre Berdibek Mülakat.mp3</li>
+                    </ul>
+                  </div>
+                  <div class="body-section">
+                    <a href="#" class="btn btn-info btn-sm">Düzenle </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-white border-top-pink">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Yetenekler</h3>
+                  <div class="controls pull-right">
+                    <span class="pull-right clickable">
+                      <i class="fa fa-chevron-up"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="body-section">
+                    <h5 class="mg-top-0">Mühendislik - 90%</h5>
+                    <div class="progress progress-xs">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        aria-valuenow="90"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        style="width: 90%"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="body-section">
+                    <h5>Pazarlama - 40%</h5>
+                    <div class="progress progress-xs">
+                      <div
+                        class="progress-bar progress-bar-success"
+                        role="progressbar"
+                        aria-valuenow="40"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        style="width: 40%"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="body-section">
+                    <h5>İletişim - 20%</h5>
+                    <div class="progress progress-xs">
+                      <div
+                        class="progress-bar progress-bar-info"
+                        role="progressbar"
+                        aria-valuenow="20"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        style="width: 20%"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="body-section">
+                    <h5>Strateji- 60%</h5>
+                    <div class="progress progress-xs">
+                      <div
+                        class="progress-bar progress-bar-warning"
+                        role="progressbar"
+                        aria-valuenow="60"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        style="width: 60%"
+                      >
+                        <span class="sr-only">60% Complete (warning)</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="body-section">
+                    <h5>Müşteri Hizmetleri - 80%</h5>
+                    <div class="progress progress-xs">
+                      <div
+                        class="progress-bar progress-bar-danger"
+                        role="progressbar"
+                        aria-valuenow="80"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        style="width: 80%"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="panel panel-white border-top-green">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Kullanıcı Bilgisi</h3>
+                  <div class="controls pull-right">
+                    <span class="pull-right clickable">
+                      <i class="fa fa-chevron-up"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="body-section">
+                    <h5 class="section-heading">Ad</h5>
+                    <p class="section-content">Yunus</p>
+                  </div>
+                  <div class="body-section">
+                    <h5 class="section-heading">Soyad</h5>
+                    <p class="section-content">Berdibek</p>
+                  </div>
+                  <div class="body-section">
+                    <h5 class="section-heading">Telefon</h5>
+                    <p class="section-content">(123) 456 - 7890</p>
+                  </div>
+                  <div class="body-section">
+                    <h5 class="section-heading">Email</h5>
+                    <p class="section-content">spam@ztapps.com</p>
+                  </div>
+                  <div class="body-section">
+                    <h5 class="section-heading">Website</h5>
+                    <p class="section-content">ztapps.com</p>
+                  </div>
+                  <div class="body-section">
+                    <a href="#" class="btn btn-green btn-sm">Düzenle</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-white border-top-orange">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Lisanslar ve Sertifikalar</h3>
+                  <div class="controls pull-right">
+                    <span class="pull-right clickable">
+                      <i class="fa fa-chevron-up"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="body-section">
+                    <h5 class="section-heading">Friends</h5>
+                    <p class="section-content">242</p>
+                  </div>
+                  <div class="body-section">
+                    <h5 class="section-heading">Posts</h5>
+                    <p class="section-content">2240</p>
+                  </div>
+                  <div class="body-section">
+                    <h5 class="section-heading">Pictures</h5>
+                    <p class="section-content">18</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-white border-top-blue">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Deneyim</h3>
+                  <div class="controls pull-right">
+                    <span class="pull-right clickable">
+                      <i class="fa fa-chevron-up"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="body-section">
+                    <h5 class="section-heading">Staj</h5>
+                    <p class="section-content">
+                      Stajyer Tekno Bağlantı Elemanları · Stajyer Tem 2022 - Ağu
+                      2022 · 2 ayTem 2022 - Ağu 2022 · 2 ay Malatya, Türkiye
+                    </p>
+                  </div>
+                  <div class="body-section">
+                    <h5 class="section-heading">Stajyer</h5>
+                    <p class="section-content">
+                      Stajyer DOKUMAS · Stajyer Haz 2021 - Tem 2021 · 2 ayHaz
+                      2021 - Tem 2021 · 2 ay Malatya, Türkiye
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
-  </div>
-</div>
-</div>
-
-<style type="text/css">
-body {
-    color: #797979;
-    background: #f1f2f7;
-    font-family: 'Open Sans', sans-serif;
-    padding: 0px !important;
-    margin: 0px !important;
-    font-size: 13px;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-}
-
-.profile-nav, .profile-info{
-    margin-top:30px;   
-}
-
-.profile-nav .user-heading {
-    background: #fbc02d;
-    color: #fff;
-    border-radius: 4px 4px 0 0;
-    -webkit-border-radius: 4px 4px 0 0;
-    padding: 30px;
-    text-align: center;
-}
-
-.profile-nav .user-heading.round a  {
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border: 10px solid rgba(255,255,255,0.3);
-    display: inline-block;
-}
-
-.profile-nav .user-heading a img {
-    width: 112px;
-    height: 112px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-}
-
-.profile-nav .user-heading h1 {
-    font-size: 22px;
-    font-weight: 300;
-    margin-bottom: 5px;
-}
-
-.profile-nav .user-heading p {
-    font-size: 12px;
-}
-
-.profile-nav ul {
-    margin-top: 1px;
-}
-
-.profile-nav ul > li {
-    border-bottom: 1px solid #ebeae6;
-    margin-top: 0;
-    line-height: 30px;
-}
-
-.profile-nav ul > li:last-child {
-    border-bottom: none;
-}
-
-.profile-nav ul > li > a {
-    border-radius: 0;
-    -webkit-border-radius: 0;
-    color: #89817f;
-    border-left: 5px solid #fff;
-}
-
-.profile-nav ul > li > a:hover, .profile-nav ul > li > a:focus, .profile-nav ul li.active  a {
-    background: #f8f7f5 !important;
-    border-left: 5px solid #fbc02d;
-    color: #89817f !important;
-}
-
-.profile-nav ul > li:last-child > a:last-child {
-    border-radius: 0 0 4px 4px;
-    -webkit-border-radius: 0 0 4px 4px;
-}
-
-.profile-nav ul > li > a > i{
-    font-size: 16px;
-    padding-right: 10px;
-    color: #bcb3aa;
-}
-
-.r-activity {
-    margin: 6px 0 0;
-    font-size: 12px;
-}
-
-
-.p-text-area, .p-text-area:focus {
-    border: none;
-    font-weight: 300;
-    box-shadow: none;
-    color: #c3c3c3;
-    font-size: 16px;
-}
-
-.profile-info .panel-footer {
-    background-color:#f8f7f5 ;
-    border-top: 1px solid #e7ebee;
-}
-
-.profile-info .panel-footer ul li a {
-    color: #7a7a7a;
-}
-
-.bio-graph-heading {
-    background: #fbc02d;
-    color: #fff;
-    text-align: center;
-    font-style: italic;
-    padding: 40px 110px;
-    border-radius: 4px 4px 0 0;
-    -webkit-border-radius: 4px 4px 0 0;
-    font-size: 16px;
-    font-weight: 300;
-}
-
-.bio-graph-info {
-    color: #89817e;
-}
-
-.bio-graph-info h1 {
-    font-size: 22px;
-    font-weight: 300;
-    margin: 0 0 20px;
-}
-
-.bio-row {
-    width: 50%;
-    float: left;
-    margin-bottom: 10px;
-    padding:0 15px;
-}
-
-.bio-row p span {
-    width: 100px;
-    display: inline-block;
-}
-
-.bio-chart, .bio-desk {
-    float: left;
-}
-
-.bio-chart {
-    width: 40%;
-}
-
-.bio-desk {
-    width: 60%;
-}
-
-.bio-desk h4 {
-    font-size: 15px;
-    font-weight:400;
-}
-
-.bio-desk h4.terques {
-    color: #4CC5CD;
-}
-
-.bio-desk h4.red {
-    color: #e26b7f;
-}
-
-.bio-desk h4.green {
-    color: #97be4b;
-}
-
-.bio-desk h4.purple {
-    color: #caa3da;
-}
-
-.file-pos {
-    margin: 6px 0 10px 0;
-}
-
-.profile-activity h5 {
-    font-weight: 300;
-    margin-top: 0;
-    color: #c3c3c3;
-}
-
-.summary-head {
-    background: #ee7272;
-    color: #fff;
-    text-align: center;
-    border-bottom: 1px solid #ee7272;
-}
-
-.summary-head h4 {
-    font-weight: 300;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-}
-
-.summary-head p {
-    color: rgba(255,255,255,0.6);
-}
-
-ul.summary-list {
-    display: inline-block;
-    padding-left:0 ;
-    width: 100%;
-    margin-bottom: 0;
-}
-
-ul.summary-list > li {
-    display: inline-block;
-    width: 19.5%;
-    text-align: center;
-}
-
-ul.summary-list > li > a > i {
-    display:block;
-    font-size: 18px;
-    padding-bottom: 5px;
-}
-
-ul.summary-list > li > a {
-    padding: 10px 0;
-    display: inline-block;
-    color: #818181;
-}
-
-ul.summary-list > li  {
-    border-right: 1px solid #eaeaea;
-}
-
-ul.summary-list > li:last-child  {
-    border-right: none;
-}
-
-.activity {
-    width: 100%;
-    float: left;
-    margin-bottom: 10px;
-}
-
-.activity.alt {
-    width: 100%;
-    float: right;
-    margin-bottom: 10px;
-}
-
-.activity span {
-    float: left;
-}
-
-.activity.alt span {
-    float: right;
-}
-.activity span, .activity.alt span {
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    background: #eee;
-    text-align: center;
-    color: #fff;
-    font-size: 16px;
-}
-
-.activity.terques span {
-    background: #8dd7d6;
-}
-
-.activity.terques h4 {
-    color: #8dd7d6;
-}
-.activity.purple span {
-    background: #b984dc;
-}
-
-.activity.purple h4 {
-    color: #b984dc;
-}
-.activity.blue span {
-    background: #90b4e6;
-}
-
-.activity.blue h4 {
-    color: #90b4e6;
-}
-.activity.green span {
-    background: #aec785;
-}
-
-.activity.green h4 {
-    color: #aec785;
-}
-
-.activity h4 {
-    margin-top:0 ;
-    font-size: 16px;
-}
-
-.activity p {
-    margin-bottom: 0;
-    font-size: 13px;
-}
-
-.activity .activity-desk i, .activity.alt .activity-desk i {
-    float: left;
-    font-size: 18px;
-    margin-right: 10px;
-    color: #bebebe;
-}
-
-.activity .activity-desk {
-    margin-left: 70px;
-    position: relative;
-}
-
-.activity.alt .activity-desk {
-    margin-right: 70px;
-    position: relative;
-}
-
-.activity.alt .activity-desk .panel {
-    float: right;
-    position: relative;
-}
-
-.activity-desk .panel {
-    background: #F4F4F4 ;
-    display: inline-block;
-}
-
-
-.activity .activity-desk .arrow {
-    border-right: 8px solid #F4F4F4 !important;
-}
-.activity .activity-desk .arrow {
-    border-bottom: 8px solid transparent;
-    border-top: 8px solid transparent;
-    display: block;
-    height: 0;
-    left: -7px;
-    position: absolute;
-    top: 13px;
-    width: 0;
-}
-
-.activity-desk .arrow-alt {
-    border-left: 8px solid #F4F4F4 !important;
-}
-
-.activity-desk .arrow-alt {
-    border-bottom: 8px solid transparent;
-    border-top: 8px solid transparent;
-    display: block;
-    height: 0;
-    right: -7px;
-    position: absolute;
-    top: 13px;
-    width: 0;
-}
-
-.activity-desk .album {
-    display: inline-block;
-    margin-top: 10px;
-}
-
-.activity-desk .album a{
-    margin-right: 10px;
-}
-
-.activity-desk .album a:last-child{
-    margin-right: 0px;
-}
-</style>
-
-<script type="text/javascript">
-
-</script>
-</body>
+    </div>
+
+    <style type="text/css">
+      body {
+        margin-top: 20px;
+        background: #eee;
+      }
+
+      .profile-widget {
+        position: relative;
+      }
+
+      .profile-widget .image-container {
+        background-size: cover;
+        background-position: center;
+        padding: 190px 0 10px;
+      }
+
+      .profile-widget .image-container .profile-background {
+        width: 100%;
+        height: auto;
+      }
+
+      .profile-widget .image-container .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin: 0 auto -60px;
+        display: block;
+      }
+
+      .profile-widget .details {
+        padding: 50px 15px 15px;
+        text-align: center;
+      }
+
+      /* Component: Mini Profile Widget */
+      .mini-profile-widget .image-container .avatar {
+        width: 180px;
+        height: 180px;
+        display: block;
+        margin: 0 auto;
+        border-radius: 50%;
+        background: white;
+        padding: 4px;
+        border: 1px solid #dddddd;
+      }
+
+      .mini-profile-widget .details {
+        text-align: center;
+      }
+
+      /* Component: Panel */
+      .panel {
+        border-radius: 0;
+        margin-bottom: 30px;
+      }
+
+      .panel.solid-color {
+        color: white;
+      }
+
+      .panel .panel-heading {
+        border-radius: 0;
+        position: relative;
+      }
+
+      .panel .panel-heading > .controls {
+        position: absolute;
+        right: 10px;
+        top: 12px;
+      }
+
+      .panel .panel-heading > .controls .nav.nav-pills {
+        margin: -8px 0 0 0;
+      }
+
+      .panel .panel-heading > .controls .nav.nav-pills li a {
+        padding: 5px 8px;
+      }
+
+      .panel .panel-heading .clickable {
+        margin-top: 0px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      .panel .panel-heading.no-heading-border {
+        border-bottom-color: transparent;
+      }
+
+      .panel .panel-heading .left {
+        float: left;
+      }
+
+      .panel .panel-heading .right {
+        float: right;
+      }
+
+      .panel .panel-title {
+        font-size: 16px;
+        line-height: 20px;
+      }
+
+      .panel .panel-title.panel-title-sm {
+        font-size: 18px;
+        line-height: 28px;
+      }
+
+      .panel .panel-title.panel-title-lg {
+        font-size: 24px;
+        line-height: 34px;
+      }
+
+      .panel .panel-body {
+        font-size: 13px;
+      }
+
+      .panel .panel-body > .body-section {
+        margin: 0px 0px 20px;
+      }
+
+      .panel .panel-body > .body-section > .section-heading {
+        margin: 0px 0px 5px;
+        font-weight: bold;
+      }
+
+      .panel .panel-body > .body-section > .section-content {
+        margin: 0px 0px 10px;
+      }
+
+      .panel-white {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-white > .panel-heading {
+        color: #333;
+        background-color: #fff;
+        border-color: #ddd;
+      }
+
+      .panel-white > .panel-footer {
+        background-color: #fff;
+        border-color: #ddd;
+      }
+
+      .panel-primary {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-purple {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-purple > .panel-heading {
+        color: #fff;
+        background-color: #8e44ad;
+        border: none;
+      }
+
+      .panel-purple > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-light-purple {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-light-purple > .panel-heading {
+        color: #fff;
+        background-color: #9b59b6;
+        border: none;
+      }
+
+      .panel-light-purple > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-blue,
+      .panel-info {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-blue > .panel-heading,
+      .panel-info > .panel-heading {
+        color: #fff;
+        background-color: #2980b9;
+        border: none;
+      }
+
+      .panel-blue > .panel-heading .panel-title a:hover,
+      .panel-info > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-light-blue {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-light-blue > .panel-heading {
+        color: #fff;
+        background-color: #3498db;
+        border: none;
+      }
+
+      .panel-light-blue > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-green,
+      .panel-success {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-green > .panel-heading,
+      .panel-success > .panel-heading {
+        color: #fff;
+        background-color: #27ae60;
+        border: none;
+      }
+
+      .panel-green > .panel-heading .panel-title a:hover,
+      .panel-success > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-light-green {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-light-green > .panel-heading {
+        color: #fff;
+        background-color: #2ecc71;
+        border: none;
+      }
+
+      .panel-light-green > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-orange,
+      .panel-warning {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-orange > .panel-heading,
+      .panel-warning > .panel-heading {
+        color: #fff;
+        background-color: #e82c0c;
+        border: none;
+      }
+
+      .panel-orange > .panel-heading .panel-title a:hover,
+      .panel-warning > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-light-orange {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-light-orange > .panel-heading {
+        color: #fff;
+        background-color: #ff530d;
+        border: none;
+      }
+
+      .panel-light-orange > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-red,
+      .panel-danger {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-red > .panel-heading,
+      .panel-danger > .panel-heading {
+        color: #fff;
+        background-color: #d40d12;
+        border: none;
+      }
+
+      .panel-red > .panel-heading .panel-title a:hover,
+      .panel-danger > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-light-red {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-light-red > .panel-heading {
+        color: #fff;
+        background-color: #ff1d23;
+        border: none;
+      }
+
+      .panel-light-red > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-pink {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-pink > .panel-heading {
+        color: #fff;
+        background-color: #fe31ab;
+        border: none;
+      }
+
+      .panel-pink > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-light-pink {
+        border: 1px solid #dddddd;
+      }
+
+      .panel-light-pink > .panel-heading {
+        color: #fff;
+        background-color: #fd32c0;
+        border: none;
+      }
+
+      .panel-light-pink > .panel-heading .panel-title a:hover {
+        color: #f0f0f0;
+      }
+
+      .panel-group .panel {
+        border-radius: 0;
+      }
+
+      .panel-group .panel + .panel {
+        margin-top: 0;
+        border-top: 0;
+      }
+
+      .bg-blue,
+      .bg-info {
+        background-color: #2980b9 !important;
+      }
+
+      .bg-light-blue {
+        background-color: #3498db !important;
+      }
+
+      .bg-red,
+      .bg-danger {
+        background-color: #d40d12 !important;
+      }
+
+      .bg-light-red {
+        background-color: #ff1d23 !important;
+      }
+
+      .bg-purple {
+        background-color: #8e44ad !important;
+      }
+
+      .bg-light-purple {
+        background-color: #9b59b6 !important;
+      }
+
+      .bg-green,
+      bg-success {
+        background-color: #27ae60 !important;
+      }
+
+      .bg-light-green {
+        background-color: #2ecc71 !important;
+      }
+
+      .bg-orange,
+      .bg-warning {
+        background-color: #e82c0c !important;
+      }
+
+      .bg-light-orange {
+        background-color: #ff530d !important;
+      }
+
+      .bg-pink {
+        background-color: #fe31ab !important;
+      }
+
+      .bg-light-pink {
+        background-color: #fd32c0 !important;
+      }
+
+      .color-white {
+        color: white !important;
+      }
+
+      .color-green,
+      .text-success {
+        color: #27ae60 !important;
+      }
+
+      .color-light-green {
+        color: #2ecc71 !important;
+      }
+
+      .color-blue,
+      .text-info {
+        color: #2980b9 !important;
+      }
+
+      .color-light-blue {
+        color: #3498db !important;
+      }
+
+      .color-orange,
+      .text-warning {
+        color: #e82c0c !important;
+      }
+
+      .color-light-orange {
+        color: #ff530d !important;
+      }
+
+      .color-red,
+      .text-danger {
+        color: #d40d12 !important;
+      }
+
+      .color-light-red {
+        color: #ff1d23 !important;
+      }
+
+      .color-purple {
+        color: #8e44ad !important;
+      }
+
+      .color-light-purple {
+        color: #9b59b6 !important;
+      }
+
+      .color-pink {
+        color: #fe31ab !important;
+      }
+
+      .color-light-pink {
+        color: #fd32c0 !important;
+      }
+
+      .border-green {
+        border: 4px solid #27ae60 !important;
+      }
+
+      .border-light-green {
+        border: 4px solid #2ecc71 !important;
+      }
+
+      .border-blue {
+        border: 4px solid #2980b9 !important;
+      }
+
+      .border-light-blue {
+        border: 4px solid #3498db !important;
+      }
+
+      .border-orange {
+        border: 4px solid #e82c0c !important;
+      }
+
+      .border-light-orange {
+        border: 4px solid #ff530d !important;
+      }
+
+      .border-red {
+        border: 4px solid #d40d12 !important;
+      }
+
+      .border-light-red {
+        border: 4px solid #ff1d23 !important;
+      }
+
+      .border-purple {
+        border: 4px solid #8e44ad !important;
+      }
+
+      .border-light-purple {
+        border: 4px solid #9b59b6 !important;
+      }
+
+      .border-pink {
+        border: 4px solid #fe31ab !important;
+      }
+
+      .border-light-pink {
+        border: 4px solid #fd32c0 !important;
+      }
+
+      .border-top-green {
+        border-top: 4px solid #27ae60 !important;
+      }
+
+      .border-top-light-green {
+        border-top: 4px solid #2ecc71 !important;
+      }
+
+      .border-top-blue {
+        border-top: 4px solid #2980b9 !important;
+      }
+
+      .border-top-light-blue {
+        border-top: 4px solid #3498db !important;
+      }
+
+      .border-top-orange {
+        border-top: 4px solid #e82c0c !important;
+      }
+
+      .border-top-light-orange {
+        border-top: 4px solid #ff530d !important;
+      }
+
+      .border-top-red {
+        border-top: 4px solid #d40d12 !important;
+      }
+
+      .border-top-light-red {
+        border-top: 4px solid #ff1d23 !important;
+      }
+
+      .border-top-purple {
+        border-top: 4px solid #8e44ad !important;
+      }
+
+      .border-top-light-purple {
+        border-top: 4px solid #9b59b6 !important;
+      }
+
+      .border-top-pink {
+        border-top: 4px solid #fe31ab !important;
+      }
+
+      .border-top-light-pink {
+        border-top: 4px solid #fd32c0 !important;
+      }
+
+      .border-right-green {
+        border-right: 4px solid #27ae60 !important;
+      }
+
+      .border-right-light-green {
+        border-right: 4px solid #2ecc71 !important;
+      }
+
+      .border-right-blue {
+        border-right: 4px solid #2980b9 !important;
+      }
+
+      .border-right-light-blue {
+        border-right: 4px solid #3498db !important;
+      }
+
+      .border-right-orange {
+        border-right: 4px solid #e82c0c !important;
+      }
+
+      .border-right-light-orange {
+        border-right: 4px solid #ff530d !important;
+      }
+
+      .border-right-red {
+        border-right: 4px solid #d40d12 !important;
+      }
+
+      .border-right-light-red {
+        border-right: 4px solid #ff1d23 !important;
+      }
+
+      .border-right-purple {
+        border-right: 4px solid #8e44ad !important;
+      }
+
+      .border-right-light-purple {
+        border-right: 4px solid #9b59b6 !important;
+      }
+
+      .border-right-pink {
+        border-right: 4px solid #fe31ab !important;
+      }
+
+      .border-right-light-pink {
+        border-right: 4px solid #fd32c0 !important;
+      }
+
+      .border-bottom-green {
+        border-bottom: 4px solid #27ae60 !important;
+      }
+
+      .border-bottom-light-green {
+        border-bottom: 4px solid #2ecc71 !important;
+      }
+
+      .border-bottom-blue {
+        border-bottom: 4px solid #2980b9 !important;
+      }
+
+      .border-bottom-light-blue {
+        border-bottom: 4px solid #3498db !important;
+      }
+
+      .border-bottom-orange {
+        border-bottom: 4px solid #e82c0c !important;
+      }
+
+      .border-bottom-light-orange {
+        border-bottom: 4px solid #ff530d !important;
+      }
+
+      .border-bottom-red {
+        border-bottom: 4px solid #d40d12 !important;
+      }
+
+      .border-bottom-light-red {
+        border-bottom: 4px solid #ff1d23 !important;
+      }
+
+      .border-bottom-purple {
+        border-bottom: 4px solid #8e44ad !important;
+      }
+
+      .border-bottom-light-purple {
+        border-bottom: 4px solid #9b59b6 !important;
+      }
+
+      .border-bottom-pink {
+        border-bottom: 4px solid #fe31ab !important;
+      }
+
+      .border-bottom-light-pink {
+        border-bottom: 4px solid #fd32c0 !important;
+      }
+
+      .border-left-green {
+        border-left: 4px solid #27ae60 !important;
+      }
+
+      .border-left-light-green {
+        border-left: 4px solid #2ecc71 !important;
+      }
+
+      .border-left-blue {
+        border-left: 4px solid #2980b9 !important;
+      }
+
+      .border-left-light-blue {
+        border-left: 4px solid #3498db !important;
+      }
+
+      .border-left-orange {
+        border-left: 4px solid #e82c0c !important;
+      }
+
+      .border-left-light-orange {
+        border-left: 4px solid #ff530d !important;
+      }
+
+      .border-left-red {
+        border-left: 4px solid #d40d12 !important;
+      }
+
+      .border-left-light-red {
+        border-left: 4px solid #ff1d23 !important;
+      }
+
+      .border-left-purple {
+        border-left: 4px solid #8e44ad !important;
+      }
+
+      .border-left-light-purple {
+        border-left: 4px solid #9b59b6 !important;
+      }
+
+      .border-left-pink {
+        border-left: 4px solid #fe31ab !important;
+      }
+
+      .border-left-light-pink {
+        border-left: 4px solid #fd32c0 !important;
+      }
+
+      .bg2 {
+        background-image: url("http://www.bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg");
+      }
+
+      .btn-blue {
+        background-color: #3498db;
+        border-color: #3498db;
+        color: white;
+      }
+
+      .btn-blue:hover,
+      .btn-blue:visited {
+        background-color: #2980b9;
+        color: white;
+      }
+
+      .btn-green {
+        background-color: #2ecc71;
+        border-color: #27ae60;
+        color: white;
+      }
+
+      .btn-green:hover,
+      .btn-green:visited {
+        background-color: #27ae60;
+        color: white;
+      }
+
+      .btn-orange {
+        background-color: #ff530d;
+        border-color: #e82c0c;
+        color: white;
+      }
+
+      .btn-orange:hover,
+      .btn-orange:visited {
+        background-color: #e82c0c;
+        color: white;
+      }
+
+      .btn-red {
+        background-color: #ff1d23;
+        border-color: #d40d12;
+        color: white;
+      }
+
+      .btn-red:hover,
+      .btn-red:visited {
+        background-color: #d40d12;
+        color: white;
+      }
+
+      .btn-purple {
+        background-color: #9b59b6;
+        border-color: #8e44ad;
+        color: white;
+      }
+
+      .btn-purple:hover,
+      .btn-purple:visited {
+        background-color: #8e44ad;
+        color: white;
+      }
+
+      .btn-pink {
+        background-color: #fd32c0;
+        border-color: #fe31ab;
+        color: white;
+      }
+
+      .btn-pink:hover,
+      .btn-pink:visited {
+        background-color: #fe31ab;
+        color: white;
+      }
+
+      .progress.progress-xs {
+        height: 12px;
+      }
+
+      /* */
+    </style>
+
+    <script type="text/javascript">
+      function goclicky(meh) {
+        var x = screen.width / 2 - 850 / 2;
+        var y = screen.height / 2 - 800 / 2;
+        window.open(
+          meh.href,
+          "sharegplus",
+          "height=800,width=850,left=" + x + ",top=" + y
+        );
+      }
+    </script>
+  </body>
 </html>
