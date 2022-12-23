@@ -43,7 +43,7 @@
                     <a href="#" class="btn btn-blue">İş Teklifi Yap</a>
 
                     <a
-                      href="edit_profil.html"
+                      href="edit_profil.php"
                       class="btn btn-blue"
                       onclick="goclicky(this); return false;"
                       target="_blank"
