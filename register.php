@@ -1,3 +1,4 @@
+<?php include('db/conDB.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -80,11 +81,17 @@
                         <input type="password" placeholder="Şifreyi Doğrula" name="confirmPassword" required>
                     </div>
                     <div class="field">
+                        <?php
+                        $sql = "select alan_id, alan_adi from meslek_alanlar";
+                        $result = mysqli_query($con, $sql);
+                        ?>
                         <select class="form-select" aria-label="Default select example" name="section">
                             <option selected>Alanınızı seçiniz...</option>
-                            <option value="Android Developer">Android Developer</option>
-                            <option value="IOS Developer">IOS Developer</option>
-                            <option value="Project Management">Project Management</option>
+                            <?php
+                            foreach ($result as $i) {
+                            ?> <option value=<?php echo $i["alan_id"]; ?>><?php echo $i["alan_adi"]; ?></option>
+                            <?php }
+                            ?>
                         </select>
                     </div>
                     <div class="field">
@@ -170,7 +177,6 @@
 
 </html>
 <?php
-include('db/conDB.php');
 if ($con) {
     if (isset($_POST["submitEmployee"])) {
         $name = $_POST["name"];
@@ -194,11 +200,16 @@ if ($con) {
                     $userID = $row["kullanici_id"];
                     $sql = "insert into iletisim (kullanicilar_kullanici_id, iletisim_tel_no, iletisim_mail) values ('$userID', '$phone', '$emailAddress')";
                     if (mysqli_query($con, $sql)) {
-                        echo "islem basarili"; ?>
-                        <script type="text/javascript">
-                            location.href = 'http://localhost/Hire/login.php';
-                        </script>
+                        $sql = "insert into kullanici_meslek_detay (kullanicilar_kullanici_id, alanlar_alan_id) values ('$userID', '$section')";
+                        if (mysqli_query($con, $sql)) {
+?>
+                            <script type="text/javascript">
+                                location.href = 'http://localhost/Hire/login.php';
+                            </script>
                         <?php
+                        }else{
+                            echo "meslek_detay hata";
+                        }
                     } else {
                         echo "iletisim veri tabanında hata var";
                     }
