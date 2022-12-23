@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 22 Ara 2022, 14:38:56
--- Sunucu sürümü: 10.4.19-MariaDB
--- PHP Sürümü: 8.0.7
+-- Üretim Zamanı: 22 Ara 2022, 17:27:56
+-- Sunucu sürümü: 10.4.24-MariaDB
+-- PHP Sürümü: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -92,7 +92,9 @@ CREATE TABLE `kullanicilar` (
   `kullanici_ad` varchar(70) COLLATE utf8_turkish_ci NOT NULL,
   `kullanici_soyad` varchar(70) COLLATE utf8_turkish_ci NOT NULL,
   `kullanici_tanitim` text COLLATE utf8_turkish_ci NOT NULL,
-  `kullanici_teklif_acik` tinyint(1) NOT NULL DEFAULT 0
+  `kullanici_teklif_acik` tinyint(1) NOT NULL DEFAULT 0,
+  `kullanici_email` varchar(70) COLLATE utf8_turkish_ci NOT NULL,
+  `kullanici_sifre` varchar(20) COLLATE utf8_turkish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
@@ -319,7 +321,7 @@ ALTER TABLE `iletisim`
 -- Tablo için AUTO_INCREMENT değeri `kullanicilar`
 --
 ALTER TABLE `kullanicilar`
-  MODIFY `kullanici_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kullanici_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `meslekler`
