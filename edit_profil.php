@@ -305,7 +305,7 @@ if (isset($_POST["uploadImg"])) {
   $tempname = $_FILES["img"]["tmp_name"];
   $folder = "uploads/" . $filename;
   if (move_uploaded_file($tempname, $folder)) {
-    $sqlImg = "insert into cv (diller_dil_id, cv_adresi, kullanicilar_kullanici_id) values (,'$filename','$userID')";
+    $sqlImg = "insert into fotograflar (fotograf_adresi, kullanicilar_kullanici_id) values ('$filename','$userID')";
     if (mysqli_query($con, $sqlImg)) {
       echo "oldu";
     } else {
