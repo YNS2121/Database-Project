@@ -58,9 +58,12 @@ if ($con) {
         $password = $_POST["password"];
 
         $sql = "Select kullanici_id from kullanicilar where kullanici_email = '$emailAddress' and kullanici_sifre = '$password'";
-        if (mysqli_num_rows(mysqli_query($con, $sql)) > 0) { ?>
+        $result = mysqli_query($con, $sql);
+        $row = $result->fetch_assoc();
+        $userID = $row["kullanici_id"];
+        if (mysqli_num_rows($result) > 0) { ?>
             <script type="text/javascript">
-                location.href = 'http://localhost/Hire/index.php';
+                location.href = "http://localhost/Hire/index.php?userID=<?php echo $userID; ?>";
             </script>
 <?php } else {
             echo "Böyle bir kullanıcı yok";
