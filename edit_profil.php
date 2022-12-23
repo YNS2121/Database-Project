@@ -59,43 +59,28 @@ $rowIletisim = $resultIletisim->fetch_assoc();
                 </div>
               </form>
               <hr class="border-light m-0" />
-
-              <form action="" method="POST">
-                <div class="card-body">
-                  <div class="form-group">
-                    <label class="form-label">Ad</label>
-                    <input type="text" class="form-control" name="name" value="<?php echo $rowUser['kullanici_ad']; ?>" />
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Soyad</label>
-                    <input type="text" class="form-control" name="surname"  value="<?php echo $rowUser['kullanici_soyad']; ?>" />
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">E-mail</label>
-                    <input type="text" class="form-control mb-1" name="email"  value="<?php echo $rowIletisim['iletisim_mail']; ?>" />
-                  </div>
-                </div>
-                <button type="submit" name="submitUserInfo" class="btn btn-primary">
-                  Değişiklikleri kaydet</button>
-              </form>
             </div>
             <div class="tab-pane fade" id="account-change-password">
-              <div class="card-body pb-2">
-                <div class="form-group">
-                  <label class="form-label">Geçerli şifre</label>
-                  <input type="password" class="form-control" />
-                </div>
+              <form action="" method="POST">
+                <div class="card-body pb-2">
+                  <div class="form-group">
+                    <label class="form-label">Geçerli şifre</label>
+                    <input type="password" value="<?php echo $rowUser["kullanici_sifre"]; ?>" class="form-control" />
+                  </div>
 
-                <div class="form-group">
-                  <label class="form-label">Yeni şifre</label>
-                  <input type="password" class="form-control" />
-                </div>
+                  <div class="form-group">
+                    <label class="form-label">Yeni şifre</label>
+                    <input type="password" name="newPassword" class="form-control" />
+                  </div>
 
-                <div class="form-group">
-                  <label class="form-label">Yeni şifre'yi tekrar giriniz.</label>
-                  <input type="password" class="form-control" />
+                  <div class="form-group">
+                    <label class="form-label">Yeni şifre'yi tekrar giriniz.</label>
+                    <input type="password" name="newPasswordConfirm" class="form-control" />
+                  </div>
                 </div>
-              </div>
+                <button type="submit" name="submitUserPasswordInfo" class="btn btn-primary">
+                  Değişiklikleri kaydet</button>
+              </form>
             </div>
             <div class="tab-pane fade" id="account-cv">
               <div class="card-body pb-2">
@@ -152,27 +137,41 @@ $rowIletisim = $resultIletisim->fetch_assoc();
               </form>
             </div>
             <div class="tab-pane fade" id="account-info">
-              <div class="card-body pb-2">
-                <div class="form-group">
-                  <label class="form-label">Biografi</label>
-                  <textarea class="form-control" rows="5">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc arcu, dignissim sit amet sollicitudin iaculis, vehicula id urna. Sed luctus urna nunc. Donec fermentum, magna sit amet rutrum pretium, turpis dolor molestie diam, ut lacinia diam risus eleifend sapien. Curabitur ac nibh nulla. Maecenas nec augue placerat, viverra tellus non, pulvinar risus.</textarea>
+              <form action="" method="POST">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="form-label">Ad</label>
+                    <input type="text" class="form-control" name="name" value="<?php echo $rowUser['kullanici_ad']; ?>" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Soyad</label>
+                    <input type="text" class="form-control" name="surname" value="<?php echo $rowUser['kullanici_soyad']; ?>" />
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">Doğum tarihi</label>
-                  <input type="text" class="form-control" value="May 3, 1995" />
+                <div class="card-body pb-2">
+                  <div class="form-group">
+                    <label class="form-label">Biografi</label>
+                    <textarea class="form-control" rows="5" name="aboutMe"><?php echo $rowUser['kullanici_tanitim']; ?></textarea>
+                  </div>
                 </div>
-              </div>
-              <hr class="border-light m-0" />
-              <div class="card-body pb-2">
-                <h6 class="mb-4">İletişim</h6>
-                <div class="form-group">
-                  <label class="form-label">Telefon</label>
-                  <input type="text" class="form-control" value="+0 (123) 456 7891" />
+                <hr class="border-light m-0" />
+                <div class="card-body pb-2">
+                  <h6 class="mb-4">İletişim</h6>
+                  <div class="form-group">
+                    <label class="form-label">Telefon</label>
+                    <input type="tel" class="form-control" name="tel" value="<?php echo $rowIletisim['iletisim_tel_no']; ?>" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">E-mail</label>
+                    <input type="text" class="form-control mb-1" name="email" value="<?php echo $rowIletisim['iletisim_mail']; ?>" />
+                  </div>
+                  <button type="submit" name="submitUserInfo" class="btn btn-primary">
+                    Değişiklikleri kaydet</button>
                 </div>
-              </div>
             </div>
           </div>
+          </form>
+
         </div>
       </div>
     </div>
@@ -351,6 +350,42 @@ if (isset($_POST["uploadVideo"])) {
 }
 
 if (isset($_POST["submitUserInfo"])) {
-  echo "ddd";
+  $name = $_POST["name"];
+  $surname = $_POST["surname"];
+  $aboutMe = $_POST["aboutMe"];
+  $tel = $_POST["tel"];
+  $email = $_POST["email"];
+
+  $sqlUserUpdate = "UPDATE kullanicilar SET kullanici_ad = '$name', kullanici_soyad = '$surname', kullanici_tanitim = '$aboutMe', kullanici_email = '$email' WHERE kullanici_id = '$userID'";
+  $sqlIletisimUpdate = "UPDATE iletisim SET iletisim_tel_no = '$tel', iletisim_mail = '$email' WHERE kullanicilar_kullanici_id = '$userID'";
+  if (mysqli_query($con, $sqlUserUpdate) && mysqli_query($con, $sqlIletisimUpdate)) {
+?>
+    <script type="text/javascript">
+      location.href = 'http://localhost/Hire/edit_profil.php?userID=<?php echo $userID; ?>';
+    </script>
+    <?php
+  } else {
+    echo "basarısız";
+  }
+}
+
+if (isset($_POST["submitUserPasswordInfo"])) {
+  $newPassword = $_POST["newPassword"];
+  $newPasswordConfirm = $_POST["newPasswordConfirm"];
+
+  if ($newPassword == $newPasswordConfirm) {
+    $sqlPasswordUpdate = "UPDATE kullanicilar SET kullanici_sifre = '$newPassword' WHERE kullanici_id = '$userID'";
+    if (mysqli_query($con, $sqlPasswordUpdate)) {
+    ?>
+      <script type="text/javascript">
+        location.href = 'http://localhost/Hire/edit_profil.php?userID=<?php echo $userID; ?>';
+      </script>
+<?php
+    } else {
+      echo "HATA";
+    }
+  } else {
+    echo "Sifreler uyusmuyor";
+  }
 }
 ?>
