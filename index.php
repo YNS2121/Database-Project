@@ -1,3 +1,4 @@
+<?php include('db/conDB.php'); ?>
 <html lang="tr">
 
 <head>
@@ -8,9 +9,7 @@
     <link rel="stylesheet" href="css/activities.css">
     <title>HIRE</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="download.png" type="image/x-icon">
     <style>
         * {
@@ -19,8 +18,8 @@
                 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
-        body{
-            background-color: #69a6e2 ;           
+        body {
+            background-color: #69a6e2;
             background-image: linear-gradient(to bottom right, #A6A6A6, #D9D9D9, #FFFFFF);
 
         }
@@ -45,7 +44,6 @@
             -moz-appearance: none;
             appearance: none;
         }
-
     </style>
 </head>
 
@@ -54,8 +52,7 @@
     <!-- Nav bar header -->
     <div class="header">
         <div class="header_left">
-            <img src="hirelogo.png"
-                alt="no image">
+            <img src="hirelogo.png" alt="no image">
             <div class="search_box">
                 <i class="bi bi-search"></i>
                 <input type="text" class="search_input" placeholder="Ara">
@@ -74,31 +71,13 @@
                     <div class="nav_icon">
 
                         <div class="nav_text dropdown drop">
-                            <i class="fa-solid fa-comments"
-                                style="font-size: 1.4rem  !important; display: flex; justify-content: center;"></i>
+                            <i class="fa-solid fa-comments" style="font-size: 1.4rem  !important; display: flex; justify-content: center;"></i>
                             <div class="nav_text">Mülakat Teklifleri</div>
 
                             <div class="dropdown-content" style="left: -90px !important;">
                                 <ul class="list-group">
                                     <li class="list-group-item">
-                                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                                                style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
-                                            <div class="dropdown_profile_info" style="padding-left:10px;">
-                                                <div class="act_title">
-                                                    Umut SAYDAM
-                                                </div>
-                                                <div class="acoount_name">
-                                                    Android Developer
-                                                </div>
-                                            </div>
-                                       
-                                        <div class="profile_view_button">
-                                            Profili Görüntüle
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                                            style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
                                         <div class="dropdown_profile_info" style="padding-left:10px;">
                                             <div class="act_title">
                                                 Umut SAYDAM
@@ -107,27 +86,41 @@
                                                 Android Developer
                                             </div>
                                         </div>
-                                   
-                                    <div class="profile_view_button">
-                                        Profili Görüntüle
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                                        style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
-                                    <div class="dropdown_profile_info" style="padding-left:10px;">
-                                        <div class="act_title">
-                                            Umut SAYDAM
+
+                                        <div class="profile_view_button">
+                                            Profili Görüntüle
                                         </div>
-                                        <div class="acoount_name">
-                                            Android Developer
+                                    </li>
+                                    <li class="list-group-item">
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                        <div class="dropdown_profile_info" style="padding-left:10px;">
+                                            <div class="act_title">
+                                                Umut SAYDAM
+                                            </div>
+                                            <div class="acoount_name">
+                                                Android Developer
+                                            </div>
                                         </div>
-                                    </div>
-                               
-                                <div class="profile_view_button">
-                                    Profili Görüntüle
-                                </div>
-                            </li>
+
+                                        <div class="profile_view_button">
+                                            Profili Görüntüle
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                        <div class="dropdown_profile_info" style="padding-left:10px;">
+                                            <div class="act_title">
+                                                Umut SAYDAM
+                                            </div>
+                                            <div class="acoount_name">
+                                                Android Developer
+                                            </div>
+                                        </div>
+
+                                        <div class="profile_view_button">
+                                            Profili Görüntüle
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -165,31 +158,13 @@
                     <div class="nav_icon">
 
                         <div class="nav_text dropdown drop">
-                            <i class="fa-solid fa-bell"
-                                style="font-size: 1.4rem  !important; display: flex; justify-content: center;"></i>
+                            <i class="fa-solid fa-bell" style="font-size: 1.4rem  !important; display: flex; justify-content: center;"></i>
                             <div class="nav_text">Bildirimler</div>
 
                             <div class="dropdown-content" style="left: -90px !important;">
                                 <ul class="list-group">
                                     <li class="list-group-item">
-                                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                                                style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
-                                            <div class="dropdown_profile_info" style="padding-left:10px;">
-                                                <div class="act_title">
-                                                    Umut SAYDAM
-                                                </div>
-                                                <div class="acoount_name">
-                                                    Android Developer
-                                                </div>
-                                            </div>
-                                       
-                                        <div class="profile_view_button">
-                                            Profili Görüntüle
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                                            style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
                                         <div class="dropdown_profile_info" style="padding-left:10px;">
                                             <div class="act_title">
                                                 Umut SAYDAM
@@ -198,27 +173,41 @@
                                                 Android Developer
                                             </div>
                                         </div>
-                                   
-                                    <div class="profile_view_button">
-                                        Profili Görüntüle
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                                        style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
-                                    <div class="dropdown_profile_info" style="padding-left:10px;">
-                                        <div class="act_title">
-                                            Umut SAYDAM
+
+                                        <div class="profile_view_button">
+                                            Profili Görüntüle
                                         </div>
-                                        <div class="acoount_name">
-                                            Android Developer
+                                    </li>
+                                    <li class="list-group-item">
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                        <div class="dropdown_profile_info" style="padding-left:10px;">
+                                            <div class="act_title">
+                                                Umut SAYDAM
+                                            </div>
+                                            <div class="acoount_name">
+                                                Android Developer
+                                            </div>
                                         </div>
-                                    </div>
-                               
-                                <div class="profile_view_button">
-                                    Profili Görüntüle
-                                </div>
-                            </li>
+
+                                        <div class="profile_view_button">
+                                            Profili Görüntüle
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                        <div class="dropdown_profile_info" style="padding-left:10px;">
+                                            <div class="act_title">
+                                                Umut SAYDAM
+                                            </div>
+                                            <div class="acoount_name">
+                                                Android Developer
+                                            </div>
+                                        </div>
+
+                                        <div class="profile_view_button">
+                                            Profili Görüntüle
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -235,16 +224,13 @@
             <div class="header_right_2" style="border-left: 1px solid grey;">
                 <div class="nav_link d-flex">
                     <div class="nav_icon">
-                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                            alt="non" style="height:30px;object-fit: contain;border-radius:50px;">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="non" style="height:30px;object-fit: contain;border-radius:50px;">
                         <div class="nav_text dropdown drop">
 
-                            <i class="bi bi-caret-down-fill dropdown"
-                                style="font-size: 20px  !important; float: center; margin-left: 4px;"></i>
+                            <i class="bi bi-caret-down-fill dropdown" style="font-size: 20px  !important; float: center; margin-left: 4px;"></i>
                             <div class="dropdown-content">
                                 <div class="dropdown_profile">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                                        style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
                                     <div class="dropdown_profile_info" style="padding-left:10px;">
                                         <div class="act_title">
                                             Umut SAYDAM
@@ -255,7 +241,7 @@
                                     </div>
                                 </div>
                                 <div class="profile_view_button">
-                                <a href="user-profile.php">Profili Görüntüle</a>
+                                    <a href="user-profile.php">Profili Görüntüle</a>
                                 </div>
 
                                 <div class="bdr_bottom"></div>
@@ -281,8 +267,7 @@
 
             <div class="sidebar_first_col">
                 <div class="profile_header" style="border-top-left-radius: 10px;border-top-right-radius:10px;"></div>
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                    alt="noimage" style="height:100px;
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="noimage" style="height:100px;
                     width:100px;
                     border-radius: 50%;
                     border:4px solid white;
@@ -306,46 +291,50 @@
                     </div>
                 </div>
                 <div class="recent">
-                    <div class="sidebar_second_text"><i class="fa-solid fa-circle-dot"
-                            style="margin-right:10px;font-size: 10px;"></i>Webtekno</div>
-                    <div class="sidebar_second_text"><i class="fa-solid fa-circle-dot"
-                            style="margin-right:10px;font-size: 10px;"></i>Aselsan</div>
-                    <div class="sidebar_second_text"><i class="fa-solid fa-circle-dot"
-                            style="margin-right:10px;font-size: 10px;"></i>Nasa</div>
+                    <div class="sidebar_second_text"><i class="fa-solid fa-circle-dot" style="margin-right:10px;font-size: 10px;"></i>Webtekno</div>
+                    <div class="sidebar_second_text"><i class="fa-solid fa-circle-dot" style="margin-right:10px;font-size: 10px;"></i>Aselsan</div>
+                    <div class="sidebar_second_text"><i class="fa-solid fa-circle-dot" style="margin-right:10px;font-size: 10px;"></i>Nasa</div>
                 </div>
-                
+
 
                 <div class="recent">
-                         
+
 
 
                 </div>
             </div>
 
         </div>
-        <div class="posts"> 
+        <div class="posts">
             <div class="post_box">
                 <div class="input">
                     <div class="input_blocks">
-                        <form style="display: flex; justify-content: space-around; align-items:center; width: 100%;">
+                        <form action="" method="POST" style="display: flex; justify-content: space-around; align-items:center; width: 100%;">
                             <div>
+                                <?php
+                                $sql = "SELECT meslek_id, alan_id, meslek_adi, alan_adi FROM meslek_alanlar JOIN meslekler ON meslek_alanlar.meslekler_meslek_id = meslekler.meslek_id;";
+                                $result = mysqli_query($con, $sql);
+                                ?>
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>Meslek</option>
-                                    <option value="1">Bilgisayar Mühendisliği</option>
-                                    <option value="2">Mimar</option>
-                                    <option value="3">Aşçı</option>
+                                    <?php
+                                    foreach ($result as $i) {
+                                    ?> <option value=<?php echo $i["meslek_id"]; ?>><?php echo $i["meslek_adi"]; ?></option>
+                                    <?php }
+                                    ?>
                                 </select>
                             </div>
                             <div>
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>Alan</option>
-                                    <option value="1">Android Developer</option>
-                                    <option value="2">IOS Developer</option>
-                                    <option value="3">Project Management</option>
+                                    <?php
+                                    foreach ($result as $i) {
+                                    ?> <option value=<?php echo $i["alan_id"]; ?>><?php echo $i["alan_adi"]; ?></option>
+                                    <?php }
+                                    ?>
                                 </select>
                             </div>
-                            <button type="button" class="btn btn-primary btn-sm" style="padding: 7px;">Filtreyi
-                                uygula</button>
+                            <button type="submit" class="btn btn-primary" name="submit">Filtreyi uygula</button>
                         </form>
                     </div>
                 </div>
@@ -355,8 +344,7 @@
             <div class="post_item">
                 <div class="post_item_header">
                     <div class="post_item_info">
-                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                            alt="no image" class="post_profile" style="height:60px">
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="post_profile" style="height:60px">
                         <div class="post_item_owner" style="margin-left:8px;">
                             <a href="#" class="act_title">Ali Efe Bozdaş </a>
                         </div>
@@ -379,16 +367,16 @@
                     <img src="1.svg" alt="">
                     <img src="2.svg" alt="">
                     <img src="3.svg" alt="">
-                    
+
 
                 </div>
 
                 <div class="post_item_footer">
                     <div class="footer_item">
-                        
-                        
+
+
                     </div>
-                    
+
                     <!--
                     <div class="footer_item">
                         <i class="bi bi-arrow-90deg-right"></i>
@@ -489,8 +477,7 @@
                 </div>
                 <br>
                 <div class="account_feed">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                        alt="no image" class="account_picture">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="account_picture">
                     <div class="account_info">
                         <p class="act_title">Ahmet Işık</p>
                         <p class="account_name">Android Developer</p>
@@ -500,8 +487,7 @@
                     </div>
                 </div>
                 <div class="account_feed">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                        alt="no image" class="account_picture">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="account_picture">
                     <div class="account_info">
                         <h4 class="act_title">Esra Durmaz</h4>
                         <p class="account_name">Pentester</p>
@@ -513,8 +499,7 @@
                 </div>
 
                 <div class="account_feed">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                        alt="no image" class="account_picture">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="account_picture">
                     <div class="account_info">
                         <h4 class="act_title">Zeynep Ergün</h4>
                         <p class="account_name">Front-End Dev.</p>
@@ -534,3 +519,12 @@
 </body>
 
 </html>
+<?php
+if ($con) {
+    if (isset($_POST["submit"])) {
+        
+    }
+}else {
+    ?> <h2> <?php  echo "bagalnti hatasi"; ?> </h2> <?php
+}
+?>
