@@ -1,7 +1,8 @@
 <?php include('db/conDB.php');
-
 $userID = $_GET["userID"];
-
+$sqlIsCompany = "Select * FROM sirketler WHERE kullanicilar_kullanici_id = '$userID'";
+$resultIsCompany = mysqli_query($con, $sqlIsCompany);
+$companyState = $resultIsCompany->fetch_assoc();
 ?>
 <html lang="tr">
 
@@ -56,7 +57,7 @@ $userID = $_GET["userID"];
     <!-- Nav bar header -->
     <div class="header">
         <div class="header_left">
-            <img src="hirelogo.png" alt="no image">
+            <a href="http://localhost/Hire/index.php?userID=<?php echo $userID; ?>"><img src="hirelogo.png" alt="no image"></a>
             <div class="search_box">
                 <i class="bi bi-search"></i>
                 <input type="text" class="search_input" placeholder="Ara">
@@ -67,7 +68,7 @@ $userID = $_GET["userID"];
                 <div class="nav_icon">
                     <i class="bi bi-house-door-fill" style="font-size: 1.3rem  !important;"></i>
                 </div>
-                <div class="nav_text">Anasayfa</div>
+                <div class="nav_text"><a href="http://localhost/Hire/index.php?userID=<?php echo $userID; ?>">Anasayfa</a></div>
             </div>
 
             <div class="header_right_2">
@@ -134,87 +135,9 @@ $userID = $_GET["userID"];
                     <i class="bi bi-three-dots"></i>
                 </div>
             </div>
-
-            <!--
-            <div class="nav_link jobs">
-                <div class="nav_icon"><i class="bi bi-bag-fill" style="font-size: 1.3rem  !important;"></i></div>
-                <div class="nav_text">Jobs</div>
-            </div>
-
-            <div class="nav_link">
-                <div class="nav_icon">
-                    <div class="info">3</div>
-                    <i class="bi bi-chat-dots-fill" style="font-size: 1.3rem  !important;"></i>
-                </div>
-                <div class="nav_text">Messaging</div>
-            </div>
-
-            <div class="nav_link">
-                <div class="nav_icon">
-                    <div class="info">3</div>
-                    <i class="bi bi-bell-fill" style="font-size: 1.3rem  !important;"></i>
-                </div>
-                <div class="nav_text">Bildirimler</div>
-            </div>-->
-
             <div class="header_right_2">
                 <div class="nav_link d-flex">
                     <div class="nav_icon">
-
-                        <div class="nav_text dropdown drop">
-                            <i class="fa-solid fa-bell" style="font-size: 1.4rem  !important; display: flex; justify-content: center;"></i>
-                            <div class="nav_text">Bildirimler</div>
-
-                            <div class="dropdown-content" style="left: -90px !important;">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
-                                        <div class="dropdown_profile_info" style="padding-left:10px;">
-                                            <div class="act_title">
-                                                Umut SAYDAM
-                                            </div>
-                                            <div class="acoount_name">
-                                                Android Developer
-                                            </div>
-                                        </div>
-
-                                        <div class="profile_view_button">
-                                            Profili Görüntüle
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
-                                        <div class="dropdown_profile_info" style="padding-left:10px;">
-                                            <div class="act_title">
-                                                Umut SAYDAM
-                                            </div>
-                                            <div class="acoount_name">
-                                                Android Developer
-                                            </div>
-                                        </div>
-
-                                        <div class="profile_view_button">
-                                            Profili Görüntüle
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
-                                        <div class="dropdown_profile_info" style="padding-left:10px;">
-                                            <div class="act_title">
-                                                Umut SAYDAM
-                                            </div>
-                                            <div class="acoount_name">
-                                                Android Developer
-                                            </div>
-                                        </div>
-
-                                        <div class="profile_view_button">
-                                            Profili Görüntüle
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="small_screen">
@@ -247,13 +170,6 @@ $userID = $_GET["userID"];
                                 <div class="profile_view_button">
                                     <a href="user-profile.php?userID=<?php echo $userID; ?>">Profili Görüntüle</a>
                                 </div>
-
-                                <div class="bdr_bottom"></div>
-                                <div class="title" style="color:black;">Hesap</div>
-                                <div class="list">Ayarlar</div>
-                                <div class="list">Yardım</div>
-                                <div class="list bdr_bottom">Dil</div>
-                                <div class="list">Çıkış Yap</div>
                             </div>
                         </div>
                     </div>
@@ -271,12 +187,12 @@ $userID = $_GET["userID"];
 
             <div class="sidebar_first_col">
                 <div class="profile_header" style="border-top-left-radius: 10px;border-top-right-radius:10px;"></div>
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="noimage" style="height:100px;
-                    width:100px;
-                    border-radius: 50%;
-                    border:4px solid white;
-                    
-                    margin:-35px auto 0 auto;">
+                <?php
+                $sqlUserProfile = "SELECT fotograf_adresi FROM fotograflar WHERE kullanicilar_kullanici_id = '$userID'";
+                $resultSqlUserProfile = mysqli_query($con, $sqlUserProfile);
+                $resultSqlUserProfile = $resultSqlUserProfile->fetch_assoc();
+                ?>
+                <img src="uploads/<?php echo $resultSqlUserProfile["fotograf_adresi"]; ?>" alt="noimage" style="height:100px; width:100px; border-radius: 50%; border:4px solid white; margin:-35px auto 0 auto;">
 
                 <div class="profile_info">
                     <p style="text-align: center;" class="act_title">Umut SAYDAM</p>
@@ -310,120 +226,159 @@ $userID = $_GET["userID"];
 
         </div>
         <div class="posts">
-            <div class="post_box">
-                <div class="input">
-                    <div class="input_blocks">
-                        <form action="" method="POST" style="display: flex; justify-content: space-around; align-items:center; width: 100%;">
-                            <div>
-                                <?php
-                                $sql = "SELECT meslek_id, alan_id, meslek_adi, alan_adi FROM meslek_alanlar JOIN meslekler ON meslek_alanlar.meslekler_meslek_id = meslekler.meslek_id;";
-                                $result = mysqli_query($con, $sql);
-                                ?>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Meslek</option>
-                                    <?php
-                                    foreach ($result as $i) {
-                                    ?> <option value=<?php echo $i["meslek_id"]; ?>><?php echo $i["meslek_adi"]; ?></option>
-                                    <?php }
-                                    ?>
-                                </select>
-                            </div>
-                            <div>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Alan</option>
-                                    <?php
-                                    foreach ($result as $i) {
-                                    ?> <option value=<?php echo $i["alan_id"]; ?>><?php echo $i["alan_adi"]; ?></option>
-                                    <?php }
-                                    ?>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary" name="submit">Filtreyi uygula</button>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
             <?php
+
+            if (!is_null($companyState)) { ?>
+                <div class="post_box">
+                    <div class="input">
+                        <div class="input_blocks">
+                            <form action="" method="GET" style="display: flex; justify-content: space-around; align-items:center; width: 100%;">
+                                <input type="text" name="userID" hidden="true" value="<?php echo $userID; ?>" id="">
+                                <div>
+                                    <?php
+                                    $sql = "SELECT meslek_id, alan_id, meslek_adi, alan_adi FROM meslek_alanlar JOIN meslekler ON meslek_alanlar.meslekler_meslek_id = meslekler.meslek_id;";
+                                    $result = mysqli_query($con, $sql);
+                                    ?>
+                                    <select class="form-select" name="job" aria-label="Default select example">
+                                        <option selected>Meslek</option>
+                                        <?php
+                                        foreach ($result as $i) {
+                                        ?> <option value=<?php echo $i["meslek_id"]; ?>><?php echo $i["meslek_adi"]; ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div>
+                                    <select class="form-select" name="sector" aria-label="Default select example">
+                                        <option selected>Alan</option>
+                                        <?php
+                                        foreach ($result as $i) {
+                                        ?> <option value=<?php echo $i["alan_id"]; ?>><?php echo $i["alan_adi"]; ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary" name="">Filtreyi uygula</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <?php }
+
+
             $sqlUserList = "SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email, fotograf_id, fotograf_adresi, video_id, video_adresi, video_zamani FROM fotograflar INNER JOIN (SELECT * from videolar INNER JOIN (SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email FROM meslekler INNER JOIN (SELECT * FROM meslek_alanlar INNER JOIN (SELECT * FROM kullanicilar INNER JOIN kullanici_meslek_detay ON kullanicilar.kullanici_id = kullanici_meslek_detay.kullanicilar_kullanici_id) as a ON a.alanlar_alan_id = meslek_alanlar.alan_id) as b ON b.meslekler_meslek_id = meslekler.meslek_id) as v ON v.kullanici_id = videolar.kullanicilar_kullanici_id) as f ON f.kullanici_id = fotograflar.kullanicilar_kullanici_id;";
             $resultUserList = mysqli_query($con, $sqlUserList);
             if ($resultUserList) {
                 $rowUserList = $resultUserList;
             }
 
-            foreach ($rowUserList as $user) { ?>
-                <div class="post_item">
-                    <div class="post_item_header">
-                        <div class="post_item_info">
-                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="post_profile" style="height:60px">
-                            <div class="post_item_owner" style="margin-left:8px;">
-                                <a href="#" class="act_title"><?php echo $user["kullanici_ad"] . " " . $user["kullanici_soyad"] . " "; ?></a>
+            if (isset($_GET["job"]) && isset($_GET["sector"])) {
+                $job = $_GET["job"];
+                $sector = $_GET["sector"];
+                $sqlFilterUser = "SELECT  meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email, fotograf_id, fotograf_adresi, video_id, video_adresi, video_zamani FROM fotograflar INNER JOIN (SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email,video_adresi, video_zamani, video_id FROM videolar INNER JOIN (SELECT * FROM kullanicilar INNER JOIN (SELECT * FROM kullanici_meslek_detay INNER JOIN (SELECT * FROM meslekler INNER JOIN meslek_alanlar ON meslekler.meslek_id = meslek_alanlar.meslekler_meslek_id HAVING meslek_id = '$job' AND alan_id = '$sector') as filterJob ON filterJob.alan_id = kullanici_meslek_detay.alanlar_alan_id) as user ON user.kullanicilar_kullanici_id = kullanici_id) as videoUser ON videoUser.kullanici_id = videolar.kullanicilar_kullanici_id) as fotograflarUser ON fotograflarUser.kullanici_id = fotograflar.kullanicilar_kullanici_id;";
+                $resultFilterUser = mysqli_query($con, $sqlFilterUser);
+                $rowFilterUser = $resultFilterUser;
+                $test = $resultFilterUser->fetch_assoc();
+                if (is_null($test)) {
+                    echo "boyle kullanici yok";
+                } else if (!is_null($rowFilterUser)) {
+                    foreach ($rowFilterUser as $filterUser) { ?>
+                        <div class="post_item">
+                            <div class="post_item_header">
+                                <div class="post_item_info">
+                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="post_profile" style="height:60px">
+                                    <div class="post_item_owner" style="margin-left:8px;">
+                                        <a href="#" class="act_title"><?php echo $filterUser["kullanici_ad"] . " " . $filterUser["kullanici_soyad"] . " "; ?></a>
+                                    </div>
+                                    <br>
+                                    <div class="account_name" style="margin-left: 15px;">
+                                        <?php echo $filterUser["meslek_adi"] . " | " . $filterUser["alan_adi"]; ?>
+                                    </div>
+                                </div>
+                                <i class="bi bi-three-dots" style="padding:5px;"></i>
                             </div>
-                            <br>
-                            <div class="account_name" style="margin-left: 15px;">
-                                <?php echo $user["meslek_adi"] . " | " . $user["alan_adi"]; ?>
+
+                            <div class="post_item_body_info">
+                                <p style="font-size: 0.95rem;"><?php echo $filterUser["kullanici_tanitim"]; ?></p>
+                            </div>
+                            <video width="100%" controls class="post_iten_body_video" style="outline:none;">
+                                <source src="uploadsVideo/<?php echo $filterUser["video_adresi"]; ?>" type="video/mp4">
+                            </video>
+                            <div class="post_item_footer">
+                                <div class="footer_item"></div>
                             </div>
                         </div>
-                        <i class="bi bi-three-dots" style="padding:5px;"></i>
-                    </div>
+                    <?php }
+                }
+            } else {
+                foreach ($rowUserList as $user) { ?>
+                    <div class="post_item">
+                        <div class="post_item_header">
+                            <div class="post_item_info">
+                                <img src="uploads/<?php echo $user["fotograf_adresi"]; ?>" alt="no image" class="account_picture">
+                                <div class="post_item_owner" style="margin-left:8px;">
+                                    <a href="http://localhost/Hire/user-profile.php?userID=<?php echo $user["kullanici_id"]; ?>" class="act_title"><?php echo $user["kullanici_ad"] . " " . $user["kullanici_soyad"] . " "; ?></a>
+                                </div>
+                                <br>
+                                <div class="account_name" style="margin-left: 15px;">
+                                    <?php echo $user["meslek_adi"] . " | " . $user["alan_adi"]; ?>
+                                </div>
+                            </div>
+                            <i class="bi bi-three-dots" style="padding:5px;"></i>
+                        </div>
 
-                    <div class="post_item_body_info">
-                        <p style="font-size: 0.95rem;"><?php echo $user["kullanici_tanitim"]; ?></p>
+                        <div class="post_item_body_info">
+                            <p style="font-size: 0.95rem;"><?php echo $user["kullanici_tanitim"]; ?></p>
+                        </div>
+                        <video width="100%" controls class="post_iten_body_video" style="outline:none;">
+                            <source src="uploadsVideo/<?php echo $user["video_adresi"]; ?>" type="video/mp4">
+                        </video>
+                        <div class="post_item_footer">
+                            <div class="footer_item"></div>
+                        </div>
                     </div>
-                    <video width="100%" controls class="post_iten_body_video" style="outline:none;">
-                        <source src="uploadsVideo/<?php echo $user["video_adresi"]; ?>" type="video/mp4">
-                    </video>
-                    <div class="post_item_footer">
-                        <div class="footer_item"></div>
-                    </div>
-                </div>
             <?php }
+            }
+
             ?>
 
 
         </div>
-        <div class="activity">
-            <div class="news">
-                <div class="news_head">
-                    <div class="news_title act_title">Potansiyel İş Arayanlar</div>
-                    <i class="bi bi-info-square-fill" style="font-size:15px;"></i>
-                </div>
-                <br>
-                <div class="account_feed">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="account_picture">
-                    <div class="account_info">
-                        <p class="act_title">Ahmet Işık</p>
-                        <p class="account_name">Android Developer</p>
-                        <div class="follow">
-                            + Mülakat Teklifi Et
-                        </div>
-                    </div>
-                </div>
-                <div class="account_feed">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="account_picture">
-                    <div class="account_info">
-                        <h4 class="act_title">Esra Durmaz</h4>
-                        <p class="account_name">Pentester</p>
 
-                        <div class="follow">
-                            + Mülakat Teklifi Et
-                        </div>
+        <?php
+        if (!is_null($companyState)) { ?>
+            <div class="activity">
+                <div class="news">
+                    <div class="news_head">
+                        <div class="news_title act_title">Potansiyel İş Arayanlar</div>
+                        <i class="bi bi-info-square-fill" style="font-size:15px;"></i>
                     </div>
-                </div>
+                    <br>
+                    <?php
+                    $sqlSomeEmployee = "SELECT   alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, fotograf_id, fotograf_adresi FROM fotograflar INNER JOIN (SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email FROM videolar INNER JOIN (SELECT * FROM kullanicilar INNER JOIN (SELECT * FROM kullanici_meslek_detay INNER JOIN (SELECT * FROM meslekler INNER JOIN meslek_alanlar ON meslekler.meslek_id = meslek_alanlar.meslekler_meslek_id) as filterJob ON filterJob.alan_id = kullanici_meslek_detay.alanlar_alan_id) as user ON user.kullanicilar_kullanici_id = kullanici_id) as videoUser ON videoUser.kullanici_id = videolar.kullanicilar_kullanici_id) as fotograflarUser ON fotograflarUser.kullanici_id = fotograflar.kullanicilar_kullanici_id LIMIT 3;";
+                    $resultSomeEmployee = mysqli_query($con, $sqlSomeEmployee);
+                    $rowSomeEmployee = $resultSomeEmployee;
 
-                <div class="account_feed">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="account_picture">
-                    <div class="account_info">
-                        <h4 class="act_title">Zeynep Ergün</h4>
-                        <p class="account_name">Front-End Dev.</p>
-
-                        <div class="follow">
-                            + Mülakat Teklifi Et
-                        </div>
-                    </div>
+                    foreach ($rowSomeEmployee as $userSomeEmployee) {
+                        if ($userSomeEmployee["kullanici_id"] != $userID) { ?>
+                            <div class="account_feed">
+                                <img src="uploads/<?php echo $userSomeEmployee["fotograf_adresi"]; ?>" alt="no image" class="account_picture">
+                                <div class="account_info">
+                                    <a href="http://localhost/Hire/user-profile.php?userID=<?php echo $userSomeEmployee["kullanici_id"] ?>"><?php echo $userSomeEmployee["kullanici_ad"] . " " . $userSomeEmployee["kullanici_soyad"]; ?></a>
+                                    <p class="account_name"><?php echo $userSomeEmployee["alan_adi"]; ?></p>
+                                    <div class="follow">
+                                        + Mülakat Teklifi Et
+                                    </div>
+                                </div>
+                            </div>
+                        <?php  }
+                        ?>
+                    <?php }
+                    ?>
                 </div>
             </div>
-        </div>
+        <?php } ?>
 
     </div>
     <script src="/__/firebase/8.4.3/firebase-app.js"></script>
@@ -434,9 +389,5 @@ $userID = $_GET["userID"];
 </html>
 <?php
 if ($con) {
-    if (isset($_POST["submit"])) {
-    }
 } else {
-?> <h2> <?php echo "bagalnti hatasi"; ?> </h2> <?php
-                                            }
-                                                ?>
+?> <h2> <?php echo "bagalnti hatasi"; ?> </h2> <?php } ?>
