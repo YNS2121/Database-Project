@@ -206,7 +206,7 @@ if ($con) {
                             <script type="text/javascript">
                                 location.href = 'http://localhost/Hire/login.php';
                             </script>
-                        <?php
+                            <?php
                         } else {
                             echo "meslek_detay hata";
                         }
@@ -247,11 +247,19 @@ if ($con) {
 
                         $sql = "insert into sirketler (kullanicilar_kullanici_id, sirket_adi, sirket_vizyon, sirket_misyon) values ('$userID', '$companyName', '$vision', '$mission')";
                         $sqlFoto = "insert into fotograflar (kullanicilar_kullanici_id, fotograf_adresi) value ('$userID', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4g-Qf3MOCxDiyXBYM_qK8UVg0zN5-7r_Fvw&usqp=CAU')";
-                        if (mysqli_query($con, $sql)) { ?>
-                            <script type="text/javascript">
-                                location.href = 'http://localhost/Hire/login.php';
-                            </script>
+                        if (mysqli_query($con, $sql)) {
+                            $sqlSirketKullaniciID = "SELECT sirket_id FROM sirketler WHERE kullanicilar_kullanici_id = '$userID' ";
+                            $resultSirketKullaniciID = mysqli_query($con, $sqlSirketKullaniciID);
+                            $rowSirketID = $resultSirketKullaniciID->fetch_assoc();
+                            $sirketId = $rowSirketID["sirket_id"];
+                            $sqlInsanKaynagi = "insert into insan_kaynagi (sirketler_sirket_id, insan_kaynagi_id) values ('$sirketId' ,'$userID')";
+                            if (mysqli_query($con, $sqlInsanKaynagi)) {
+                            ?>
+                                <script type="text/javascript">
+                                    location.href = 'http://localhost/Hire/login.php';
+                                </script>
 <?php
+                            }
                         } else {
                             echo "Sirketler tablo hatali";
                         }
