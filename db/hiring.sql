@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 22 Ara 2022, 17:27:56
+-- Üretim Zamanı: 25 Ara 2022, 08:45:57
 -- Sunucu sürümü: 10.4.24-MariaDB
 -- PHP Sürümü: 8.1.6
 
@@ -44,6 +44,17 @@ CREATE TABLE `diller` (
   `dil_id` int(11) NOT NULL,
   `dil_adi` varchar(25) COLLATE utf8_turkish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `diller`
+--
+
+INSERT INTO `diller` (`dil_id`, `dil_adi`) VALUES
+(1, 'Türkçe'),
+(2, 'İngilizce'),
+(3, 'Almanca'),
+(4, 'Fransızca'),
+(5, 'Rusça');
 
 -- --------------------------------------------------------
 
@@ -90,7 +101,7 @@ CREATE TABLE `insan_kaynagi` (
 CREATE TABLE `kullanicilar` (
   `kullanici_id` int(11) NOT NULL,
   `kullanici_ad` varchar(70) COLLATE utf8_turkish_ci NOT NULL,
-  `kullanici_soyad` varchar(70) COLLATE utf8_turkish_ci NOT NULL,
+  `kullanici_soyad` varchar(70) COLLATE utf8_turkish_ci NOT NULL DEFAULT '""',
   `kullanici_tanitim` text COLLATE utf8_turkish_ci NOT NULL,
   `kullanici_teklif_acik` tinyint(1) NOT NULL DEFAULT 0,
   `kullanici_email` varchar(70) COLLATE utf8_turkish_ci NOT NULL,
@@ -196,8 +207,6 @@ CREATE TABLE `teklifler` (
 
 CREATE TABLE `videolar` (
   `video_id` int(11) NOT NULL,
-  `video_adi` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
-  `video_baslik` varchar(150) COLLATE utf8_turkish_ci NOT NULL,
   `video_zamani` date NOT NULL DEFAULT current_timestamp(),
   `video_adresi` varchar(250) COLLATE utf8_turkish_ci NOT NULL,
   `kullanicilar_kullanici_id` int(11) NOT NULL
@@ -239,6 +248,7 @@ ALTER TABLE `iletisim`
 -- Tablo için indeksler `insan_kaynagi`
 --
 ALTER TABLE `insan_kaynagi`
+  ADD PRIMARY KEY (`sirketler_sirket_id`,`insan_kaynagi_id`),
   ADD KEY `insan_kaynagi_id` (`insan_kaynagi_id`),
   ADD KEY `sirketler_sirket_id` (`sirketler_sirket_id`);
 
@@ -252,6 +262,7 @@ ALTER TABLE `kullanicilar`
 -- Tablo için indeksler `kullanici_meslek_detay`
 --
 ALTER TABLE `kullanici_meslek_detay`
+  ADD PRIMARY KEY (`kullanicilar_kullanici_id`,`alanlar_alan_id`),
   ADD KEY `kullanicilar_kullanici_id` (`kullanicilar_kullanici_id`),
   ADD KEY `alanlar_alan_id` (`alanlar_alan_id`);
 
@@ -279,6 +290,7 @@ ALTER TABLE `sirketler`
 -- Tablo için indeksler `teklifler`
 --
 ALTER TABLE `teklifler`
+  ADD PRIMARY KEY (`insan_kaynagi_id`,`kullanicilar_kullanici_id`),
   ADD KEY `kullanicilar_kullanici_id` (`kullanicilar_kullanici_id`),
   ADD KEY `insan_kaynagi_id` (`insan_kaynagi_id`);
 
@@ -297,31 +309,31 @@ ALTER TABLE `videolar`
 -- Tablo için AUTO_INCREMENT değeri `cv`
 --
 ALTER TABLE `cv`
-  MODIFY `cv_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `diller`
 --
 ALTER TABLE `diller`
-  MODIFY `dil_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `fotograflar`
 --
 ALTER TABLE `fotograflar`
-  MODIFY `fotograf_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `fotograf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `iletisim`
 --
 ALTER TABLE `iletisim`
-  MODIFY `iletisim_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iletisim_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kullanicilar`
 --
 ALTER TABLE `kullanicilar`
-  MODIFY `kullanici_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `kullanici_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `meslekler`
@@ -339,13 +351,13 @@ ALTER TABLE `meslek_alanlar`
 -- Tablo için AUTO_INCREMENT değeri `sirketler`
 --
 ALTER TABLE `sirketler`
-  MODIFY `sirket_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sirket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `videolar`
 --
 ALTER TABLE `videolar`
-  MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
