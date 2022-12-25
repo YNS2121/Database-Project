@@ -1,6 +1,21 @@
 <?php include('db/conDB.php');
 
-$userID = $_GET["userID"];
+$state = 1;
+if (isset($_GET["userID"]) && isset($_GET["gusetID"])) {
+  $userID = $_GET["gusetID"];
+  $gusetID = $_GET["userID"];
+  $state = 0;
+} else if (isset($_GET["userID"])) {
+  $userID = $_GET["userID"];
+  $state = 1;
+} else {
+?>
+  <script type="text/javascript">
+    location.href = "http://localhost/Hire/login.php";
+  </script>
+<?php
+}
+
 $sql = "Select * from kullanicilar where kullanici_id = '$userID'";
 $meslekSQL = "SELECT kullanicilar_kullanici_id,meslekler_meslek_id, alan_id, alan_adi from kullanici_meslek_detay JOIN meslek_alanlar ON kullanici_meslek_detay.alanlar_alan_id = meslek_alanlar.alan_id HAVING kullanici_meslek_detay.kullanicilar_kullanici_id = '$userID'";
 $sqlIletisim = "SELECT * FROM iletisim where kullanicilar_kullanici_id = '$userID'";
@@ -56,9 +71,17 @@ if ($result) {
                 <div><?php echo  $rowMeslek["alan_adi"]; ?></div>
                 <br>
                 <div></div>
-                <div class="mg-top-10">
-                  <a href="#" class="btn btn-blue">İş Teklifi Yap</a>
-                  <a href="edit_profil.php?userID=<?php echo $userID; ?>" class="btn btn-blue" onclick="goclicky(this); return false;" target="_blank">Profili Düzenle</a>
+                <div class="mg-top-10" style="display: flex;align-items: center;justify-content: center;">
+                  <?php
+                  if ($state == 0) { ?>
+                    <form action="" method="POST">
+                      <button type="submit" class="btn btn-blue" style="margin-right:5px;" name="submitInterview">Mülakat teklifi et</button>
+                    </form>
+                  <?php }
+                  if ($state == 1) { ?>
+                    <a href="edit_profil.php?userID=<?php echo $userID; ?>" style="margin-left:5px;" class="btn btn-blue" onclick="goclicky(this); return false;" target="_blank">Profili Düzenle</a>
+                  <?php }
+                  ?>
                 </div>
               </div>
             </div>
@@ -165,6 +188,31 @@ if ($result) {
     </div>
   </div>
 
+  <?php
+
+  if ($con) {
+    if (isset($_POST["submitInterview"])) {
+      $userID = $_GET["gusetID"];
+      $gusetID = $_GET["userID"];
+
+      $sqlIsThere = "Select * FROM teklifler WHERE kullanicilar_kullanici_id = '$userID' AND insan_kaynagi_id = '$gusetID'";
+      $resultIsThere = mysqli_query($con, $sqlIsThere);
+      $resultIsThere = $resultIsThere->fetch_assoc();
+      if (is_null($resultIsThere)) {
+        $sqlTeklif = "insert into teklifler (insan_kaynagi_id, kullanicilar_kullanici_id) values ('$gusetID', '$userID')";
+        if (mysqli_query($con, $sqlTeklif)) {
+          echo "oldu";
+        }
+      } else {
+        echo "Zaten teklif edildi";
+      }
+    }
+  } else {
+    echo "baglanti hatasi";
+  }
+
+
+  ?>
   <style type="text/css">
     body {
       margin-top: 20px;
