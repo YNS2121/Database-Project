@@ -37,7 +37,11 @@ if ($result) {
   $rowIletisim = $resultIletisimSQL->fetch_assoc();
   $rowImg = $resultImg->fetch_assoc();
 } else {
-  echo "Hata";
+?>
+  <script>
+    window.alert("Hata");
+  </script>
+<?php
 }
 ?>
 <!DOCTYPE html>
@@ -238,14 +242,26 @@ if ($result) {
       if (is_null($resultIsThere)) {
         $sqlTeklif = "insert into teklifler (insan_kaynagi_id, kullanicilar_kullanici_id) values ('$gusetID', '$userID')";
         if (mysqli_query($con, $sqlTeklif)) {
-          echo "oldu";
+  ?>
+          <script>
+            window.alert("Teklif edildi");
+          </script>
+        <?php
         }
       } else {
-        echo "Zaten teklif edildi";
+        ?>
+        <script>
+          window.alert("Zaten teklif edildi");
+        </script>
+    <?php
       }
     }
   } else {
-    echo "baglanti hatasi";
+    ?>
+    <script>
+      window.alert("baglanti hatasi");
+    </script>
+  <?php
   }
 
 

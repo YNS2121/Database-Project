@@ -60,16 +60,21 @@ if ($con) {
         $sql = "Select kullanici_id from kullanicilar where kullanici_email = '$emailAddress' and kullanici_sifre = '$password'";
         $result = mysqli_query($con, $sql);
         $row = $result->fetch_assoc();
-        $userID = $row["kullanici_id"];
-        if (mysqli_num_rows($result) > 0) { ?>
+
+        if (mysqli_num_rows($result) > 0) {
+            $userID = $row["kullanici_id"]; ?>
             <script type="text/javascript">
                 location.href = "http://localhost/Hire/index.php?userID=<?php echo $userID; ?>";
             </script>
-<?php } else {
-            echo "Böyle bir kullanıcı yok";
-        }
+        <?php } else { ?>
+            <script>
+                window.alert("Böyle bir kullanıcı yok");
+            </script>
+    <?php }
     }
-} else {
-    echo "Veri tabani baglanti hatasi";
-}
+} else { ?>
+    <script>
+        alert(<?php echo "Veri tabani baglanti hatasi"; ?>);
+    </script>
+<?php }
 ?>

@@ -313,10 +313,18 @@ if (isset($_POST["uploadImg"])) {
       </script>
     <?php
     } else {
-      echo "basarisiz";
+    ?>
+      <script>
+        window.alert("Basarisiz");
+      </script>
+    <?php
     }
   } else {
-    echo "Hatda";
+    ?>
+    <script>
+      window.alert("Hata");
+    </script>
+    <?php
   }
 }
 
@@ -334,10 +342,18 @@ if (isset($_POST["uploadCv"])) {
       </script>
     <?php
     } else {
-      echo "basarisiz";
+    ?>
+      <script>
+        window.alert("Basarisiz");
+      </script>
+    <?php
     }
   } else {
-    echo "Hatda";
+    ?>
+    <script>
+      window.alert("Hata");
+    </script>
+    <?php
   }
 }
 
@@ -354,10 +370,18 @@ if (isset($_POST["uploadVideo"])) {
       </script>
     <?php
     } else {
-      echo "basarisiz";
+    ?>
+      <script>
+        window.alert("Basarisiz");
+      </script>
+    <?php
     }
   } else {
-    echo "Hatda";
+    ?>
+    <script>
+      window.alert("Hata");
+    </script>
+  <?php
   }
 }
 
@@ -371,13 +395,17 @@ if (isset($_POST["submitUserInfo"])) {
   $sqlUserUpdate = "UPDATE kullanicilar SET kullanici_ad = '$name', kullanici_soyad = '$surname', kullanici_tanitim = '$aboutMe', kullanici_email = '$email' WHERE kullanici_id = '$userID'";
   $sqlIletisimUpdate = "UPDATE iletisim SET iletisim_tel_no = '$tel', iletisim_mail = '$email' WHERE kullanicilar_kullanici_id = '$userID'";
   if (mysqli_query($con, $sqlUserUpdate) && mysqli_query($con, $sqlIletisimUpdate)) {
-    ?>
+  ?>
     <script type="text/javascript">
       location.href = 'http://localhost/Hire/edit_profil.php?userID=<?php echo $userID; ?>';
     </script>
-    <?php
+  <?php
   } else {
-    echo "basarısız";
+  ?>
+    <script>
+      window.alert("Basarisiz");
+    </script>
+    <?php
   }
 }
 
@@ -392,12 +420,20 @@ if (isset($_POST["submitUserPasswordInfo"])) {
       <script type="text/javascript">
         location.href = 'http://localhost/Hire/edit_profil.php?userID=<?php echo $userID; ?>';
       </script>
-<?php
+    <?php
     } else {
-      echo "HATA";
+    ?>
+      <script>
+        window.alert("Hata");
+      </script>
+    <?php
     }
   } else {
-    echo "Sifreler uyusmuyor";
+    ?>
+    <script>
+      window.alert("Sifreler uyusmadi");
+    </script>
+<?php
   }
 }
 ?>

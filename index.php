@@ -479,10 +479,18 @@ if ($con) {
         if (is_null($resultIsThere)) {
             $sqlTeklif = "insert into teklifler (insan_kaynagi_id, kullanicilar_kullanici_id) values ('$userID', '$employeeID')";
             if (mysqli_query($con, $sqlTeklif)) {
-                echo "oldu";
+?>
+                <script>
+                    window.alert("Teklif edildi");
+                </script>
+            <?php
             }
         } else {
-            echo "Zaten teklif edildi";
+            ?>
+            <script>
+                window.alert("Zaten teklif edildi");
+            </script>
+        <?php
         }
     }
 
@@ -494,9 +502,17 @@ if ($con) {
             <script type="text/javascript">
                 location.href = "http://localhost/Hire/index.php?userID=<?php echo $userID; ?>";
             </script>
-    <?php } else {
-            echo "HATA";
+        <?php } else {
+        ?>
+            <script>
+                window.alert("Hata");
+            </script>
+    <?php
         }
     }
 } else {
-    ?> <h2> <?php echo "baglanti hatasi"; ?> </h2> <?php } ?>
+    ?>
+    <script>
+        window.alert("Böyle bir kullanıcı yok");
+    </script>
+<?php } ?>

@@ -206,19 +206,35 @@ if ($con) {
                             <script type="text/javascript">
                                 location.href = 'http://localhost/Hire/login.php';
                             </script>
-                            <?php
+                        <?php
                         } else {
-                            echo "meslek_detay hata";
+                        ?>
+                            <script>
+                                window.alert("meslek detay hata");
+                            </script>
+                        <?php
                         }
                     } else {
-                        echo "iletisim veri tabanında hata var";
+                        ?>
+                        <script>
+                            window.alert("İletisim db hatasi");
+                        </script>
+                <?php
                     }
                 }
             } else {
-                echo "kayıt olurken hata oldu";
+                ?>
+                <script>
+                    window.alert("Kayıt olurken hata");
+                </script>
+            <?php
             }
         } else {
-            echo "Parolalar eşleşmiyor.";
+            ?>
+            <script>
+                window.alert("Parolalar eşleşmedi");
+            </script>
+            <?php
         }
     }
     if (isset($_POST["submitEmployer"])) {
@@ -254,27 +270,47 @@ if ($con) {
                             $sirketId = $rowSirketID["sirket_id"];
                             $sqlInsanKaynagi = "insert into insan_kaynagi (sirketler_sirket_id, insan_kaynagi_id) values ('$sirketId' ,'$userID')";
                             if (mysqli_query($con, $sqlInsanKaynagi)) {
-                            ?>
+            ?>
                                 <script type="text/javascript">
                                     location.href = 'http://localhost/Hire/login.php';
                                 </script>
-<?php
+                            <?php
                             }
                         } else {
-                            echo "Sirketler tablo hatali";
+                            ?>
+                            <script>
+                                window.alert("sirketler db");
+                            </script>
+                        <?php
                         }
                     } else {
-                        echo "iletisim veri tabanında hata var";
+                        ?>
+                        <script>
+                            window.alert("iletisim db");
+                        </script>
+                <?php
                     }
                 }
             } else {
-                echo "kayıt olurken hata oldu";
+                ?>
+                <script>
+                    window.alert("kayıt hatası");
+                </script>
+            <?php
             }
         } else {
-            echo "Parolalar eşleşmiyor.";
+            ?>
+            <script>
+                window.alert("parola eslesmedi");
+            </script>
+    <?php
         }
     }
 } else {
-    echo "Veri tabani baglanti hatasi";
+    ?>
+    <script>
+        window.alert("Db hatasi");
+    </script>
+<?php
 }
 ?>
