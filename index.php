@@ -365,7 +365,7 @@ $companyState = $resultIsCompany->fetch_assoc();
                         <div class="post_item">
                             <div class="post_item_header">
                                 <div class="post_item_info">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="no image" class="post_profile" style="height:60px">
+                                    <img src="uploads/<?php echo $user["fotograf_adresi"]; ?>" alt="no image" class="account_picture">
                                     <div class="post_item_owner" style="margin-left:8px;">
                                         <a href="#" class="act_title"><?php echo $filterUser["kullanici_ad"] . " " . $filterUser["kullanici_soyad"] . " "; ?></a>
                                     </div>
