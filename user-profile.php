@@ -15,7 +15,11 @@ if (isset($_GET["userID"]) && isset($_GET["gusetID"])) {
   </script>
 <?php
 }
-
+$stateAlan = 0;
+$sqlOwner = "Select * FROM sirketler WHERE kullanicilar_kullanici_id = '$userID'";
+if (mysqli_num_rows(mysqli_query($con, $sqlOwner)) > 0) {
+  $stateAlan = 1;
+}
 $sql = "Select * from kullanicilar where kullanici_id = '$userID'";
 $meslekSQL = "SELECT kullanicilar_kullanici_id,meslekler_meslek_id, alan_id, alan_adi from kullanici_meslek_detay JOIN meslek_alanlar ON kullanici_meslek_detay.alanlar_alan_id = meslek_alanlar.alan_id HAVING kullanici_meslek_detay.kullanicilar_kullanici_id = '$userID'";
 $sqlIletisim = "SELECT * FROM iletisim where kullanicilar_kullanici_id = '$userID'";
@@ -24,6 +28,9 @@ $result = mysqli_query($con, $sql);
 $resultMeslekSQL = mysqli_query($con, $meslekSQL);
 $resultIletisimSQL = mysqli_query($con, $sqlIletisim);
 $resultImg = mysqli_query($con, $sqlImg);
+$sqlCompany =  "SELECT * FROM kullanicilar INNER JOIN sirketler ON sirketler.kullanicilar_kullanici_id = kullanicilar.kullanici_id HAVING kullanici_id = '$userID';";
+$resultCompany = mysqli_query($con, $sqlCompany);
+$resultCompany = $resultCompany->fetch_assoc();
 if ($result) {
   $row = $result->fetch_assoc();
   $rowMeslek = $resultMeslekSQL->fetch_assoc();
@@ -68,7 +75,13 @@ if ($result) {
             <div class="col-sm-12">
               <div class="details">
                 <h4> <?php echo $row["kullanici_ad"] . " " . $row["kullanici_soyad"]; ?> <i class="fa fa-sheild"></i></h4>
-                <div><?php echo  $rowMeslek["alan_adi"]; ?></div>
+                <?php
+                if ($stateAlan == 1) { ?>
+                  <div><?php echo  $resultCompany["sirket_adi"]; ?></div>
+                <?php } else { ?>
+                  <div><?php echo  $rowMeslek["alan_adi"]; ?></div>
+                <?php }
+                ?>
                 <br>
                 <div></div>
                 <div class="mg-top-10" style="display: flex;align-items: center;justify-content: center;">
@@ -106,51 +119,75 @@ if ($result) {
                 </div>
                 <div class="body-section">
                   <h5 class="section-heading">İlgilendiği Alan</h5>
-                  <?php echo  $rowMeslek["alan_adi"]; ?>
+                  <?php
+                  if ($stateAlan == 1) { ?>
+                    <?php echo  $resultCompany["sirket_adi"]; ?>
+                  <?php } else { ?>
+                    <?php echo  $rowMeslek["alan_adi"]; ?>
+                  <?php }
+                  ?>
                 </div>
-                <div class="body-section">
-                  <h5 class="section-heading">İlgi alanları</h5>
-                  <p class="section-content">Yazılım, Yüzme</p>
-                </div>
+                <?php
+                if ($stateAlan == 1) { ?>
+                  <div class="body-section">
+                    <h5 class="section-heading">Şirket Vizyon</h5>
+                    <?php
+                    if ($stateAlan == 1) { ?>
+                      <?php echo  $resultCompany["sirket_vizyon"]; ?>
+                    <?php } ?>
+                  </div>
+                  <div class="body-section">
+                    <h5 class="section-heading">Şirket Misyon</h5>
+                    <?php
+                    if ($stateAlan == 1) { ?>
+                      <?php echo  $resultCompany["sirket_misyon"]; ?>
+                    <?php } ?>
+                  </div>
+                <?php }
+                ?>
               </div>
             </div>
 
-            <div class="panel panel-white border-top-light-blue">
-              <div class="panel-heading">
-                <h3 class="panel-title">Mülakat Videoları ve CV</h3>
-                <div class="controls pull-right">
-                  <span class="pull-right clickable">
-                    <i class="fa fa-chevron-up"></i>
-                  </span>
+            <?php
+            if ($stateAlan == 0) { ?>
+              <div class="panel panel-white border-top-light-blue">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Mülakat Videoları ve CV</h3>
+                  <div class="controls pull-right">
+                    <span class="pull-right clickable">
+                      <i class="fa fa-chevron-up"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <?php
+                  $sqlCvList =  "SELECT * from cv JOIN diller ON cv.diller_dil_id = diller.dil_id HAVING cv.kullanicilar_kullanici_id = '$userID';";
+                  $resultCvList = mysqli_query($con,  $sqlCvList);
+                  $sqlVideoList = "SELECT * from videolar where kullanicilar_kullanici_id = '$userID'";
+                  $resultVideoList = mysqli_query($con,  $sqlVideoList);
+                  ?>
+                  <div class="body-section">
+                    <p><b>Kullanici CV bilgileri.</b></p>
+                    <ul>
+                      <?php
+                      foreach ($resultCvList as $item) { ?>
+                        <li><a href="uploadsCv/<?php echo $item['cv_adresi']; ?>"><?php echo $item['cv_adresi'] . ' ' . '(' . $item['dil_adi'] . ')'; ?></a></li>
+                      <?php }
+                      ?>
+                    </ul>
+                    <p><b>Kullanici mülakat videoları.</b></p>
+                    <ul>
+                      <?php
+                      foreach ($resultVideoList as $video) { ?>
+                        <li><a href="uploadsVideo/<?php echo $video['video_adresi']; ?>"><?php echo $video['video_adresi']; ?></a></li>
+                      <?php }
+                      ?>
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div class="panel-body">
-                <?php
-                $sqlCvList =  "SELECT * from cv JOIN diller ON cv.diller_dil_id = diller.dil_id HAVING cv.kullanicilar_kullanici_id = '$userID';";
-                $resultCvList = mysqli_query($con,  $sqlCvList);
-                $sqlVideoList = "SELECT * from videolar where kullanicilar_kullanici_id = '$userID'";
-                $resultVideoList = mysqli_query($con,  $sqlVideoList);
-                ?>
-                <div class="body-section">
-                  <p><b>Kullanici CV bilgileri.</b></p>
-                  <ul>
-                    <?php
-                    foreach ($resultCvList as $item) { ?>
-                      <li><a href="uploadsCv/<?php echo $item['cv_adresi']; ?>"><?php echo $item['cv_adresi'] . ' ' . '(' . $item['dil_adi'] . ')'; ?></a></li>
-                    <?php }
-                    ?>
-                  </ul>
-                  <p><b>Kullanici mülakat videoları.</b></p>
-                  <ul>
-                    <?php
-                    foreach ($resultVideoList as $video) { ?>
-                      <li><a href="uploadsVideo/<?php echo $video['video_adresi']; ?>"><?php echo $video['video_adresi']; ?></a></li>
-                    <?php }
-                    ?>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <?php }
+            ?>
           </div>
 
           <div class="col-sm-6">

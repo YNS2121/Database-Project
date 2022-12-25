@@ -307,7 +307,11 @@ if (isset($_POST["uploadImg"])) {
   if (move_uploaded_file($tempname, $folder)) {
     $sqlImg = "insert into fotograflar (fotograf_adresi, kullanicilar_kullanici_id) values ('$filename','$userID')";
     if (mysqli_query($con, $sqlImg)) {
-      echo "oldu";
+?>
+      <script type="text/javascript">
+        location.href = 'http://localhost/Hire/edit_profil.php?userID=<?php echo $userID; ?>';
+      </script>
+    <?php
     } else {
       echo "basarisiz";
     }
@@ -324,7 +328,11 @@ if (isset($_POST["uploadCv"])) {
   if (move_uploaded_file($tempname, $folder)) {
     $sqlCvUpload = "insert into cv (diller_dil_id, cv_adresi, kullanicilar_kullanici_id) values ('$lang', '$filename', '$userID')";
     if (mysqli_query($con, $sqlCvUpload)) {
-      echo "oldu";
+    ?>
+      <script type="text/javascript">
+        location.href = 'http://localhost/Hire/edit_profil.php?userID=<?php echo $userID; ?>';
+      </script>
+    <?php
     } else {
       echo "basarisiz";
     }
@@ -340,7 +348,11 @@ if (isset($_POST["uploadVideo"])) {
   if (move_uploaded_file($tempname, $folder)) {
     $sqlVideoUpload = "insert into videolar (video_adresi, kullanicilar_kullanici_id) values ('$filename', '$userID')";
     if (mysqli_query($con, $sqlVideoUpload)) {
-      echo "oldu";
+    ?>
+      <script type="text/javascript">
+        location.href = 'http://localhost/Hire/edit_profil.php?userID=<?php echo $userID; ?>';
+      </script>
+    <?php
     } else {
       echo "basarisiz";
     }
@@ -359,7 +371,7 @@ if (isset($_POST["submitUserInfo"])) {
   $sqlUserUpdate = "UPDATE kullanicilar SET kullanici_ad = '$name', kullanici_soyad = '$surname', kullanici_tanitim = '$aboutMe', kullanici_email = '$email' WHERE kullanici_id = '$userID'";
   $sqlIletisimUpdate = "UPDATE iletisim SET iletisim_tel_no = '$tel', iletisim_mail = '$email' WHERE kullanicilar_kullanici_id = '$userID'";
   if (mysqli_query($con, $sqlUserUpdate) && mysqli_query($con, $sqlIletisimUpdate)) {
-?>
+    ?>
     <script type="text/javascript">
       location.href = 'http://localhost/Hire/edit_profil.php?userID=<?php echo $userID; ?>';
     </script>
