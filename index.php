@@ -319,7 +319,7 @@ $companyState = $resultIsCompany->fetch_assoc();
                             <div class="post_item_info">
                                 <img src="uploads/<?php echo $user["fotograf_adresi"]; ?>" alt="no image" class="account_picture">
                                 <div class="post_item_owner" style="margin-left:8px;">
-                                    <a href="http://localhost/Hire/user-profile.php?userID=<?php echo $user["kullanici_id"]; ?>" class="act_title"><?php echo $user["kullanici_ad"] . " " . $user["kullanici_soyad"] . " "; ?></a>
+                                    <a href="http://localhost/Hire/user-profile.php?userID=<?php echo $userID . '&gusetID=' . $user["kullanici_id"]; ?>" class="act_title"><?php echo $user["kullanici_ad"] . " " . $user["kullanici_soyad"] . " "; ?></a>
                                 </div>
                                 <br>
                                 <div class="account_name" style="margin-left: 15px;">
