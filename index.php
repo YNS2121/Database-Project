@@ -1,5 +1,12 @@
 <?php include('db/conDB.php');
-$userID = $_GET["userID"];
+if (isset($_GET["userID"])) {
+    $userID = $_GET["userID"];
+} else { ?>
+    <script type="text/javascript">
+        location.href = "http://localhost/Hire/login.php";
+    </script>
+<?php }
+
 $sqlIsCompany = "Select * FROM sirketler WHERE kullanicilar_kullanici_id = '$userID'";
 $resultIsCompany = mysqli_query($con, $sqlIsCompany);
 $companyState = $resultIsCompany->fetch_assoc();
@@ -81,51 +88,45 @@ $companyState = $resultIsCompany->fetch_assoc();
 
                             <div class="dropdown-content" style="left: -90px !important;">
                                 <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
-                                        <div class="dropdown_profile_info" style="padding-left:10px;">
-                                            <div class="act_title">
-                                                Umut SAYDAM
-                                            </div>
-                                            <div class="acoount_name">
-                                                Android Developer
-                                            </div>
-                                        </div>
+                                    <?php
+                                    $sqlNotification = "SELECT * FROM iletisim INNER JOIN (Select sirket_id, (sirketler.kullanicilar_kullanici_id) as kulID, sirket_adi FROM sirketler INNER JOIN (SELECT sirketler_sirket_id, kullanicilar_kullanici_id FROM insan_kaynagi INNER JOIN teklifler ON insan_kaynagi.insan_kaynagi_id = teklifler.insan_kaynagi_id HAVING kullanicilar_kullanici_id = '$userID') as a ON a.sirketler_sirket_id = sirketler.sirket_id) as il ON iletisim.kullanicilar_kullanici_id = il.kulID;";
+                                    $resultNotification = mysqli_query($con, $sqlNotification);
+                                    $rowNotification = $resultNotification;
 
-                                        <div class="profile_view_button">
-                                            Profili Görüntüle
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
-                                        <div class="dropdown_profile_info" style="padding-left:10px;">
-                                            <div class="act_title">
-                                                Umut SAYDAM
-                                            </div>
-                                            <div class="acoount_name">
-                                                Android Developer
-                                            </div>
-                                        </div>
+                                    foreach ($rowNotification as $n) { ?>
 
-                                        <div class="profile_view_button">
-                                            Profili Görüntüle
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
-                                        <div class="dropdown_profile_info" style="padding-left:10px;">
-                                            <div class="act_title">
-                                                Umut SAYDAM
-                                            </div>
-                                            <div class="acoount_name">
-                                                Android Developer
-                                            </div>
-                                        </div>
+                                        <form action="" method="POST">
+                                            <?php $kulID = $n["kulID"];
+                                            $sqlImg = "SELECT fotograf_adresi FROM fotograflar where kullanicilar_kullanici_id = '$kulID'";
+                                            $resultImg = mysqli_query($con, $sqlImg);
+                                            $rowImg = $resultImg->fetch_assoc();
+                                            ?> <?php
+                                                if (is_null($rowImg)) { ?>
+                                                <div style="display: flex;align-items: center;justify-content: center;">
+                                                    <img src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                                </div>
+                                            <?php } else { ?>
+                                                <div style="display: flex;align-items: center;justify-content: center;">
+                                                    <img src="uploads/<?php echo $rowImg["fotograf_adresi"]; ?>" class="avatar" alt="avatar" />
+                                                </div>
+                                            <?php  }
+                                            ?>
+                                            <li class="list-group-item" style="border:0px !important;border-bottom: 1px solid rgba(0,0,0,.125) !important;">
+                                                <div class="dropdown_profile_info" style="padding-left:10px;">
+                                                    <div class="act_title" style="display: flex;align-items: center;justify-content: center;font-size: 22px;">
+                                                        <?php echo $n["sirket_adi"]; ?>
+                                                    </div>
+                                                </div>
+                                                <input type=" text" name="companyOwnerID" value="<?php echo $kulID ?>" hidden="true" id="">
+                                                <div style="display: flex;align-items: center;justify-content: center;">
+                                                    <a class="profile_view_button" href="mailto:<?php echo $n["iletisim_mail"]; ?>">Kabul et</a>
+                                                    <button type="submit" class="profile_view_button" name="submitAcceptInterview">Yok say</button>
+                                                </div>
+                                            </li>
+                                        </form>
 
-                                        <div class="profile_view_button">
-                                            Profili Görüntüle
-                                        </div>
-                                    </li>
+                                    <?php }
+                                    ?>
                                 </ul>
                             </div>
                         </div>
@@ -365,11 +366,13 @@ $companyState = $resultIsCompany->fetch_assoc();
                             <div class="account_feed">
                                 <img src="uploads/<?php echo $userSomeEmployee["fotograf_adresi"]; ?>" alt="no image" class="account_picture">
                                 <div class="account_info">
-                                    <a href="http://localhost/Hire/user-profile.php?userID=<?php echo $userSomeEmployee["kullanici_id"] ?>"><?php echo $userSomeEmployee["kullanici_ad"] . " " . $userSomeEmployee["kullanici_soyad"]; ?></a>
-                                    <p class="account_name"><?php echo $userSomeEmployee["alan_adi"]; ?></p>
-                                    <div class="follow">
-                                        + Mülakat Teklifi Et
-                                    </div>
+                                    <form action="" method="POST">
+                                        <a href="http://localhost/Hire/user-profile.php?userID=<?php echo $userSomeEmployee["kullanici_id"] ?>"><?php echo $userSomeEmployee["kullanici_ad"] . " " . $userSomeEmployee["kullanici_soyad"]; ?></a>
+                                        <p class="account_name"><?php echo $userSomeEmployee["alan_adi"]; ?></p>
+                                        <input type="text" name="userID" value="<?php echo $userID; ?>" hidden="true" id="">
+                                        <input type="text" name="employeeID" value="<?php echo $userSomeEmployee["kullanici_id"]; ?>" hidden="true" id="">
+                                        <button type="submit" class="follow" name="submitInterview">Mülakat teklifi et</button>
+                                    </form>
                                 </div>
                             </div>
                         <?php  }
@@ -389,5 +392,34 @@ $companyState = $resultIsCompany->fetch_assoc();
 </html>
 <?php
 if ($con) {
+    if (isset($_POST["submitInterview"])) {
+        $employeeID = $_POST["employeeID"];
+        $userID = $_POST["userID"];
+
+        $sqlIsThere = "Select * FROM teklifler WHERE kullanicilar_kullanici_id = '$employeeID' AND insan_kaynagi_id = '$userID'";
+        $resultIsThere = mysqli_query($con, $sqlIsThere);
+        $resultIsThere = $resultIsThere->fetch_assoc();
+        if (is_null($resultIsThere)) {
+            $sqlTeklif = "insert into teklifler (insan_kaynagi_id, kullanicilar_kullanici_id) values ('$userID', '$employeeID')";
+            if (mysqli_query($con, $sqlTeklif)) {
+                echo "oldu";
+            }
+        } else {
+            echo "Zaten teklif edildi";
+        }
+    }
+
+    if (isset($_POST["submitAcceptInterview"])) {
+        $companyOwnerID = $_POST["companyOwnerID"];
+        $sqlRefuse = "DELETE FROM teklifler WHERE insan_kaynagi_id = '$companyOwnerID' AND kullanicilar_kullanici_id = '$userID'";
+        $resultRefuse = mysqli_query($con, $sqlRefuse);
+        if ($resultRefuse) { ?>
+            <script type="text/javascript">
+                location.href = "http://localhost/Hire/index.php?userID=<?php echo $userID; ?>";
+            </script>
+    <?php } else {
+            echo "HATA";
+        }
+    }
 } else {
-?> <h2> <?php echo "bagalnti hatasi"; ?> </h2> <?php } ?>
+    ?> <h2> <?php echo "baglanti hatasi"; ?> </h2> <?php } ?>
