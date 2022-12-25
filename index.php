@@ -60,7 +60,22 @@ $companyState = $resultIsCompany->fetch_assoc();
 </head>
 
 <body>
-
+    <?php
+    $state = 0;
+    $sqlOwner = "Select * FROM sirketler WHERE kullanicilar_kullanici_id = '$userID'";
+    if (mysqli_num_rows(mysqli_query($con, $sqlOwner)) > 0) {
+        $state = 1;
+    }
+    $sqlUserProfile = "SELECT fotograf_adresi FROM fotograflar WHERE kullanicilar_kullanici_id = '$userID'";
+    $resultSqlUserProfile = mysqli_query($con, $sqlUserProfile);
+    $resultSqlUserProfile = $resultSqlUserProfile->fetch_assoc();
+    $userInfo = "SELECT alan_id, alan_adi,meslekler_meslek_id, kullanicilar_kullanici_id, kullanici_ad, kullanici_soyad From meslek_alanlar INNER JOIN (SELECT * FROM kullanici_meslek_detay INNER JOIN (SELECT * FROM kullanicilar WHERE kullanici_id = '$userID') as kullanici ON kullanici.kullanici_id = kullanici_meslek_detay.kullanicilar_kullanici_id) as a ON meslek_alanlar.alan_id = a.alanlar_alan_id;";
+    $resultInfo = mysqli_query($con, $userInfo);
+    $rowInfo = $resultInfo->fetch_assoc();
+    $sqlCompany =  "SELECT * FROM kullanicilar INNER JOIN sirketler ON sirketler.kullanicilar_kullanici_id = kullanicilar.kullanici_id HAVING kullanici_id = '$userID';";
+    $resultCompany = mysqli_query($con, $sqlCompany);
+    $resultCompany = $resultCompany->fetch_assoc();
+    ?>
     <!-- Nav bar header -->
     <div class="header">
         <div class="header_left">
@@ -152,19 +167,41 @@ $companyState = $resultIsCompany->fetch_assoc();
             <div class="header_right_2" style="border-left: 1px solid grey;">
                 <div class="nav_link d-flex">
                     <div class="nav_icon">
-                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="non" style="height:30px;object-fit: contain;border-radius:50px;">
+                        <?php
+                        if (is_null($resultSqlUserProfile)) { ?>
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <img src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png" style="height:30px;object-fit: contain;border-radius:50px;" alt="noimage">
+                            </div>
+                        <?php } else { ?>
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <img src="uploads/<?php echo $resultSqlUserProfile["fotograf_adresi"]; ?>" alt="noimage" style="height:30px;width:30px;object-fit: contain;border-radius:50px;">
+
+                            </div>
+                        <?php  }
+                        ?>
                         <div class="nav_text dropdown drop">
 
                             <i class="bi bi-caret-down-fill dropdown" style="font-size: 20px  !important; float: center; margin-left: 4px;"></i>
                             <div class="dropdown-content">
                                 <div class="dropdown_profile">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                    <?php
+                                    if (is_null($resultSqlUserProfile)) { ?>
+                                        <div style="display: flex;align-items: center;justify-content: center;">
+                                            <img src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                                        </div>
+                                    <?php } else { ?>
+                                        <div style="display: flex;align-items: center;justify-content: center;">
+                                            <img src="uploads/<?php echo $resultSqlUserProfile["fotograf_adresi"]; ?>" alt="noimage" style="height:50px;object-fit: contain;border-radius:50px;">
+
+                                        </div>
+                                    <?php  }
+                                    ?>
                                     <div class="dropdown_profile_info" style="padding-left:10px;">
                                         <div class="act_title">
-                                            Umut SAYDAM
+                                            <?php echo $resultCompany["kullanici_ad"] . " " . $resultCompany["kullanici_soyad"]; ?>
                                         </div>
                                         <div class="acoount_name">
-                                            Android Developer
+                                            <?php echo $resultCompany["sirket_adi"]; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -185,24 +222,53 @@ $companyState = $resultIsCompany->fetch_assoc();
     <!-- Mainbody -->
     <div class="mainbody">
         <div class="sidebar" style="border:none;">
+            <?php
+            if ($state == 0) { ?>
+                <div class="sidebar_first_col">
+                    <div class="profile_header" style="border-top-left-radius: 10px;border-top-right-radius:10px;"></div>
+                    <?php
+                    if (is_null($resultSqlUserProfile)) { ?>
+                        <div style="display: flex;align-items: center;justify-content: center;">
+                            <img src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                        </div>
+                    <?php } else { ?>
+                        <div style="display: flex;align-items: center;justify-content: center;">
+                            <img src="uploads/<?php echo $resultSqlUserProfile["fotograf_adresi"]; ?>" alt="noimage" style="height:100px; width:100px; border-radius: 50%; border:4px solid white; margin:-35px auto 0 auto;">
 
-            <div class="sidebar_first_col">
-                <div class="profile_header" style="border-top-left-radius: 10px;border-top-right-radius:10px;"></div>
-                <?php
-                $sqlUserProfile = "SELECT fotograf_adresi FROM fotograflar WHERE kullanicilar_kullanici_id = '$userID'";
-                $resultSqlUserProfile = mysqli_query($con, $sqlUserProfile);
-                $resultSqlUserProfile = $resultSqlUserProfile->fetch_assoc();
-                ?>
-                <img src="uploads/<?php echo $resultSqlUserProfile["fotograf_adresi"]; ?>" alt="noimage" style="height:100px; width:100px; border-radius: 50%; border:4px solid white; margin:-35px auto 0 auto;">
+                        </div>
+                    <?php  }
+                    ?>
+                    <div class="profile_info">
+                        <p style="text-align: center;" class="act_title"><?php echo $rowInfo["kullanici_ad"] . " " . $rowInfo["kullanici_soyad"]; ?></p>
+                        <p class="account_name"><?php echo $rowInfo["alan_adi"]; ?></p>
+                    </div>
 
-                <div class="profile_info">
-                    <p style="text-align: center;" class="act_title">Umut SAYDAM</p>
-                    <p class="account_name">Android Developer</p>
+                    <div style="border:0.2px solid lightgrey"></div>
+                </div>
+            <?php } else { ?>
+                <div class="sidebar_first_col">
+                    <div class="profile_header" style="border-top-left-radius: 10px;border-top-right-radius:10px;"></div>
+                    <?php
+                    if (is_null($resultSqlUserProfile)) { ?>
+                        <div style="display: flex;align-items: center;justify-content: center;">
+                            <img src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png" style="height:50px;object-fit: contain;border-radius:50px;" alt="noimage">
+                        </div>
+                    <?php } else { ?>
+                        <div style="display: flex;align-items: center;justify-content: center;">
+                            <img src="uploads/<?php echo $resultSqlUserProfile["fotograf_adresi"]; ?>" alt="noimage" style="height:100px; width:100px; border-radius: 50%; border:4px solid white; margin:-35px auto 0 auto;">
+
+                        </div>
+                    <?php  }
+                    ?>
+                    <div class="profile_info">
+                        <p style="text-align: center;" class="act_title"><?php echo $resultCompany["kullanici_ad"] . " " . $resultCompany["kullanici_soyad"]; ?></p>
+                        <p class="account_name"><?php echo $resultCompany["sirket_adi"]; ?></p>
+                    </div>
+
+                    <div style="border:0.2px solid lightgrey"></div>
                 </div>
 
-                <div style="border:0.2px solid lightgrey"></div>
-            </div>
-
+            <?php } ?>
             <div class="sidebar_second_col">
 
                 <div class="sidebar_title">
