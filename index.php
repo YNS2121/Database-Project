@@ -122,7 +122,7 @@ $companyState = $resultIsCompany->fetch_assoc();
                                                 </div>
                                             <?php } else { ?>
                                                 <div style="display: flex;align-items: center;justify-content: center;">
-                                                    <img src="uploads/<?php echo $rowImg["fotograf_adresi"]; ?>" class="avatar" alt="avatar" />
+                                                    <img src="uploads/<?php echo $rowImg["fotograf_adresi"]; ?>" class="avatar" style="height: 40px;width:50px;" alt="avatar" />
                                                 </div>
                                             <?php  }
                                             ?>
