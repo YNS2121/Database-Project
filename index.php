@@ -197,12 +197,23 @@ $companyState = $resultIsCompany->fetch_assoc();
                                     <?php  }
                                     ?>
                                     <div class="dropdown_profile_info" style="padding-left:10px;">
-                                        <div class="act_title">
-                                            <?php echo $resultCompany["kullanici_ad"] . " " . $resultCompany["kullanici_soyad"]; ?>
-                                        </div>
-                                        <div class="acoount_name">
-                                            <?php echo $resultCompany["sirket_adi"]; ?>
-                                        </div>
+                                        <?php
+                                        if ($state == 1) { ?>
+                                            <div class="act_title">
+                                                <?php echo $resultCompany["kullanici_ad"] . " " . $resultCompany["kullanici_soyad"]; ?>
+                                            </div>
+                                            <div class="acoount_name">
+                                                <?php echo $resultCompany["sirket_adi"]; ?>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div class="act_title">
+                                                <?php echo $rowInfo["kullanici_ad"] . " " . $rowInfo["kullanici_soyad"]; ?>
+                                            </div>
+                                            <div class="acoount_name">
+                                                <?php echo $rowInfo["alan_adi"]; ?>
+                                            </div>
+                                        <?php }
+                                        ?>
                                     </div>
                                 </div>
                                 <div class="profile_view_button">
