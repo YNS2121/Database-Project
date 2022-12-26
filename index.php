@@ -345,7 +345,11 @@ $companyState = $resultIsCompany->fetch_assoc();
                 <?php }
 
 
+<<<<<<< HEAD
             $sqlUserList = "SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email, fotograf_id, fotograf_adresi, video_id, video_adresi, video_zamani FROM fotograflar INNER JOIN (SELECT * from videolar INNER JOIN (SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email FROM meslekler INNER JOIN (SELECT * FROM meslek_alanlar INNER JOIN (SELECT * FROM kullanicilar INNER JOIN kullanici_meslek_detay ON kullanicilar.kullanici_id = kullanici_meslek_detay.kullanicilar_kullanici_id) as a ON a.alanlar_alan_id = meslek_alanlar.alan_id) as b ON b.meslekler_meslek_id = meslekler.meslek_id) as v ON v.kullanici_id = videolar.kullanicilar_kullanici_id) as f ON f.kullanici_id = fotograflar.kullanicilar_kullanici_id ORDER BY video_zamani DESC;";
+=======
+            $sqlUserList = "SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email, fotograf_id, fotograf_adresi, video_id, video_adresi, video_zamani FROM fotograflar INNER JOIN (SELECT * from videolar INNER JOIN (SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email FROM meslekler INNER JOIN (SELECT * FROM meslek_alanlar INNER JOIN (SELECT * FROM kullanicilar INNER JOIN kullanici_meslek_detay ON kullanicilar.kullanici_id = kullanici_meslek_detay.kullanicilar_kullanici_id) as a ON a.alanlar_alan_id = meslek_alanlar.alan_id) as b ON b.meslekler_meslek_id = meslekler.meslek_id) as v ON v.kullanici_id = videolar.kullanicilar_kullanici_id) as f ON f.kullanici_id = fotograflar.kullanicilar_kullanici_id;";
+>>>>>>> dca331e1b7b6ab1879fa450bc78e820dff761ab5
             $resultUserList = mysqli_query($con, $sqlUserList);
             if ($resultUserList) {
                 $rowUserList = $resultUserList;
@@ -354,6 +358,7 @@ $companyState = $resultIsCompany->fetch_assoc();
             if (isset($_GET["job"]) && isset($_GET["sector"])) {
                 $job = $_GET["job"];
                 $sector = $_GET["sector"];
+<<<<<<< HEAD
 
                 if ($sector == "Alan") {
                     $sqlFilterUser = "SELECT  meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email, fotograf_id, fotograf_adresi, video_id, video_adresi, video_zamani FROM fotograflar INNER JOIN (SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email,video_adresi, video_zamani, video_id FROM videolar INNER JOIN (SELECT * FROM kullanicilar INNER JOIN (SELECT * FROM kullanici_meslek_detay INNER JOIN (SELECT * FROM meslekler INNER JOIN meslek_alanlar ON meslekler.meslek_id = meslek_alanlar.meslekler_meslek_id HAVING meslek_id = '$job') as filterJob ON filterJob.alan_id = kullanici_meslek_detay.alanlar_alan_id) as user ON user.kullanicilar_kullanici_id = kullanici_id) as videoUser ON videoUser.kullanici_id = videolar.kullanicilar_kullanici_id) as fotograflarUser ON fotograflarUser.kullanici_id = fotograflar.kullanicilar_kullanici_id;";
@@ -363,6 +368,9 @@ $companyState = $resultIsCompany->fetch_assoc();
                     $sqlFilterUser = "SELECT  meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email, fotograf_id, fotograf_adresi, video_id, video_adresi, video_zamani FROM fotograflar INNER JOIN (SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email,video_adresi, video_zamani, video_id FROM videolar INNER JOIN (SELECT * FROM kullanicilar INNER JOIN (SELECT * FROM kullanici_meslek_detay INNER JOIN (SELECT * FROM meslekler INNER JOIN meslek_alanlar ON meslekler.meslek_id = meslek_alanlar.meslekler_meslek_id HAVING meslek_id = '$job' AND alan_id = '$sector') as filterJob ON filterJob.alan_id = kullanici_meslek_detay.alanlar_alan_id) as user ON user.kullanicilar_kullanici_id = kullanici_id) as videoUser ON videoUser.kullanici_id = videolar.kullanicilar_kullanici_id) as fotograflarUser ON fotograflarUser.kullanici_id = fotograflar.kullanicilar_kullanici_id;";
                 }
 
+=======
+                $sqlFilterUser = "SELECT  meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email, fotograf_id, fotograf_adresi, video_id, video_adresi, video_zamani FROM fotograflar INNER JOIN (SELECT meslek_id, meslek_adi, alan_id, alan_adi, kullanici_id, kullanici_ad, kullanici_soyad, kullanici_tanitim, kullanici_email,video_adresi, video_zamani, video_id FROM videolar INNER JOIN (SELECT * FROM kullanicilar INNER JOIN (SELECT * FROM kullanici_meslek_detay INNER JOIN (SELECT * FROM meslekler INNER JOIN meslek_alanlar ON meslekler.meslek_id = meslek_alanlar.meslekler_meslek_id HAVING meslek_id = '$job' AND alan_id = '$sector') as filterJob ON filterJob.alan_id = kullanici_meslek_detay.alanlar_alan_id) as user ON user.kullanicilar_kullanici_id = kullanici_id) as videoUser ON videoUser.kullanici_id = videolar.kullanicilar_kullanici_id) as fotograflarUser ON fotograflarUser.kullanici_id = fotograflar.kullanicilar_kullanici_id;";
+>>>>>>> dca331e1b7b6ab1879fa450bc78e820dff761ab5
                 $resultFilterUser = mysqli_query($con, $sqlFilterUser);
                 $rowFilterUser = $resultFilterUser;
                 $test = $resultFilterUser->fetch_assoc();
