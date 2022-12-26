@@ -1,310 +1,1034 @@
+<?php include('db/conDB.php');
+
+$state = 1;
+if (isset($_GET["userID"]) && isset($_GET["gusetID"])) {
+  $userID = $_GET["gusetID"];
+  $gusetID = $_GET["userID"];
+  $state = 0;
+} else if (isset($_GET["userID"])) {
+  $userID = $_GET["userID"];
+  $state = 1;
+} else {
+?>
+  <script type="text/javascript">
+    location.href = "http://localhost/Hire/login.php";
+  </script>
+<?php
+}
+$stateAlan = 0;
+$sqlOwner = "Select * FROM sirketler WHERE kullanicilar_kullanici_id = '$userID'";
+if (mysqli_num_rows(mysqli_query($con, $sqlOwner)) > 0) {
+  $stateAlan = 1;
+}
+$sql = "Select * from kullanicilar where kullanici_id = '$userID'";
+$meslekSQL = "SELECT kullanicilar_kullanici_id,meslekler_meslek_id, alan_id, alan_adi from kullanici_meslek_detay JOIN meslek_alanlar ON kullanici_meslek_detay.alanlar_alan_id = meslek_alanlar.alan_id HAVING kullanici_meslek_detay.kullanicilar_kullanici_id = '$userID'";
+$sqlIletisim = "SELECT * FROM iletisim where kullanicilar_kullanici_id = '$userID'";
+$sqlImg = "SELECT fotograf_adresi FROM fotograflar where kullanicilar_kullanici_id = '$userID'";
+$result = mysqli_query($con, $sql);
+$resultMeslekSQL = mysqli_query($con, $meslekSQL);
+$resultIletisimSQL = mysqli_query($con, $sqlIletisim);
+$resultImg = mysqli_query($con, $sqlImg);
+$sqlCompany =  "SELECT * FROM kullanicilar INNER JOIN sirketler ON sirketler.kullanicilar_kullanici_id = kullanicilar.kullanici_id HAVING kullanici_id = '$userID';";
+$resultCompany = mysqli_query($con, $sqlCompany);
+$resultCompany = $resultCompany->fetch_assoc();
+if ($result) {
+  $row = $result->fetch_assoc();
+  $rowMeslek = $resultMeslekSQL->fetch_assoc();
+  $rowIletisim = $resultIletisimSQL->fetch_assoc();
+  $rowImg = $resultImg->fetch_assoc();
+} else {
+  echo "Hata";
+}
+?>
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
+<html lang="tr">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-
-    <style>
-        body {
-            margin-top: 20px;
-            color: #1a202c;
-            text-align: left;
-            background-color: #e2e8f0;
-        }
-
-        .main-body {
-            padding: 15px;
-        }
-
-        .card {
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-        }
-
-        .card {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            word-wrap: break-word;
-            background-color: #fff;
-            background-clip: border-box;
-            border: 0 solid rgba(0, 0, 0, .125);
-            border-radius: .25rem;
-        }
-
-        .card-body {
-            flex: 1 1 auto;
-            min-height: 1px;
-            padding: 1rem;
-        }
-
-        .gutters-sm {
-            margin-right: -8px;
-            margin-left: -8px;
-        }
-
-        .gutters-sm>.col,
-        .gutters-sm>[class*=col-] {
-            padding-right: 8px;
-            padding-left: 8px;
-        }
-
-        .mb-3,
-        .my-3 {
-            margin-bottom: 1rem !important;
-        }
-
-        .bg-gray-300 {
-            background-color: #e2e8f0;
-        }
-
-        .h-100 {
-            height: 100% !important;
-        }
-
-        .shadow-none {
-            box-shadow: none !important;
-        }
-    </style>
-
+  <meta charset="utf-8" />
+  <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+  <!--  All snippets are MIT license http://bootdey.com/license -->
+  <title>Kullanıcı Profili</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="container">
-        <div class="main-body">
-
-            <!-- Breadcrumb -->
-            <nav aria-label="breadcrumb" class="main-breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-                </ol>
-            </nav>
-            <!-- /Breadcrumb -->
-
-            <div class="row gutters-sm">
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
-                                    class="rounded-circle" width="150">
-                                <div class="mt-3">
-                                    <h4>John Doe</h4>
-                                    <p class="text-secondary mb-1">Full Stack Developer</p>
-                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                    <button class="btn btn-primary">Follow</button>
-                                    <button class="btn btn-outline-primary">Message</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mt-3">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-globe mr-2 icon-inline">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                                        <path
-                                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                                        </path>
-                                    </svg>Website</h6>
-                                <span class="text-secondary">https://bootdey.com</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-github mr-2 icon-inline">
-                                        <path
-                                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                        </path>
-                                    </svg>Github</h6>
-                                <span class="text-secondary">bootdey</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-twitter mr-2 icon-inline text-info">
-                                        <path
-                                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
-                                        </path>
-                                    </svg>Twitter</h6>
-                                <span class="text-secondary">@bootdey</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-instagram mr-2 icon-inline text-danger">
-                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                    </svg>Instagram</h6>
-                                <span class="text-secondary">bootdey</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="feather feather-facebook mr-2 icon-inline text-primary">
-                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z">
-                                        </path>
-                                    </svg>Facebook</h6>
-                                <span class="text-secondary">bootdey</span>
-                            </li>
-                        </ul>
-                    </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="panel panel-white profile-widget">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="image-container bg2">
+                <?php
+                if (is_null($rowImg)) { ?>
+                  <img src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png" class="avatar" alt="avatar" />
+                <?php } else { ?>
+                  <img src="uploads/<?php echo $rowImg["fotograf_adresi"]; ?>" class="avatar" alt="avatar" />
+                <?php  }
+                ?>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="details">
+                <h4> <?php echo $row["kullanici_ad"] . " " . $row["kullanici_soyad"]; ?> <i class="fa fa-sheild"></i></h4>
+                <?php
+                if ($stateAlan == 1) { ?>
+                  <div><?php echo  $resultCompany["sirket_adi"]; ?></div>
+                <?php } else { ?>
+                  <div><?php echo  $rowMeslek["alan_adi"]; ?></div>
+                <?php }
+                ?>
+                <br>
+                <div></div>
+                <div class="mg-top-10" style="display: flex;align-items: center;justify-content: center;">
+                  <?php
+                  if ($state == 0) { ?>
+                    <form action="" method="POST">
+                      <button type="submit" class="btn btn-blue" style="margin-right:5px;" name="submitInterview">Mülakat teklifi et</button>
+                    </form>
+                  <?php }
+                  if ($state == 1) { ?>
+                    <a href="edit_profil.php?userID=<?php echo $userID; ?>" style="margin-left:5px;" class="btn btn-blue" onclick="goclicky(this); return false;" target="_blank">Profili Düzenle</a>
+                  <?php }
+                  ?>
                 </div>
-                <div class="col-md-8">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Full Name</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    Kenneth Valdez
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Email</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    fip@jukmuh.al
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Phone</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    (239) 816-9029
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Mobile</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    (320) 380-4539
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Address</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    Bay Area, San Francisco, CA
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <a class="btn btn-info " target="__blank"
-                                        href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                    <div class="row gutters-sm">
-                        <div class="col-sm-6 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-3"><i
-                                            class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                    <small>Web Design</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
-                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Website Markup</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%"
-                                            aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>One Page</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%"
-                                            aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Mobile Template</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
-                                            aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Backend API</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
-                                            aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-3"><i
-                                            class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                    <small>Web Design</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
-                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Website Markup</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%"
-                                            aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>One Page</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%"
-                                            aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Mobile Template</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
-                                            aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <small>Backend API</small>
-                                    <div class="progress mb-3" style="height: 5px">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
-                                            aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="panel panel-white border-top-purple">
+              <div class="panel-heading">
+                <h3 class="panel-title">Özgeçmiş</h3>
+                <div class="controls pull-right">
+                  <span class="pull-right clickable">
+                    <i class="fa fa-chevron-up"></i>
+                  </span>
                 </div>
+              </div>
+              <div class="panel-body">
+                <div class="body-section">
+                  <h5 class="section-heading">Hakkında</h5>
+                  <p class="section-content"><?php echo $row["kullanici_tanitim"]; ?></p>
+                </div>
+                <div class="body-section">
+                  <h5 class="section-heading">İlgilendiği Alan</h5>
+                  <?php
+                  if ($stateAlan == 1) { ?>
+                    <?php echo  $resultCompany["sirket_adi"]; ?>
+                  <?php } else { ?>
+                    <?php echo  $rowMeslek["alan_adi"]; ?>
+                  <?php }
+                  ?>
+                </div>
+                <?php
+                if ($stateAlan == 1) { ?>
+                  <div class="body-section">
+                    <h5 class="section-heading">Şirket Vizyon</h5>
+                    <?php
+                    if ($stateAlan == 1) { ?>
+                      <?php echo  $resultCompany["sirket_vizyon"]; ?>
+                    <?php } ?>
+                  </div>
+                  <div class="body-section">
+                    <h5 class="section-heading">Şirket Misyon</h5>
+                    <?php
+                    if ($stateAlan == 1) { ?>
+                      <?php echo  $resultCompany["sirket_misyon"]; ?>
+                    <?php } ?>
+                  </div>
+                <?php }
+                ?>
+              </div>
             </div>
 
-        </div>
-    </div>
+            <?php
+            if ($stateAlan == 0) { ?>
+              <div class="panel panel-white border-top-light-blue">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Mülakat Videoları ve CV</h3>
+                  <div class="controls pull-right">
+                    <span class="pull-right clickable">
+                      <i class="fa fa-chevron-up"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <?php
+                  $sqlCvList =  "SELECT * from cv JOIN diller ON cv.diller_dil_id = diller.dil_id HAVING cv.kullanicilar_kullanici_id = '$userID';";
+                  $resultCvList = mysqli_query($con,  $sqlCvList);
+                  $sqlVideoList = "SELECT * from videolar where kullanicilar_kullanici_id = '$userID'";
+                  $resultVideoList = mysqli_query($con,  $sqlVideoList);
+                  ?>
+                  <div class="body-section">
+                    <p><b>Kullanici CV bilgileri.</b></p>
+                    <ul>
+                      <?php
+                      foreach ($resultCvList as $item) { ?>
+                        <li><a href="uploadsCv/<?php echo $item['cv_adresi']; ?>"><?php echo $item['cv_adresi'] . ' ' . '(' . $item['dil_adi'] . ')'; ?></a></li>
+                      <?php }
+                      ?>
+                    </ul>
+                    <p><b>Kullanici mülakat videoları.</b></p>
+                    <ul>
+                      <?php
+                      foreach ($resultVideoList as $video) { ?>
+                        <li><a href="uploadsVideo/<?php echo $video['video_adresi']; ?>"><?php echo $video['video_adresi']; ?></a></li>
+                      <?php }
+                      ?>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            <?php }
+            ?>
+          </div>
 
-    <script src="" async defer></script>
+          <div class="col-sm-6">
+            <div class="panel panel-white border-top-green">
+              <div class="panel-heading">
+                <h3 class="panel-title">Kullanıcı Bilgisi</h3>
+                <div class="controls pull-right">
+                  <span class="pull-right clickable">
+                    <i class="fa fa-chevron-up"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="body-section">
+                  <h5 class="section-heading">Ad</h5>
+                  <p class="section-content"><?php echo $row["kullanici_ad"]; ?></p>
+                </div>
+                <div class="body-section">
+                  <h5 class="section-heading">Soyad</h5>
+                  <p class="section-content"><?php echo $row["kullanici_soyad"]; ?></p>
+                </div>
+                <div class="body-section">
+                  <h5 class="section-heading">Telefon</h5>
+                  <p class="section-content"><?php echo $rowIletisim["iletisim_tel_no"]; ?></p>
+                </div>
+                <div class="body-section">
+                  <h5 class="section-heading">Email</h5>
+                  <p class="section-content"><?php echo $rowIletisim["iletisim_mail"]; ?></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <?php
+
+  if ($con) {
+    if (isset($_POST["submitInterview"])) {
+      $userID = $_GET["gusetID"];
+      $gusetID = $_GET["userID"];
+
+      $sqlIsThere = "Select * FROM teklifler WHERE kullanicilar_kullanici_id = '$userID' AND insan_kaynagi_id = '$gusetID'";
+      $resultIsThere = mysqli_query($con, $sqlIsThere);
+      $resultIsThere = $resultIsThere->fetch_assoc();
+      if (is_null($resultIsThere)) {
+        $sqlTeklif = "insert into teklifler (insan_kaynagi_id, kullanicilar_kullanici_id) values ('$gusetID', '$userID')";
+        if (mysqli_query($con, $sqlTeklif)) {
+          echo "oldu";
+        }
+      } else {
+        echo "Zaten teklif edildi";
+      }
+    }
+  } else {
+    echo "baglanti hatasi";
+  }
+
+
+  ?>
+  <style type="text/css">
+    body {
+      margin-top: 20px;
+      background: #eee;
+    }
+
+    .profile-widget {
+      position: relative;
+    }
+
+    .profile-widget .image-container {
+      background-size: cover;
+      background-position: center;
+      padding: 190px 0 10px;
+    }
+
+    .profile-widget .image-container .profile-background {
+      width: 100%;
+      height: auto;
+    }
+
+    .profile-widget .image-container .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto -60px;
+      display: block;
+    }
+
+    .profile-widget .details {
+      padding: 50px 15px 15px;
+      text-align: center;
+    }
+
+    /* Component: Mini Profile Widget */
+    .mini-profile-widget .image-container .avatar {
+      width: 180px;
+      height: 180px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 50%;
+      background: white;
+      padding: 4px;
+      border: 1px solid #dddddd;
+    }
+
+    .mini-profile-widget .details {
+      text-align: center;
+    }
+
+    /* Component: Panel */
+    .panel {
+      border-radius: 0;
+      margin-bottom: 30px;
+    }
+
+    .panel.solid-color {
+      color: white;
+    }
+
+    .panel .panel-heading {
+      border-radius: 0;
+      position: relative;
+    }
+
+    .panel .panel-heading>.controls {
+      position: absolute;
+      right: 10px;
+      top: 12px;
+    }
+
+    .panel .panel-heading>.controls .nav.nav-pills {
+      margin: -8px 0 0 0;
+    }
+
+    .panel .panel-heading>.controls .nav.nav-pills li a {
+      padding: 5px 8px;
+    }
+
+    .panel .panel-heading .clickable {
+      margin-top: 0px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .panel .panel-heading.no-heading-border {
+      border-bottom-color: transparent;
+    }
+
+    .panel .panel-heading .left {
+      float: left;
+    }
+
+    .panel .panel-heading .right {
+      float: right;
+    }
+
+    .panel .panel-title {
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    .panel .panel-title.panel-title-sm {
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    .panel .panel-title.panel-title-lg {
+      font-size: 24px;
+      line-height: 34px;
+    }
+
+    .panel .panel-body {
+      font-size: 13px;
+    }
+
+    .panel .panel-body>.body-section {
+      margin: 0px 0px 20px;
+    }
+
+    .panel .panel-body>.body-section>.section-heading {
+      margin: 0px 0px 5px;
+      font-weight: bold;
+    }
+
+    .panel .panel-body>.body-section>.section-content {
+      margin: 0px 0px 10px;
+    }
+
+    .panel-white {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-white>.panel-heading {
+      color: #333;
+      background-color: #fff;
+      border-color: #ddd;
+    }
+
+    .panel-white>.panel-footer {
+      background-color: #fff;
+      border-color: #ddd;
+    }
+
+    .panel-primary {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-purple {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-purple>.panel-heading {
+      color: #fff;
+      background-color: #8e44ad;
+      border: none;
+    }
+
+    .panel-purple>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-light-purple {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-light-purple>.panel-heading {
+      color: #fff;
+      background-color: #9b59b6;
+      border: none;
+    }
+
+    .panel-light-purple>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-blue,
+    .panel-info {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-blue>.panel-heading,
+    .panel-info>.panel-heading {
+      color: #fff;
+      background-color: #2980b9;
+      border: none;
+    }
+
+    .panel-blue>.panel-heading .panel-title a:hover,
+    .panel-info>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-light-blue {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-light-blue>.panel-heading {
+      color: #fff;
+      background-color: #3498db;
+      border: none;
+    }
+
+    .panel-light-blue>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-green,
+    .panel-success {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-green>.panel-heading,
+    .panel-success>.panel-heading {
+      color: #fff;
+      background-color: #27ae60;
+      border: none;
+    }
+
+    .panel-green>.panel-heading .panel-title a:hover,
+    .panel-success>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-light-green {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-light-green>.panel-heading {
+      color: #fff;
+      background-color: #2ecc71;
+      border: none;
+    }
+
+    .panel-light-green>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-orange,
+    .panel-warning {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-orange>.panel-heading,
+    .panel-warning>.panel-heading {
+      color: #fff;
+      background-color: #e82c0c;
+      border: none;
+    }
+
+    .panel-orange>.panel-heading .panel-title a:hover,
+    .panel-warning>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-light-orange {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-light-orange>.panel-heading {
+      color: #fff;
+      background-color: #ff530d;
+      border: none;
+    }
+
+    .panel-light-orange>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-red,
+    .panel-danger {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-red>.panel-heading,
+    .panel-danger>.panel-heading {
+      color: #fff;
+      background-color: #d40d12;
+      border: none;
+    }
+
+    .panel-red>.panel-heading .panel-title a:hover,
+    .panel-danger>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-light-red {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-light-red>.panel-heading {
+      color: #fff;
+      background-color: #ff1d23;
+      border: none;
+    }
+
+    .panel-light-red>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-pink {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-pink>.panel-heading {
+      color: #fff;
+      background-color: #fe31ab;
+      border: none;
+    }
+
+    .panel-pink>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-light-pink {
+      border: 1px solid #dddddd;
+    }
+
+    .panel-light-pink>.panel-heading {
+      color: #fff;
+      background-color: #fd32c0;
+      border: none;
+    }
+
+    .panel-light-pink>.panel-heading .panel-title a:hover {
+      color: #f0f0f0;
+    }
+
+    .panel-group .panel {
+      border-radius: 0;
+    }
+
+    .panel-group .panel+.panel {
+      margin-top: 0;
+      border-top: 0;
+    }
+
+    .bg-blue,
+    .bg-info {
+      background-color: #2980b9 !important;
+    }
+
+    .bg-light-blue {
+      background-color: #3498db !important;
+    }
+
+    .bg-red,
+    .bg-danger {
+      background-color: #d40d12 !important;
+    }
+
+    .bg-light-red {
+      background-color: #ff1d23 !important;
+    }
+
+    .bg-purple {
+      background-color: #8e44ad !important;
+    }
+
+    .bg-light-purple {
+      background-color: #9b59b6 !important;
+    }
+
+    .bg-green,
+    bg-success {
+      background-color: #27ae60 !important;
+    }
+
+    .bg-light-green {
+      background-color: #2ecc71 !important;
+    }
+
+    .bg-orange,
+    .bg-warning {
+      background-color: #e82c0c !important;
+    }
+
+    .bg-light-orange {
+      background-color: #ff530d !important;
+    }
+
+    .bg-pink {
+      background-color: #fe31ab !important;
+    }
+
+    .bg-light-pink {
+      background-color: #fd32c0 !important;
+    }
+
+    .color-white {
+      color: white !important;
+    }
+
+    .color-green,
+    .text-success {
+      color: #27ae60 !important;
+    }
+
+    .color-light-green {
+      color: #2ecc71 !important;
+    }
+
+    .color-blue,
+    .text-info {
+      color: #2980b9 !important;
+    }
+
+    .color-light-blue {
+      color: #3498db !important;
+    }
+
+    .color-orange,
+    .text-warning {
+      color: #e82c0c !important;
+    }
+
+    .color-light-orange {
+      color: #ff530d !important;
+    }
+
+    .color-red,
+    .text-danger {
+      color: #d40d12 !important;
+    }
+
+    .color-light-red {
+      color: #ff1d23 !important;
+    }
+
+    .color-purple {
+      color: #8e44ad !important;
+    }
+
+    .color-light-purple {
+      color: #9b59b6 !important;
+    }
+
+    .color-pink {
+      color: #fe31ab !important;
+    }
+
+    .color-light-pink {
+      color: #fd32c0 !important;
+    }
+
+    .border-green {
+      border: 4px solid #27ae60 !important;
+    }
+
+    .border-light-green {
+      border: 4px solid #2ecc71 !important;
+    }
+
+    .border-blue {
+      border: 4px solid #2980b9 !important;
+    }
+
+    .border-light-blue {
+      border: 4px solid #3498db !important;
+    }
+
+    .border-orange {
+      border: 4px solid #e82c0c !important;
+    }
+
+    .border-light-orange {
+      border: 4px solid #ff530d !important;
+    }
+
+    .border-red {
+      border: 4px solid #d40d12 !important;
+    }
+
+    .border-light-red {
+      border: 4px solid #ff1d23 !important;
+    }
+
+    .border-purple {
+      border: 4px solid #8e44ad !important;
+    }
+
+    .border-light-purple {
+      border: 4px solid #9b59b6 !important;
+    }
+
+    .border-pink {
+      border: 4px solid #fe31ab !important;
+    }
+
+    .border-light-pink {
+      border: 4px solid #fd32c0 !important;
+    }
+
+    .border-top-green {
+      border-top: 4px solid #27ae60 !important;
+    }
+
+    .border-top-light-green {
+      border-top: 4px solid #2ecc71 !important;
+    }
+
+    .border-top-blue {
+      border-top: 4px solid #2980b9 !important;
+    }
+
+    .border-top-light-blue {
+      border-top: 4px solid #3498db !important;
+    }
+
+    .border-top-orange {
+      border-top: 4px solid #e82c0c !important;
+    }
+
+    .border-top-light-orange {
+      border-top: 4px solid #ff530d !important;
+    }
+
+    .border-top-red {
+      border-top: 4px solid #d40d12 !important;
+    }
+
+    .border-top-light-red {
+      border-top: 4px solid #ff1d23 !important;
+    }
+
+    .border-top-purple {
+      border-top: 4px solid #8e44ad !important;
+    }
+
+    .border-top-light-purple {
+      border-top: 4px solid #9b59b6 !important;
+    }
+
+    .border-top-pink {
+      border-top: 4px solid #fe31ab !important;
+    }
+
+    .border-top-light-pink {
+      border-top: 4px solid #fd32c0 !important;
+    }
+
+    .border-right-green {
+      border-right: 4px solid #27ae60 !important;
+    }
+
+    .border-right-light-green {
+      border-right: 4px solid #2ecc71 !important;
+    }
+
+    .border-right-blue {
+      border-right: 4px solid #2980b9 !important;
+    }
+
+    .border-right-light-blue {
+      border-right: 4px solid #3498db !important;
+    }
+
+    .border-right-orange {
+      border-right: 4px solid #e82c0c !important;
+    }
+
+    .border-right-light-orange {
+      border-right: 4px solid #ff530d !important;
+    }
+
+    .border-right-red {
+      border-right: 4px solid #d40d12 !important;
+    }
+
+    .border-right-light-red {
+      border-right: 4px solid #ff1d23 !important;
+    }
+
+    .border-right-purple {
+      border-right: 4px solid #8e44ad !important;
+    }
+
+    .border-right-light-purple {
+      border-right: 4px solid #9b59b6 !important;
+    }
+
+    .border-right-pink {
+      border-right: 4px solid #fe31ab !important;
+    }
+
+    .border-right-light-pink {
+      border-right: 4px solid #fd32c0 !important;
+    }
+
+    .border-bottom-green {
+      border-bottom: 4px solid #27ae60 !important;
+    }
+
+    .border-bottom-light-green {
+      border-bottom: 4px solid #2ecc71 !important;
+    }
+
+    .border-bottom-blue {
+      border-bottom: 4px solid #2980b9 !important;
+    }
+
+    .border-bottom-light-blue {
+      border-bottom: 4px solid #3498db !important;
+    }
+
+    .border-bottom-orange {
+      border-bottom: 4px solid #e82c0c !important;
+    }
+
+    .border-bottom-light-orange {
+      border-bottom: 4px solid #ff530d !important;
+    }
+
+    .border-bottom-red {
+      border-bottom: 4px solid #d40d12 !important;
+    }
+
+    .border-bottom-light-red {
+      border-bottom: 4px solid #ff1d23 !important;
+    }
+
+    .border-bottom-purple {
+      border-bottom: 4px solid #8e44ad !important;
+    }
+
+    .border-bottom-light-purple {
+      border-bottom: 4px solid #9b59b6 !important;
+    }
+
+    .border-bottom-pink {
+      border-bottom: 4px solid #fe31ab !important;
+    }
+
+    .border-bottom-light-pink {
+      border-bottom: 4px solid #fd32c0 !important;
+    }
+
+    .border-left-green {
+      border-left: 4px solid #27ae60 !important;
+    }
+
+    .border-left-light-green {
+      border-left: 4px solid #2ecc71 !important;
+    }
+
+    .border-left-blue {
+      border-left: 4px solid #2980b9 !important;
+    }
+
+    .border-left-light-blue {
+      border-left: 4px solid #3498db !important;
+    }
+
+    .border-left-orange {
+      border-left: 4px solid #e82c0c !important;
+    }
+
+    .border-left-light-orange {
+      border-left: 4px solid #ff530d !important;
+    }
+
+    .border-left-red {
+      border-left: 4px solid #d40d12 !important;
+    }
+
+    .border-left-light-red {
+      border-left: 4px solid #ff1d23 !important;
+    }
+
+    .border-left-purple {
+      border-left: 4px solid #8e44ad !important;
+    }
+
+    .border-left-light-purple {
+      border-left: 4px solid #9b59b6 !important;
+    }
+
+    .border-left-pink {
+      border-left: 4px solid #fe31ab !important;
+    }
+
+    .border-left-light-pink {
+      border-left: 4px solid #fd32c0 !important;
+    }
+
+    .bg2 {
+      background-image: url("http://www.bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg");
+    }
+
+    .btn-blue {
+      background-color: #3498db;
+      border-color: #3498db;
+      color: white;
+    }
+
+    .btn-blue:hover,
+    .btn-blue:visited {
+      background-color: #2980b9;
+      color: white;
+    }
+
+    .btn-green {
+      background-color: #2ecc71;
+      border-color: #27ae60;
+      color: white;
+    }
+
+    .btn-green:hover,
+    .btn-green:visited {
+      background-color: #27ae60;
+      color: white;
+    }
+
+    .btn-orange {
+      background-color: #ff530d;
+      border-color: #e82c0c;
+      color: white;
+    }
+
+    .btn-orange:hover,
+    .btn-orange:visited {
+      background-color: #e82c0c;
+      color: white;
+    }
+
+    .btn-red {
+      background-color: #ff1d23;
+      border-color: #d40d12;
+      color: white;
+    }
+
+    .btn-red:hover,
+    .btn-red:visited {
+      background-color: #d40d12;
+      color: white;
+    }
+
+    .btn-purple {
+      background-color: #9b59b6;
+      border-color: #8e44ad;
+      color: white;
+    }
+
+    .btn-purple:hover,
+    .btn-purple:visited {
+      background-color: #8e44ad;
+      color: white;
+    }
+
+    .btn-pink {
+      background-color: #fd32c0;
+      border-color: #fe31ab;
+      color: white;
+    }
+
+    .btn-pink:hover,
+    .btn-pink:visited {
+      background-color: #fe31ab;
+      color: white;
+    }
+
+    .progress.progress-xs {
+      height: 12px;
+    }
+
+    /* */
+  </style>
+
+  <script type="text/javascript">
+    function goclicky(meh) {
+      var x = screen.width / 2 - 850 / 2;
+      var y = screen.height / 2 - 800 / 2;
+      window.open(
+        meh.href,
+        "sharegplus",
+        "height=800,width=850,left=" + x + ",top=" + y
+      );
+    }
+  </script>
 </body>
 
 </html>
